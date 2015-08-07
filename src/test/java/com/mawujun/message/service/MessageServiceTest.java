@@ -6,9 +6,6 @@ import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.util.StringUtils;
 
-import com.mawujun.messge.service.DefaultRequestProcess;
-import com.mawujun.messge.service.IRequestProcess;
-import com.mawujun.messge.service.IResponseProcess;
 import com.mawujun.messge.service.MessageService;
 
 public class MessageServiceTest {
@@ -17,21 +14,7 @@ public class MessageServiceTest {
 //	public void setBeforeClass(){
 //		
 //	}
-	MessageService messageService=new MessageService(){
-
-		@Override
-		public IRequestProcess getRequestProcess() {
-			// TODO Auto-generated method stub
-			return new DefaultRequestProcess();
-		}
-
-		@Override
-		public IResponseProcess getResponseProcess() {
-			// TODO Auto-generated method stub
-			return new DefaultResponseProcess();
-		}
-		
-	};
+	MessageService messageService=new DefaultMessageService();
 	
 	@Test
 	public void process() throws Exception {

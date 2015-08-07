@@ -15,6 +15,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
@@ -166,9 +167,11 @@ public class MessageUtils {
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @param request
 	 * @return
+	 * @throws IOException 
+	 * @throws DocumentException 
 	 * @throws Exception
 	 */
-	public static Map<String,String> getMessgeMap(HttpServletRequest request) throws Exception {
+	public static Map<String,String> getMessgeMap(HttpServletRequest request) throws IOException, DocumentException  {
 		Map<String,String> map=new HashMap<String,String>();
 		InputStream inputStream = request.getInputStream();
 		SAXReader saxReader = new SAXReader();
@@ -208,9 +211,10 @@ public class MessageUtils {
 	 * 将请求消息转换成对应类型
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @param request
+	 * @throws IOException 
 	 * @throws Exception
 	 */
-	public  static <T> T xml2Message(HttpServletRequest request,Class<T> clazz) throws Exception {
+	public  static <T> T xml2Message(HttpServletRequest request,Class<T> clazz) throws IOException  {
 		BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
 		
 		StringBuilder build=new StringBuilder();

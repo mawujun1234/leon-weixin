@@ -1,8 +1,11 @@
 package com.mawujun.messge.service;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.dom4j.DocumentException;
 
 import com.mawujun.message.event.LocationEvent;
 import com.mawujun.message.event.MenuEvent;
@@ -34,9 +37,12 @@ public abstract class MessageService {
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @param request
 	 * @return
+	 * @throws IOException 
+	 * @throws DocumentException 
+	 * @throws InvalidMsgTypeException 
 	 * @throws Exception
 	 */
-	public String process(HttpServletRequest request) throws Exception{
+	public String process(HttpServletRequest request) throws Exception {
 		//String MsgType=MessageUtils.getMsgType(request);
 		Map<String,String> requestMap=MessageUtils.getMessgeMap(request);
 		String MsgType=requestMap.get("MsgType");
