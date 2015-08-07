@@ -1,5 +1,8 @@
 package com.mawujun.message.request;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+@XStreamAlias("xml")
 public class LocationMessage extends BaseMessage {
 	private String Location_X;//地理位置维度
 	private String Location_Y;//地理位置经度

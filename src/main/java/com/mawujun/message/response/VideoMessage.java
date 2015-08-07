@@ -1,5 +1,8 @@
 package com.mawujun.message.response;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+@XStreamAlias("xml")
 public class VideoMessage extends BaseMessage {
 	private Video Video;
 	public VideoMessage(){

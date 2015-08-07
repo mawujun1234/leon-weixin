@@ -1,5 +1,6 @@
 package com.mawujun.message.event;
 
+
 public class BaseEvent {
 	// 开发者微信号，公众号的微信号
 	private String ToUserName;

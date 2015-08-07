@@ -1,5 +1,7 @@
 package com.mawujun.message.event;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 /**
  * 扫描带参数二维码事件
  * 用户扫描带场景值二维码时，可能推送以下两种事件：
@@ -8,6 +10,7 @@ package com.mawujun.message.event;
  * @author mawujun email:16064988@qq.com qq:16064988
  *
  */
+@XStreamAlias("xml")
 public class QRCodeEvent extends BaseEvent {
 	//用户已关注时的事件推送:事件类型，Event=SCAN
 	//用户未关注时，进行关注后的事件推送:事件类型，Event=subscribe

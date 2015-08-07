@@ -1,5 +1,8 @@
 package com.mawujun.message.request;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+@XStreamAlias("xml")
 public class LinkMessage extends BaseMessage {
 	private String Title;//消息标题
 	private String Description;//消息描述

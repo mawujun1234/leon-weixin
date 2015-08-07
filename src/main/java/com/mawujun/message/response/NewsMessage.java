@@ -1,7 +1,11 @@
 package com.mawujun.message.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+@XStreamAlias("xml")
 public class NewsMessage extends BaseMessage {
 	//图文消息个数，限制为10条以内
 	private int ArticleCount;
@@ -11,6 +15,19 @@ public class NewsMessage extends BaseMessage {
 		super();
 		super.setMsgType("news");
 	}
+	public void addArticles(Articles article) {
+		if(Articles==null){
+			Articles=new ArrayList<Articles>();
+		}
+		Articles.add(article);
+		this.ArticleCount=Articles.size();
+	}
+	public void setArticles(List<Articles> articles) {
+		Articles = articles;
+		this.ArticleCount=Articles.size();
+	}
+	
+	
 	public int getArticleCount() {
 		return ArticleCount;
 	}
@@ -20,9 +37,7 @@ public class NewsMessage extends BaseMessage {
 	public List<Articles> getArticles() {
 		return Articles;
 	}
-	public void setArticles(List<Articles> articles) {
-		Articles = articles;
-	}
+	
 
 
 }

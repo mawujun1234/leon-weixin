@@ -1,10 +1,13 @@
 package com.mawujun.message.request;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 /**
  * 文本消息
  * @author mawujun email:16064988@qq.com qq:16064988
  *
  */
+@XStreamAlias("xml")
 public class TextMessage extends BaseMessage {
 	private String Content;
 	

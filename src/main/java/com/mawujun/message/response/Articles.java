@@ -1,10 +1,13 @@
 package com.mawujun.message.response;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 /**
  * 多条图文消息信息，默认第一个item为大图,注意，如果图文数超过10，则将会无响应
  * @author mawujun email:16064988@qq.com qq:16064988
  *
  */
+@XStreamAlias("item")
 public class Articles {
 	private String Title;//图文消息标题
 	private String Description;//图文消息描述

@@ -1,0 +1,2 @@
+1:实现IResponseProcess，IRequestProcess，MessageService
+	在实现类里面做真正的业务
