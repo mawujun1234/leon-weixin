@@ -1,9 +1,13 @@
 package com.mawujun.message.utils;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Writer;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -233,5 +237,34 @@ public class MessageUtils {
         String xml = xstream.toXML(message);  
         return xml;
 	}
+	
+	
+//	private final static String mediaRequestUrl="http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
+//	/**
+//	 * 下载多媒体问文件,请注意，视频文件不支持下载，调用该接口需http协议。
+//	 * @return
+//	 */
+//	public static String getMedia(String accessToken,String mediaId,String savePath) {
+//		String filePath=null;
+//		String requestUrl=mediaRequestUrl.replace("ACCESS_TOKEN", accessToken).replace("MEDIA_ID", mediaId);
+//		try {
+//			URL url=new URL(requestUrl);
+//			HttpURLConnection conn=(HttpURLConnection)url.openConnection();
+//			conn.setDoInput(true);
+//			conn.setRequestMethod("GET");
+//			
+//			
+//			//这里还没有完成
+//			
+//			
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 
 }
