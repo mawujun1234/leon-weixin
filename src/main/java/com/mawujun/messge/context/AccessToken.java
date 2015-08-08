@@ -1,6 +1,5 @@
 package com.mawujun.messge.context;
 
-import java.security.InvalidParameterException;
 import java.util.Date;
 /**
  * 获取access_token的时候，返回来的类的封装
@@ -34,7 +33,7 @@ public class AccessToken {
 	 * @return
 	 */
 	public boolean isExpires(){
-		if(((new Date()).getTime()/1000-createDate.getTime()/1000)>=(expires_in-120)){
+		if((System.currentTimeMillis()/1000-createDate.getTime()/1000)>=(expires_in-120)){
 			return true;
 		}
 		return false;

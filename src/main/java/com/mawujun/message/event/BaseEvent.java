@@ -1,5 +1,7 @@
 package com.mawujun.message.event;
 
+import com.mawujun.message.request.RequestMsgType;
+
 
 public class BaseEvent {
 	// 开发者微信号，公众号的微信号
@@ -9,11 +11,11 @@ public class BaseEvent {
 	// 消息创建时间 （整型）
 	private long CreateTime;
 	//这个值就是event
-	private String MsgType;
-	private String Event;
+	private RequestMsgType MsgType;
+	private EventType Event;
 	public BaseEvent(){
 		super();
-		this.MsgType="event";
+		this.MsgType=RequestMsgType.event;
 	}
 	
 	public String getToUserName() {
@@ -34,16 +36,21 @@ public class BaseEvent {
 	public void setCreateTime(long createTime) {
 		CreateTime = createTime;
 	}
-	public String getMsgType() {
-		return MsgType;
-	}
-	public void setMsgType(String msgType) {
-		MsgType = msgType;
-	}
-	public String getEvent() {
+
+	public EventType getEvent() {
 		return Event;
 	}
-	public void setEvent(String event) {
+
+	public void setEvent(EventType event) {
 		Event = event;
 	}
+
+	public RequestMsgType getMsgType() {
+		return MsgType;
+	}
+
+	public void setMsgType(RequestMsgType msgType) {
+		MsgType = msgType;
+	}
+
 }

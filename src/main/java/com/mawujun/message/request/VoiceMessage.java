@@ -12,7 +12,7 @@ public class VoiceMessage extends BaseMessage {
 	
 	public VoiceMessage(){
 		super();
-		this.setMsgType("voice");
+		this.setMsgType(RequestMsgType.voice);
 	}
 	
 	

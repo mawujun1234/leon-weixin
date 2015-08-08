@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>leon-weixin Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.springframework.version>4.2.0.RELEASE</org.springframework.version>
@@ -16,7 +16,7 @@
 		<com.thoughtworks.xstream.version>1.4.8</com.thoughtworks.xstream.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<jaxen.version>1.1.6</jaxen.version>
- </properties>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -24,13 +24,20 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>3.3.1</version>
+			<scope>test</scope>
+		</dependency> -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -41,7 +48,7 @@
 			<artifactId>jaxen</artifactId>
 			<version>${jaxen.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>

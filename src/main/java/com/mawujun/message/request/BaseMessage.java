@@ -1,5 +1,6 @@
 package com.mawujun.message.request;
 
+
 /**
  * 基础的请求消息  客户--》公众号
  * @author mawujun email:16064988@qq.com qq:16064988
@@ -13,7 +14,7 @@ public class BaseMessage {
 	// 消息创建时间 （整型）
 	private long CreateTime;
 	//消息类型，text，image,voice,video,shortvideo,location.link等等
-	private String MsgType;
+	private RequestMsgType MsgType;
 	
 	//消息id，64位整型
 	private String MsgId;
@@ -37,16 +38,16 @@ public class BaseMessage {
 		CreateTime = createTime;
 	}
 
-	public String getMsgType() {
-		return MsgType;
-	}
-	public void setMsgType(String msgType) {
-		MsgType = msgType;
-	}
 	public String getMsgId() {
 		return MsgId;
 	}
 	public void setMsgId(String msgId) {
 		MsgId = msgId;
+	}
+	public RequestMsgType getMsgType() {
+		return MsgType;
+	}
+	public void setMsgType(RequestMsgType msgType) {
+		MsgType = msgType;
 	}
 }

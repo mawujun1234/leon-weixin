@@ -10,7 +10,7 @@ public class LocationMessage extends BaseMessage {
 	private String Label;//地理位置信息
 	public LocationMessage(){
 		super();
-		this.setMsgType("location");
+		this.setMsgType(RequestMsgType.location);
 	}
 	public String getLocation_X() {
 		return Location_X;

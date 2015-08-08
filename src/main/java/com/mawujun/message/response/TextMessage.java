@@ -8,7 +8,7 @@ public class TextMessage extends BaseMessage {
 	
 	public TextMessage(){
 		super();
-		super.setMsgType("text");
+		super.setMsgType(ResponseMsgType.text);
 	}
 
 	public String getContent() {

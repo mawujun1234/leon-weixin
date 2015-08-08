@@ -14,7 +14,7 @@ public class BaseMessage {
 	private long CreateTime;
 
 	//消息类型，text，image,voice,video,shortvideo,location.link等等
-	private String MsgType;
+	private ResponseMsgType MsgType;
 	public String getToUserName() {
 		return ToUserName;
 	}
@@ -33,11 +33,11 @@ public class BaseMessage {
 	public void setCreateTime(long createTime) {
 		CreateTime = createTime;
 	}
-
-	public String getMsgType() {
+	public ResponseMsgType getMsgType() {
 		return MsgType;
 	}
-	public void setMsgType(String msgType) {
+	public void setMsgType(ResponseMsgType msgType) {
 		MsgType = msgType;
 	}
+
 }

@@ -7,7 +7,7 @@ public class VoiceMessage extends BaseMessage {
 	private Voice Voice;
 	public VoiceMessage(){
 		super();
-		super.setMsgType("voice");
+		super.setMsgType(ResponseMsgType.voice);
 	}
 	public Voice getVoice() {
 		return Voice;

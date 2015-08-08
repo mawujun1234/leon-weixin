@@ -1,2 +1,4 @@
-1：测试MessageServlet
+1：微信返回的异常代码封装 {"errcode":40013,"errmsg":"invalid appid"} http://mp.weixin.qq.com/wiki/17/fa4e1434e57290788bde25603fa2fcbd.html
 2：getAccessToken测试
+3：菜单的新建，更新和删除测试
+4:菜单的点击频率统计报表

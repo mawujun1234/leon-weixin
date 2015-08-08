@@ -8,7 +8,7 @@ public class ShortvideoMessage extends BaseMessage {
 	private String MediaId;//图片消息媒体id，可以调用多媒体文件下载接口拉取数据。
 	public ShortvideoMessage(){
 		super();
-		this.setMsgType("shortvideo");
+		this.setMsgType(RequestMsgType.shortvideo);
 	}
 	
 	

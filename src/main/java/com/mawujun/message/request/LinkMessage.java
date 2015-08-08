@@ -10,7 +10,7 @@ public class LinkMessage extends BaseMessage {
 
 	public LinkMessage(){
 		super();
-		this.setMsgType("link");
+		this.setMsgType(RequestMsgType.link);
 	}
 
 	public String getTitle() {

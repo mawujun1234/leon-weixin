@@ -1,4 +1,4 @@
-1:实现IResponseProcess，IRequestProcess，MessageService
+1:实现IResponseProcess，IRequestProcess，MessageService用来接收消息，这些都是被动回复消息，类似于自动回复
 	在实现类里面做真正的业务
 	并且在weixin.properties中做好配置
 2:在web.xml中配置好MessageServlet
@@ -19,4 +19,4 @@
         <servlet-name>messageServlet</servlet-name>  
         <url-pattern>/messageServlet</url-pattern>  
     </servlet-mapping>
- 3:框架默认是7000秒去获取accesstoken一次，这个值可以自定义
+ 3:AccessTokenCache接口是用来缓存AccessToken的，可以实现这个接口，来吧AccessToken放到数据库中.默认实现DefaultAccessCache是放在缓存中的

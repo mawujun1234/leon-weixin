@@ -7,9 +7,11 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.util.StringUtils;
 
 import com.mawujun.message.request.ImageMessage;
+import com.mawujun.message.request.RequestMsgType;
 import com.mawujun.message.request.TextMessage;
 import com.mawujun.message.response.Articles;
 import com.mawujun.message.response.Image;
+import com.mawujun.message.response.ResponseMsgType;
 import com.mawujun.message.utils.MessageUtils;
 
 public class MessageUtilsTest {
@@ -50,7 +52,7 @@ public class MessageUtilsTest {
 		assertEquals("toUser",message.getToUserName());
 		assertEquals("fromUser",message.getFromUserName());
 		assertEquals(1348831860,message.getCreateTime());
-		assertEquals("text",message.getMsgType());
+		assertEquals(RequestMsgType.text,message.getMsgType());
 		assertEquals("this is a test",message.getContent());
 		assertEquals("1234567890123456",message.getMsgId());
 		
@@ -75,7 +77,7 @@ public class MessageUtilsTest {
 		assertEquals("toUser",message.getToUserName());
 		assertEquals("fromUser",message.getFromUserName());
 		assertEquals(1348831860,message.getCreateTime());
-		assertEquals("image",message.getMsgType());
+		assertEquals(RequestMsgType.image,message.getMsgType());
 		assertEquals("this is a url",message.getPicUrl());
 		assertEquals("media_id",message.getMediaId());
 		assertEquals("1234567890123456",message.getMsgId());
@@ -88,7 +90,7 @@ public class MessageUtilsTest {
 		message.setToUserName("toUser");
 		message.setFromUserName("fromUser");
 		message.setCreateTime(12345678);
-		message.setMsgType("text");
+		message.setMsgType(ResponseMsgType.text);
 		message.setContent("你好");
 		
 		String xml=MessageUtils.message2Xml(message);
@@ -110,7 +112,7 @@ public class MessageUtilsTest {
 		message.setToUserName("toUser");
 		message.setFromUserName("fromUser");
 		message.setCreateTime(12345678);
-		message.setMsgType("image");
+		message.setMsgType(ResponseMsgType.image);
 		
 		Image image=new Image();
 		image.setMediaId("media_id");
@@ -137,7 +139,7 @@ public class MessageUtilsTest {
 		message.setToUserName("toUser");
 		message.setFromUserName("fromUser");
 		message.setCreateTime(12345678);
-		message.setMsgType("news");
+		message.setMsgType(ResponseMsgType.news);
 		
 		Articles articles1=new Articles();
 		articles1.setTitle("title1");

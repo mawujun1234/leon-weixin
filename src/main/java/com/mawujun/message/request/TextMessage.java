@@ -13,7 +13,7 @@ public class TextMessage extends BaseMessage {
 	
 	public TextMessage(){
 		super();
-		this.setMsgType("text");
+		this.setMsgType(RequestMsgType.text);
 	}
 
 	public String getContent() {

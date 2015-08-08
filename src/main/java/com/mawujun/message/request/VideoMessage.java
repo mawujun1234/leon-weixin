@@ -8,7 +8,7 @@ public class VideoMessage extends BaseMessage {
 	private String MediaId;//图片消息媒体id，可以调用多媒体文件下载接口拉取数据。
 	public VideoMessage(){
 		super();
-		this.setMsgType("video");
+		this.setMsgType(RequestMsgType.video);
 	}
 	
 	

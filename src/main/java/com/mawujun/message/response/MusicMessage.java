@@ -7,7 +7,7 @@ public class MusicMessage extends BaseMessage {
 	private Music Music;
 	public MusicMessage(){
 		super();
-		super.setMsgType("music");
+		super.setMsgType(ResponseMsgType.music);
 	}
 	public Music getMusic() {
 		return Music;

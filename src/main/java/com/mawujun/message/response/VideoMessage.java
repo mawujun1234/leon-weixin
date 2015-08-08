@@ -7,7 +7,7 @@ public class VideoMessage extends BaseMessage {
 	private Video Video;
 	public VideoMessage(){
 		super();
-		super.setMsgType("video");
+		super.setMsgType(ResponseMsgType.video);
 	}
 	public Video getVideo() {
 		return Video;

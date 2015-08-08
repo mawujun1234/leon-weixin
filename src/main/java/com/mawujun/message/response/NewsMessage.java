@@ -13,7 +13,7 @@ public class NewsMessage extends BaseMessage {
 	private List<Articles> Articles;
 	public NewsMessage(){
 		super();
-		super.setMsgType("news");
+		super.setMsgType(ResponseMsgType.news);
 	}
 	public void addArticles(Articles article) {
 		if(Articles==null){

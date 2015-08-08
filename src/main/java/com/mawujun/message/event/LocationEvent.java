@@ -15,7 +15,7 @@ public class LocationEvent extends BaseEvent {
 	
 	public LocationEvent(){
 		super();
-		this.setEvent("LOCATION");
+		this.setEvent(EventType.LOCATION);
 	}
 
 	public String getLatitude() {
