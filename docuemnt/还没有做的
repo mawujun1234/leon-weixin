@@ -1,4 +1,9 @@
 1：微信返回的异常代码封装 {"errcode":40013,"errmsg":"invalid appid"} http://mp.weixin.qq.com/wiki/17/fa4e1434e57290788bde25603fa2fcbd.html
 2：getAccessToken测试
+	调用WeiXinApplicationContext
 3：菜单的新建，更新和删除测试
+	调用WeiXinApplicationContext进行创建，更新和删除
+	同时点击菜单进行菜单的事件测试
 4:菜单的点击频率统计报表
+3:在微信后端是如何发多图文消息的，它的信息是怎么美化的，因为内容是放在公众号里面的。还有图片是不是要先上传。
+1：当没有消息进行回复的时候，怎么判断？已经解决，返回空字符串就可以了。然后再通过客服接口进行处理。测试下看看是不是正确的。
