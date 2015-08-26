@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Writer;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
@@ -174,6 +172,7 @@ public class MessageUtils {
 	public static Map<String,String> getMessgeMap(HttpServletRequest request) throws IOException, DocumentException  {
 		Map<String,String> map=new HashMap<String,String>();
 		InputStream inputStream = request.getInputStream();
+		
 		SAXReader saxReader = new SAXReader();
 
 		Document document = saxReader.read(inputStream);
@@ -185,6 +184,28 @@ public class MessageUtils {
 		}
 		inputStream.close();
 		inputStream=null;
+		return map;
+	}
+	
+	/**
+	 * 把请求信息以map的形式返回
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @param request
+	 * @return
+	 * @throws IOException 
+	 * @throws DocumentException 
+	 * @throws Exception
+	 */
+	public static Map<String,String> getMessgeMap(String xmlStr) throws IOException, DocumentException  {
+		Map<String,String> map=new HashMap<String,String>();
+		Document document = DocumentHelper.parseText(xmlStr); 
+		Element root=document.getRootElement();
+		List<Element> elementlist=root.elements();
+		
+		for(Element element:elementlist){
+			map.put(element.getName(), element.getText());
+		}
+
 		return map;
 	}
 	/**
@@ -207,6 +228,22 @@ public class MessageUtils {
 		inputStream = null;
 		return text;
 	}
+	
+	/**
+	 * 将请求消息转换成对应类型
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @param request
+	 * @throws IOException 
+	 * @throws Exception
+	 */
+	public  static <T> T xml2Message(String xmlString,Class<T> clazz) throws IOException  {
+		
+		XStream xstream=getXStream();
+		xstream.processAnnotations(clazz);
+		T t = (T) xstream.fromXML(xmlString);
+		return t;
+	}
+	
 	/**
 	 * 将请求消息转换成对应类型
 	 * @author mawujun email:160649888@163.com qq:16064988

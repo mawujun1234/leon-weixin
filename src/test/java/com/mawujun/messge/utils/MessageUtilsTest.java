@@ -59,6 +59,28 @@ public class MessageUtilsTest {
 	}
 	
 	@Test
+	public void xmlStr2Message_text() throws Exception{
+
+		String textMsg_xml="<xml>"
+				+ "<ToUserName><![CDATA[toUser]]></ToUserName>"
+				+ "<FromUserName><![CDATA[fromUser]]></FromUserName> "
+				+ "<CreateTime>1348831860</CreateTime>"
+				+ "<MsgType><![CDATA[text]]></MsgType>"
+				+ "<Content><![CDATA[this is a test]]></Content>"
+				+ "<MsgId>1234567890123456</MsgId>"
+				+ "</xml>";
+		
+		TextMessage message=MessageUtils.xml2Message(textMsg_xml, TextMessage.class);
+		assertEquals("toUser",message.getToUserName());
+		assertEquals("fromUser",message.getFromUserName());
+		assertEquals(1348831860,message.getCreateTime());
+		assertEquals(RequestMsgType.text,message.getMsgType());
+		assertEquals("this is a test",message.getContent());
+		assertEquals("1234567890123456",message.getMsgId());
+		
+	}
+	
+	@Test
 	public void xml2Message_image() throws Exception{
 		MockHttpServletRequest request = new MockHttpServletRequest();  
 		request.setMethod("POST");  

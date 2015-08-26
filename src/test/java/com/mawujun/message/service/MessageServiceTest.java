@@ -3,7 +3,6 @@ package com.mawujun.message.service;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.util.StringUtils;
 
 import com.mawujun.messge.service.MessageService;
@@ -18,8 +17,8 @@ public class MessageServiceTest {
 	
 	@Test
 	public void process() throws Exception {
-		MockHttpServletRequest request = new MockHttpServletRequest();  
-		request.setMethod("POST");  
+		//MockHttpServletRequest request = new MockHttpServletRequest();  
+		//request.setMethod("POST");  
 		String textMsg_xml="<xml>"
 				+ "<ToUserName><![CDATA[toUser]]></ToUserName>"
 				+ "<FromUserName><![CDATA[fromUser]]></FromUserName> "
@@ -28,9 +27,9 @@ public class MessageServiceTest {
 				+ "<Content><![CDATA[this is a test]]></Content>"
 				+ "<MsgId>1234567890123456</MsgId>"
 				+ "</xml>";
-		request.setContent(textMsg_xml.getBytes("UTF-8"));
+		//request.setContent(textMsg_xml.getBytes("UTF-8"));
 		
-		String xml=messageService.process(request);
+		String xml=messageService.process(textMsg_xml);
 		
 		String orginxml="<xml>"
 				+ "<ToUserName><![CDATA[fromUser]]></ToUserName>"
@@ -45,8 +44,8 @@ public class MessageServiceTest {
 	
 	@Test
 	public void process_subscribe() throws Exception {
-		MockHttpServletRequest request = new MockHttpServletRequest();  
-		request.setMethod("POST");  
+		//MockHttpServletRequest request = new MockHttpServletRequest();  
+		//request.setMethod("POST");  
 		String textMsg_xml="<xml>"
 				+ "<ToUserName><![CDATA[toUser]]></ToUserName>"
 				+ "<FromUserName><![CDATA[fromUser]]></FromUserName>"
@@ -54,9 +53,9 @@ public class MessageServiceTest {
 				+ "<MsgType><![CDATA[event]]></MsgType>"
 				+ "<Event><![CDATA[subscribe]]></Event>"
 				+ "</xml>";
-		request.setContent(textMsg_xml.getBytes("UTF-8"));
+		//request.setContent(textMsg_xml.getBytes("UTF-8"));
 		
-		String xml=messageService.process(request);
+		String xml=messageService.process(textMsg_xml);
 		
 		String orginxml="<xml>"
 				+ "<ToUserName><![CDATA[fromUser]]></ToUserName>"

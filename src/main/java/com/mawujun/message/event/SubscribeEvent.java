@@ -1,5 +1,8 @@
 package com.mawujun.message.event;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -9,6 +12,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("xml")
+@Entity
+@Table(name="wx_subscribeevent")
 public class SubscribeEvent extends BaseEvent {
 
 }

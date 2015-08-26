@@ -1,5 +1,9 @@
 package com.mawujun.message.event;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -8,9 +12,14 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("xml")
+@Entity
+@Table(name="wx_locationevent")
 public class LocationEvent extends BaseEvent {
+	@Column(length=30)
 	private String Latitude;
+	@Column(length=30)
 	private String Longitude;
+	@Column(length=30)
 	private String Precision;
 	
 	public LocationEvent(){

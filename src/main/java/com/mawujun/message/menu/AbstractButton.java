@@ -1,6 +1,12 @@
 package com.mawujun.message.menu;
 
-public abstract class AbstractButton {
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
+import com.mawujun.repository.idEntity.UUIDEntity;
+@MappedSuperclass
+public abstract class AbstractButton  extends UUIDEntity{
+	@Column(length=20)
 	private String name;
 	
 	

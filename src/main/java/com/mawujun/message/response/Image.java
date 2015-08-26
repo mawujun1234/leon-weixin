@@ -1,5 +1,10 @@
 package com.mawujun.message.response;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+//@Entity
+//@Table(name="wx_image")
 public class Image {
 	private String MediaId;//通过素材管理接口上传多媒体文件，得到的id。
 	public String getMediaId() {

@@ -1,5 +1,9 @@
 package com.mawujun.message.event;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -10,12 +14,15 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("xml")
+@Entity
+@Table(name="wx_menuevent")
 public class MenuEvent extends BaseEvent {
 	//点击菜单拉取消息时的事件推送:Event=CLICK
 	//点击菜单跳转链接时的事件推送:Event=VIEW
 	
 	//点击菜单拉取消息时的事件推送:事件KEY值，与自定义菜单接口中KEY值对应
 	//点击菜单跳转链接时的事件推送:事件KEY值，设置的跳转URL
+	@Column(length=50)
 	private String EventKey;
 
 	public String getEventKey() {

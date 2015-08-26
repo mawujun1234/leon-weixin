@@ -1,7 +1,5 @@
 package com.mawujun.message.service;
 
-import java.util.Date;
-
 import com.mawujun.message.event.LocationEvent;
 import com.mawujun.message.event.MenuEvent;
 import com.mawujun.message.event.QRCodeEvent;

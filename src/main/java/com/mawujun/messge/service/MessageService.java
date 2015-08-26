@@ -3,8 +3,6 @@ package com.mawujun.messge.service;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.dom4j.DocumentException;
 
 import com.mawujun.message.event.EventType;
@@ -30,8 +28,17 @@ import com.mawujun.message.utils.MessageUtils;
  *
  */
 public abstract class MessageService {
-	
+	/**
+	 * 获取请求消息处理器
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @return
+	 */
 	public abstract IRequestProcess getRequestProcess();
+	/**
+	 * 获取响应消息处理器
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @return
+	 */
 	public abstract IResponseProcess getResponseProcess();
 	
 	/**
@@ -44,9 +51,9 @@ public abstract class MessageService {
 	 * @throws InvalidMsgTypeException 
 	 * @throws Exception
 	 */
-	public String process(HttpServletRequest request) throws Exception {
+	public String process(String xmlStr) throws Exception {
 		//String MsgType=MessageUtils.getMsgType(request);
-		Map<String,String> requestMap=MessageUtils.getMessgeMap(request);
+		Map<String,String> requestMap=MessageUtils.getMessgeMap(xmlStr);
 		//String MsgType=requestMap.get("MsgType");
 		RequestMsgType MsgType;
 		try {
@@ -59,37 +66,37 @@ public abstract class MessageService {
 		BaseMessage responseMessage=null;
 		//文本消息处理
 		if(RequestMsgType.text==MsgType){
-			TextMessage message=MessageUtils.xml2Message(request, TextMessage.class);
+			TextMessage message=MessageUtils.xml2Message(xmlStr, TextMessage.class);
 			this.getRequestProcess().process(message);
 			responseMessage=this.getResponseProcess().process(message);
 			
 		} else if(RequestMsgType.image==MsgType){
-			ImageMessage message=MessageUtils.xml2Message(request, ImageMessage.class);
+			ImageMessage message=MessageUtils.xml2Message(xmlStr, ImageMessage.class);
 			this.getRequestProcess().process(message);
 			responseMessage=this.getResponseProcess().process(message);
 			//return MessageUtils.message2Xml(responseMessage);
 		} else if (RequestMsgType.voice==MsgType) {
-			VoiceMessage message = MessageUtils.xml2Message(request, VoiceMessage.class);
+			VoiceMessage message = MessageUtils.xml2Message(xmlStr, VoiceMessage.class);
 			this.getRequestProcess().process(message);
 			responseMessage = this.getResponseProcess().process(message);
 			//return MessageUtils.message2Xml(responseMessage);
 		} else if (RequestMsgType.video==MsgType) {
-			VideoMessage message = MessageUtils.xml2Message(request, VideoMessage.class);
+			VideoMessage message = MessageUtils.xml2Message(xmlStr, VideoMessage.class);
 			this.getRequestProcess().process(message);
 			responseMessage = this.getResponseProcess().process(message);
 			//return MessageUtils.message2Xml(responseMessage);
 		} else if (RequestMsgType.shortvideo==MsgType) {
-			ShortvideoMessage message = MessageUtils.xml2Message(request, ShortvideoMessage.class);
+			ShortvideoMessage message = MessageUtils.xml2Message(xmlStr, ShortvideoMessage.class);
 			this.getRequestProcess().process(message);
 			responseMessage = this.getResponseProcess().process(message);
 			//return MessageUtils.message2Xml(responseMessage);
 		} else if (RequestMsgType.location==MsgType) {
-			LocationMessage message = MessageUtils.xml2Message(request, LocationMessage.class);
+			LocationMessage message = MessageUtils.xml2Message(xmlStr, LocationMessage.class);
 			this.getRequestProcess().process(message);
 			responseMessage = this.getResponseProcess().process(message);
 			//return MessageUtils.message2Xml(responseMessage);
 		} else if (RequestMsgType.link==MsgType) {
-			LinkMessage message = MessageUtils.xml2Message(request, LinkMessage.class);
+			LinkMessage message = MessageUtils.xml2Message(xmlStr, LinkMessage.class);
 			this.getRequestProcess().process(message);
 			responseMessage = this.getResponseProcess().process(message);
 			//return MessageUtils.message2Xml(responseMessage);
@@ -105,26 +112,26 @@ public abstract class MessageService {
 			if(EventType.subscribe==eventType || EventType.unsubscribe==eventType){
 				//扫描带二维码参数时候的关注
 				if(requestMap.get("EventKey")!=null){
-					QRCodeEvent event = MessageUtils.xml2Message(request, QRCodeEvent.class);
+					QRCodeEvent event = MessageUtils.xml2Message(xmlStr, QRCodeEvent.class);
 					this.getRequestProcess().process(event);
 					responseMessage = this.getResponseProcess().process(event);
 					//return MessageUtils.message2Xml(responseMessage);
 				} else {
 					//普通关注或取消关注
-					SubscribeEvent event = MessageUtils.xml2Message(request, SubscribeEvent.class);
+					SubscribeEvent event = MessageUtils.xml2Message(xmlStr, SubscribeEvent.class);
 					this.getRequestProcess().process(event);
 					responseMessage = this.getResponseProcess().process(event);
 					//return MessageUtils.message2Xml(responseMessage);
 				}
 				
 			}  else if (EventType.SCAN==eventType){
-				QRCodeEvent event = MessageUtils.xml2Message(request, QRCodeEvent.class);
+				QRCodeEvent event = MessageUtils.xml2Message(xmlStr, QRCodeEvent.class);
 				this.getRequestProcess().process(event);
 				responseMessage = this.getResponseProcess().process(event);
 				//return MessageUtils.message2Xml(responseMessage);
 				
 			}  else if (EventType.LOCATION==eventType){
-				LocationEvent event = MessageUtils.xml2Message(request, LocationEvent.class);
+				LocationEvent event = MessageUtils.xml2Message(xmlStr, LocationEvent.class);
 				this.getRequestProcess().process(event);
 				responseMessage = this.getResponseProcess().process(event);
 				//return MessageUtils.message2Xml(responseMessage);
@@ -136,7 +143,7 @@ public abstract class MessageService {
 					|| EventType.pic_photo_or_album==eventType
 					|| EventType.pic_weixin==eventType
 					|| EventType.location_select==eventType){
-				MenuEvent event = MessageUtils.xml2Message(request, MenuEvent.class);
+				MenuEvent event = MessageUtils.xml2Message(xmlStr, MenuEvent.class);
 				this.getRequestProcess().process(event);
 				responseMessage = this.getResponseProcess().process(event);
 				//return MessageUtils.message2Xml(responseMessage);

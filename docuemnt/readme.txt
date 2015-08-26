@@ -1,11 +1,11 @@
-1:实现IResponseProcess，IRequestProcess，MessageService用来接收消息，这些都是被动回复消息，类似于自动回复
+1:实现IResponseProcess，IRequestProcess，MessageService用来接收消息，这些都是被动回复消息，类似于自动回复,在MessageService中返回IResponseProcess和IRequestProcess
 	在实现类里面做真正的业务
 	并且在weixin.properties中做好配置
 2:在web.xml中配置好MessageServlet
     <servlet>  
         <servlet-name>messageServlet</servlet-name>  
         <servlet-class>  
-            com.mawujun.message.servlet.CoreServlet  
+            com.mawujun.message.servlet.MessageServlet  
         </servlet-class> 
         <!--初始化的配置文件 -->
         <init-param> 
@@ -19,4 +19,26 @@
         <servlet-name>messageServlet</servlet-name>  
         <url-pattern>/messageServlet</url-pattern>  
     </servlet-mapping>
- 3:AccessTokenCache接口是用来缓存AccessToken的，可以实现这个接口，来吧AccessToken放到数据库中.默认实现DefaultAccessCache是放在缓存中的
+    2.1和spring mvc进行整合,不需要在web.xml中配置上面的类了，只要
+  
+ 3：  
+ 3:配置weixin.properties
+	#实现MessageService的类配置，注意使用全限定类名
+	messageService=com.mawujun.message.service.DefaultMessageService
+	
+	#在微信上配置服务器的死后，填写的Token的值
+	Token=mawujun1234
+	##########获取access_token的配置############
+	#获取access_token填写client_credential
+	grant_type=client_credential
+	#第三方用户唯一凭证
+	appid=wxc57f66afafe529c2
+	#第三方用户唯一凭证密钥，即appsecret
+	appsecret=b0fcc1ff54ed693eecde7ce51f68040d
+	
+	
+	
+	#AccessTokenCache接口的实现类
+	#AccessTokenCache接口是用来缓存AccessToken的，可以实现这个接口，来吧AccessToken放到数据库中.默认实现DefaultAccessCache是放在缓存中的
+	accessTokenCache=com.mawujun.messge.context.DefaultAccessTokenCache
+4：
