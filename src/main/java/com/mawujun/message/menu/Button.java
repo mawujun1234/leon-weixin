@@ -1,19 +1,23 @@
 package com.mawujun.message.menu;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Table;
 
 /**
  * 菜单
  * @author mawujun email:16064988@qq.com qq:16064988
  *
  */
-@Entity
-@Table(name="wx_button")
+@Entity  
+@DiscriminatorValue("button") 
 public class Button extends AbstractButton {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Enumerated(EnumType.STRING)
 	@Column(length=30)
 	private ButtonType type;
