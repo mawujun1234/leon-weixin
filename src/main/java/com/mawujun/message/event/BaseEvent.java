@@ -25,6 +25,8 @@ public class BaseEvent extends UUIDEntity{
 	@Enumerated(EnumType.STRING)
 	@Column(length=30)
 	private EventType Event;
+	
+	
 	public BaseEvent(){
 		super();
 		this.MsgType=RequestMsgType.event;

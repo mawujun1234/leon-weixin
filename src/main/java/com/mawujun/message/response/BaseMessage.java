@@ -1,5 +1,7 @@
 package com.mawujun.message.response;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,13 +22,21 @@ public class BaseMessage  extends UUIDEntity{
 	// 开发者微信号
 	@Column(length=30)
 	private String FromUserName;
-	// 消息创建时间 （整型）
+	// 消息创建时间 （整型）,秒
 	private Long CreateTime;
 
 	//消息类型，text，image,voice,video,shortvideo,location.link等等
 	@Enumerated(EnumType.STRING)
 	@Column(length=30)
 	private ResponseMsgType MsgType;
+	
+	public void setCreateTime(Date... date) {
+		if(date!=null && date.length>0){
+			CreateTime=date[0].getTime()/1000;
+		} else {
+			CreateTime=(new Date()).getTime()/1000;
+		}
+	}
 	
 	
 	public String getToUserName() {

@@ -1,9 +1,20 @@
 package com.mawujun.message.response;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
+@Entity
+@Table(name="wx_musicmessage")
 public class MusicMessage extends BaseMessage {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Embedded
 	private Music Music;
 	public MusicMessage(){
 		super();

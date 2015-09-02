@@ -3,26 +3,41 @@ package com.mawujun.message.response;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
+@Entity
+@Table(name="wx_newsmessage")
 public class NewsMessage extends BaseMessage {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//图文消息个数，限制为10条以内
 	private int ArticleCount;
 	//多条图文消息信息，默认第一个item为大图,注意，如果图文数超过10，则将会无响应
-	private List<Articles> Articles;
+	@ElementCollection 
+    @CollectionTable(name="wx_news", joinColumns=@JoinColumn(name="newsmessage_id"))  
+    //@OrderBy("serviceDate")  
+	private List<News> Articles;
 	public NewsMessage(){
 		super();
 		super.setMsgType(ResponseMsgType.news);
 	}
-	public void addArticles(Articles article) {
+	public void addArticles(News article) {
 		if(Articles==null){
-			Articles=new ArrayList<Articles>();
+			Articles=new ArrayList<News>();
 		}
 		Articles.add(article);
 		this.ArticleCount=Articles.size();
 	}
-	public void setArticles(List<Articles> articles) {
+	public void setArticles(List<News> articles) {
 		Articles = articles;
 		this.ArticleCount=Articles.size();
 	}
@@ -34,7 +49,7 @@ public class NewsMessage extends BaseMessage {
 	public void setArticleCount(int articleCount) {
 		ArticleCount = articleCount;
 	}
-	public List<Articles> getArticles() {
+	public List<News> getArticles() {
 		return Articles;
 	}
 	

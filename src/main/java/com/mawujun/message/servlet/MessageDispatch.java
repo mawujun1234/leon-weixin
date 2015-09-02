@@ -36,26 +36,8 @@ public class MessageDispatch {
 		if(config_file_temp!=null && !"".equals(config_file_temp)){
 			config_file_path=config_file_temp;
 		}
-		
-		try {
-			WeiXinApplicationContext.loadProperties(config_file_path);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("加载微信配置文件出错,该文件不存在或者路径指定错误",e);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("找不到指定的类",e);
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("指定的类，请提供默认的构造函数",e);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("指定的类，请提供默认的构造函数",e);
-		}
+
+		WeiXinApplicationContext.loadProperties(config_file_path);
 	} 
 	/*
 	 * 确认请求来自微信服务器

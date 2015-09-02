@@ -1,5 +1,8 @@
 package com.mawujun.message.response;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Video {
 	private String MediaId;//通过素材管理接口上传多媒体文件，得到的id
 	private String Title;//视频消息的标题

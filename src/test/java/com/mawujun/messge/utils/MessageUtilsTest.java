@@ -9,7 +9,7 @@ import org.springframework.util.StringUtils;
 import com.mawujun.message.request.ImageMessage;
 import com.mawujun.message.request.RequestMsgType;
 import com.mawujun.message.request.TextMessage;
-import com.mawujun.message.response.Articles;
+import com.mawujun.message.response.News;
 import com.mawujun.message.response.Image;
 import com.mawujun.message.response.ResponseMsgType;
 import com.mawujun.message.utils.MessageUtils;
@@ -163,13 +163,13 @@ public class MessageUtilsTest {
 		message.setCreateTime(12345678);
 		message.setMsgType(ResponseMsgType.news);
 		
-		Articles articles1=new Articles();
+		News articles1=new News();
 		articles1.setTitle("title1");
 		articles1.setDescription("description1");
 		articles1.setPicUrl("picurl");
 		articles1.setUrl("url");
 		message.addArticles(articles1);
-		Articles articles2=new Articles();
+		News articles2=new News();
 		articles2.setTitle("title");
 		articles2.setDescription("description");
 		articles2.setPicUrl("picurl");
@@ -185,7 +185,7 @@ public class MessageUtilsTest {
 				+ "<CreateTime><![CDATA[12345678]]></CreateTime>"
 				+ "<MsgType><![CDATA[news]]></MsgType>"
 				+ "<ArticleCount><![CDATA[2]]></ArticleCount>"
-				+ "<Articles>"
+				+ "<News>"
 				+ "<item>"
 				+ "<Title><![CDATA[title1]]></Title>"
 				+ "<Description><![CDATA[description1]]></Description>"
@@ -198,7 +198,7 @@ public class MessageUtilsTest {
 				+ "<PicUrl><![CDATA[picurl]]></PicUrl>"
 				+ "<Url><![CDATA[url]]></Url>"
 				+ "</item>"
-				+ "</Articles>"
+				+ "</News>"
 				+ "</xml>";
 		assertEquals(orginxml,StringUtils.trimAllWhitespace(xml));
 	}
