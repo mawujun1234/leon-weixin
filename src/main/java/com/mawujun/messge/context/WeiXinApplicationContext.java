@@ -11,6 +11,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.Date;
 import java.util.Properties;
 
@@ -32,7 +35,9 @@ import com.mawujun.material.MaterialPage;
 import com.mawujun.material.MaterialType;
 import com.mawujun.material.NewsMaterial;
 import com.mawujun.material.VideoMaterial;
+import com.mawujun.message.response.BaseMessage;
 import com.mawujun.messge.service.MessageService;
+import com.mawujun.utils.properties.PropertiesUtils;
 
 /**
  * 应用程序上下文，主要用来根据weixin.properties来初始化上下文类
@@ -43,7 +48,7 @@ public class WeiXinApplicationContext {
 	static Logger logger=LogManager.getLogger(WeiXinApplicationContext.class);
 	
 	static Properties weixin_pps;
-	static AccessTokenCache accessTokenCache;
+	static AccessTokenCache accessTokenCache=new DefaultAccessTokenCache();
 	private static MessageService messageService;
 	
 	private static final String access_token_url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
@@ -73,7 +78,20 @@ public class WeiXinApplicationContext {
 		return weixin_pps;
 	}
 	
-	
+	/**
+	 * 当有消息过来后，如果发现没有匹配的自动消息回复规则的时候，先回复一个空字符串，否则，微信将会报错
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @return
+	 */
+	public static BaseMessage getEmptyStringResponse(String fromUsername,String toUsername) {
+		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+		result.setContent("");
+		result.setFromUserName(fromUsername);
+		result.setToUserName(toUsername);
+		result.setCreateTime(new Date());
+		
+		return result;
+	}
 	public static void loadProperties(String wexin_properties_path) {
 		if(wexin_properties_path==null){
 			throw new NullPointerException("wexin。properties路径必须先指定!");
@@ -85,6 +103,7 @@ public class WeiXinApplicationContext {
 			}
 			weixin_pps = new Properties();
 			weixin_pps.load(in);
+			
 			
 			//PropertiesUtils putils=PropertiesUtils.load(wexin_properties_path);
 			Class clazz = Class.forName(weixin_pps.getProperty("messageService"));
@@ -275,7 +294,7 @@ public class WeiXinApplicationContext {
 	 * @author mawujun 16064988@qq.com 
 	 * @
 	 */
-	public static Material get_material(String media_id)  {
+	public static Material get_material(MaterialType materialType,String media_id)  {
 		String url=get_material_url.replace("ACCESS_TOKEN", WeiXinApplicationContext.getAccessToken().getAccess_token());
 		//dd
 		//正确时的返回JSON数据包如下：{"errcode":0,"errmsg":"ok"}
@@ -286,14 +305,19 @@ public class WeiXinApplicationContext {
 		//Menu menu=jSONObject.getObject("menu",Menu.class);
 		//这样就表示返回的是图文信息
 		Material material=null;
-		
-		if(jSONObject.getString("news_item")!=null){
+		//http://mp.weixin.qq.com/wiki/4/b3546879f07623cb30df9ca0e420a5d0.html
+		//官方文档中有描述返回的数据格式是什么
+		if(materialType==MaterialType.news){
 			material=JSON.parseObject(jsonStr, NewsMaterial.class);
 			material.setMaterialType(MaterialType.news);
-		} else {
-			//否则就是视频素材
+		} else if(materialType==MaterialType.video){
+			//否则就是视频素材,{"title":TITLE,"description":DESCRIPTION,"down_url":DOWN_URL}
+			//视频消息可能是自己上传的，也可能是网页视频
 			material=JSON.parseObject(jsonStr, VideoMaterial.class);
 			material.setMaterialType(MaterialType.video);	
+		} else {
+			//其他类型的素材消息，则响应的直接为素材的内容，开发者可以自行保存为文件。例如：
+			throw new BusinessException("这个还没有开发");
 		}
 		material.setMedia_id(media_id);
 		return material;
@@ -315,6 +339,7 @@ public class WeiXinApplicationContext {
 	/**
 	 * 获取临时素材，也就是客户发送消息时，发送的图片，音频，视频等内容的时候
 	 * http://www.tuicool.com/articles/muYzAr
+	 * http://mp.weixin.qq.com/wiki/10/78b15308b053286e2a66b33f0f0f5fb6.html
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @param media_id
 	 * @param savePath
@@ -423,7 +448,16 @@ public class WeiXinApplicationContext {
 			}
 			//JSONObject json=JSONObject.fromObject(buffer.toString());
 			return buffer.toString();
-		} catch(Exception e) {
+		}  catch (IOException e) {
+			logger.error(e);
+			throw new RuntimeException(e);
+		} catch (KeyManagementException e) {
+			logger.error(e);
+			throw new RuntimeException(e);
+		} catch (NoSuchAlgorithmException e) {
+			logger.error(e);
+			throw new RuntimeException(e);
+		} catch (NoSuchProviderException e) {
 			logger.error(e);
 			throw new RuntimeException(e);
 		}
