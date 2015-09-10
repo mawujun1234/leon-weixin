@@ -1,6 +1,6 @@
 package com.mawujun.messge.context;
 
-import java.awt.Menu;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,8 +26,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.mawujun.error.ErrorMsg;
 import com.mawujun.exception.BusinessException;
 import com.mawujun.material.Material;
 import com.mawujun.material.MaterialCount;
@@ -35,9 +35,10 @@ import com.mawujun.material.MaterialPage;
 import com.mawujun.material.MaterialType;
 import com.mawujun.material.NewsMaterial;
 import com.mawujun.material.VideoMaterial;
+import com.mawujun.message.menu.Button;
+import com.mawujun.message.menu.Menu;
 import com.mawujun.message.response.BaseMessage;
 import com.mawujun.messge.service.MessageService;
-import com.mawujun.utils.properties.PropertiesUtils;
 
 /**
  * 应用程序上下文，主要用来根据weixin.properties来初始化上下文类
@@ -163,6 +164,36 @@ public class WeiXinApplicationContext {
 		
 	}
 	/**
+	 * 获取菜单
+	 * http://mp.weixin.qq.com/wiki/13/43de8269be54a0a6f64413e4dfa94f39.html
+	 * @author mawujun 16064988@qq.com 
+	 * @
+	 */
+	public static Menu getMenu() {
+		String url=get_menu_url.replace("ACCESS_TOKEN", WeiXinApplicationContext.getAccessToken().getAccess_token());
+
+		//正确时的返回JSON数据包如下：{"errcode":0,"errmsg":"ok"}
+		//错误时的返回JSON数据包如下（示例为无效菜单名长度）：{"errcode":40018,"errmsg":"invalid button name size"}
+		String jsonStr=httpsRequest(url, "POST",null);
+		
+		JSONObject jSONObject=JSON.parseObject(jsonStr);
+		Menu menu=jSONObject.getObject("menu",  Menu.class);
+		//Menu menu=JSON.parseObject(jSONObject.getJSONObject("menu").toJSONString(), Menu.class);
+		
+//		JSONObject menu_jsonobject=jSONObject.getJSONObject("menu");
+//		JSONArray button_jsonarray=menu_jsonobject.getJSONArray("button");
+//		Menu menu=new Menu();
+//		for(int i=0;i<button_jsonarray.size();i++){
+//			Button button=button_jsonarray.getObject(i, Button.class);
+//			menu.addButton(button);
+//		}
+		
+		//Menu menu=JSON.parseObject(jsonStr,Menu.class);
+		return menu;
+		
+	}
+	
+	/**
 	 * 创建或更新 自定义菜单,比如新建一个二级菜单，也要构建整个菜单，然后上传，单上传后要24小时候后才能看到，不过在开发的时候可以先取消关注然后再关注
 	 * 就可以看到新上传的菜单了
 	 * http://mp.weixin.qq.com/wiki/13/43de8269be54a0a6f64413e4dfa94f39.html
@@ -181,36 +212,19 @@ public class WeiXinApplicationContext {
 		String jsonStr=httpsRequest(url, "POST",menuJson);
 		return jsonStr;
 	}
-	/**
-	 * 获取菜单
-	 * http://mp.weixin.qq.com/wiki/13/43de8269be54a0a6f64413e4dfa94f39.html
-	 * @author mawujun 16064988@qq.com 
-	 * @
-	 */
-	public static Menu getMenu() {
-		String url=get_menu_url.replace("ACCESS_TOKEN", WeiXinApplicationContext.getAccessToken().getAccess_token());
 
-		//正确时的返回JSON数据包如下：{"errcode":0,"errmsg":"ok"}
-		//错误时的返回JSON数据包如下（示例为无效菜单名长度）：{"errcode":40018,"errmsg":"invalid button name size"}
-		String jsonStr=httpsRequest(url, "POST",null);
-		
-		JSONObject jSONObject=JSON.parseObject(jsonStr);
-		Menu menu=jSONObject.getObject("menu",Menu.class);
-		return menu;
-		
-	}
 	/**
 	 * 删除所有自定义菜单
 	 * @author mawujun 16064988@qq.com 
 	 * @
 	 */
-	public static String deleteMenu() {
+	public static void deleteMenu() {
 		String url=delete_menu_url.replace("ACCESS_TOKEN", WeiXinApplicationContext.getAccessToken().getAccess_token());
 		
 		//正确时的返回JSON数据包如下：{"errcode":0,"errmsg":"ok"}
 		//错误时的返回JSON数据包如下（示例为无效菜单名长度）：{"errcode":40018,"errmsg":"invalid button name size"}
-		String jsonStr=httpsRequest(url, "POST",null);
-		return jsonStr;
+		httpsRequest(url, "POST",null);
+		//return jsonStr;
 	}
 	
 	/**
@@ -357,8 +371,8 @@ public class WeiXinApplicationContext {
 	      conn.setDoInput(true);
 	      conn.setRequestMethod("GET");
 
-	      if (!savePath.endsWith(File.pathSeparator)) {
-	        savePath += File.pathSeparator;
+	      if (!savePath.endsWith(File.separator)) {
+	        savePath += File.separator;
 	      }
 	     
 	     
@@ -442,9 +456,13 @@ public class WeiXinApplicationContext {
 
 			//当微信发生错误的时候爆出异常
 			if(buffer.indexOf("errcode")!=-1){
-				logger.error(buffer.toString());
-				//ErrorMsg errorMsg=JSON.parseObject(jsonStr, ErrorMsg.class);
-				throw new BusinessException(buffer.toString());
+				//菜单正确删除的接口会返回{"errcode":0,"errmsg":"ok"}
+				if(buffer.indexOf("\"errmsg\":\"ok\"")==-1){
+					logger.error(buffer.toString());
+					//ErrorMsg errorMsg=JSON.parseObject(jsonStr, ErrorMsg.class);
+					throw new BusinessException(buffer.toString());
+				}
+				
 			}
 			//JSONObject json=JSONObject.fromObject(buffer.toString());
 			return buffer.toString();

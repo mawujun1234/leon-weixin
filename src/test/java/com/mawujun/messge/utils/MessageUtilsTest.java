@@ -185,7 +185,7 @@ public class MessageUtilsTest {
 				+ "<CreateTime><![CDATA[12345678]]></CreateTime>"
 				+ "<MsgType><![CDATA[news]]></MsgType>"
 				+ "<ArticleCount><![CDATA[2]]></ArticleCount>"
-				+ "<News>"
+				+ "<Articles>"
 				+ "<item>"
 				+ "<Title><![CDATA[title1]]></Title>"
 				+ "<Description><![CDATA[description1]]></Description>"
@@ -198,7 +198,7 @@ public class MessageUtilsTest {
 				+ "<PicUrl><![CDATA[picurl]]></PicUrl>"
 				+ "<Url><![CDATA[url]]></Url>"
 				+ "</item>"
-				+ "</News>"
+				+ "</Articles>"
 				+ "</xml>";
 		assertEquals(orginxml,StringUtils.trimAllWhitespace(xml));
 	}

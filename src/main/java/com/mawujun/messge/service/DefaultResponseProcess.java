@@ -17,6 +17,7 @@ import com.mawujun.message.request.VideoMessage;
 import com.mawujun.message.request.VoiceMessage;
 import com.mawujun.message.response.BaseMessage;
 import com.mawujun.messge.autoReply.AutoReplyService;
+import com.mawujun.messge.context.WeiXinApplicationContext;
 
 public class DefaultResponseProcess implements IResponseProcess {
 	static Logger logger=LogManager.getLogger(DefaultResponseProcess.class);
@@ -31,7 +32,16 @@ public class DefaultResponseProcess implements IResponseProcess {
 	 * @return
 	 */
 	private BaseMessage getAutoReplyResponse(com.mawujun.message.request.BaseMessage message) {
-		
+		BaseMessage[] responseMessage= autoReplyService.getMessageAutoreply(message);
+		if(responseMessage==null){
+			return null;
+		}
+		if(responseMessage.length==1){
+			return responseMessage[0];
+		} else {
+			//这里转到客服接口去发送多条信息
+			return WeiXinApplicationContext.getEmptyStringResponse(message.getToUserName(),message.getFromUserName());
+		}
 	}
 
 	/**
@@ -39,104 +49,54 @@ public class DefaultResponseProcess implements IResponseProcess {
 	 */
 	public BaseMessage process(TextMessage message) {
 		// TODO Auto-generated method stub
-		return getEmptyStringResponse(message);
+		return getAutoReplyResponse(message);
 	}
 
 	public BaseMessage process(ImageMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
-		result.setContent("热烈欢迎");
-		result.setFromUserName(message.getToUserName());
-		result.setToUserName(message.getFromUserName());
-		result.setCreateTime(12345678);
-		
-		return result;
+		return getAutoReplyResponse(message);
 	}
 
 	public BaseMessage process(VoiceMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
-		result.setContent("热烈欢迎");
-		result.setFromUserName(message.getToUserName());
-		result.setToUserName(message.getFromUserName());
-		result.setCreateTime(12345678);
-		
-		return result;
+		return getAutoReplyResponse(message);
 	}
 
 	public BaseMessage process(VideoMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
-		result.setContent("热烈欢迎");
-		result.setFromUserName(message.getToUserName());
-		result.setToUserName(message.getFromUserName());
-		result.setCreateTime(12345678);
-		
-		return result;
+		return getAutoReplyResponse(message);
 	}
 
 	public BaseMessage process(ShortvideoMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
-		result.setContent("热烈欢迎");
-		result.setFromUserName(message.getToUserName());
-		result.setToUserName(message.getFromUserName());
-		result.setCreateTime(12345678);
-		
-		return result;
+		return getAutoReplyResponse(message);
 	}
 
 	public BaseMessage process(LocationMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
-		result.setContent("热烈欢迎");
-		result.setFromUserName(message.getToUserName());
-		result.setToUserName(message.getFromUserName());
-		result.setCreateTime(12345678);
-		
-		return result;
+		return getAutoReplyResponse(message);
 	}
 
 	public BaseMessage process(LinkMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
-		result.setContent("热烈欢迎");
-		result.setFromUserName(message.getToUserName());
-		result.setToUserName(message.getFromUserName());
-		result.setCreateTime(12345678);
-		
-		return result;
+		return getAutoReplyResponse(message);
 	}
-
-	public BaseMessage process(QRCodeEvent message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
-		result.setContent("热烈欢迎");
-		result.setFromUserName(message.getToUserName());
-		result.setToUserName(message.getFromUserName());
-		result.setCreateTime(12345678);
-		
-		return result;
-	}
-
+	/**
+	 * 当关注的时候，设置的内容
+	 */
 	public BaseMessage process(SubscribeEvent message) {
 		if(message.getEvent()==EventType.subscribe){
 			return autoReplyService.getSubscribeReply(message);
 		}
-		return null;
+		return WeiXinApplicationContext.getEmptyStringResponse(message.getToUserName(),message.getFromUserName());
 	}
 
+	
+	public BaseMessage process(QRCodeEvent message) {
+		return WeiXinApplicationContext.getEmptyStringResponse(message.getToUserName(),message.getFromUserName());
+	}
+
+	
 	public BaseMessage process(MenuEvent message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
-		result.setContent("热烈欢迎");
-		result.setFromUserName(message.getToUserName());
-		result.setToUserName(message.getFromUserName());
-		result.setCreateTime(12345678);
-		
-		return result;
+		return WeiXinApplicationContext.getEmptyStringResponse(message.getToUserName(),message.getFromUserName());
 	}
 
 	public BaseMessage process(LocationEvent message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
-		result.setContent("热烈欢迎");
-		result.setFromUserName(message.getToUserName());
-		result.setToUserName(message.getFromUserName());
-		result.setCreateTime(12345678);
-		
-		return result;
+		return WeiXinApplicationContext.getEmptyStringResponse(message.getToUserName(),message.getFromUserName());
 	}
 
 }

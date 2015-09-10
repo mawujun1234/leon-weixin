@@ -1,13 +1,9 @@
 package com.mawujun.message.request;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
-
-import com.mawujun.repository.idEntity.UUIDEntity;
 
 
 /**
@@ -16,7 +12,7 @@ import com.mawujun.repository.idEntity.UUIDEntity;
  *
  */
 @MappedSuperclass
-public class BaseMessage extends UUIDEntity{
+public class BaseMessage {
 	//消息id，64位整型
 	@Column(length=70)
 	private String MsgId;

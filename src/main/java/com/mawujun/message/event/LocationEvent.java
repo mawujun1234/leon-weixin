@@ -12,8 +12,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_locationevent")
+//@Entity
+//@Table(name="wx_locationevent")
 public class LocationEvent extends BaseEvent {
 	@Column(length=30)
 	private String Latitude;

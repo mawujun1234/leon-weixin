@@ -15,8 +15,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_qrcodeevent")
+//@Entity
+//@Table(name="wx_qrcodeevent")
 public class QRCodeEvent extends BaseEvent {
 	//用户已关注时的事件推送:事件类型，Event=SCAN
 	//用户未关注时，进行关注后的事件推送:事件类型，Event=subscribe

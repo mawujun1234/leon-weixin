@@ -6,10 +6,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
 
 import com.mawujun.message.request.RequestMsgType;
-import com.mawujun.repository.idEntity.UUIDEntity;
 
 @MappedSuperclass
-public class BaseEvent extends UUIDEntity{
+public class BaseEvent {
 	// 开发者微信号，公众号的微信号
 	@Column(length=30)
 	private String ToUserName;

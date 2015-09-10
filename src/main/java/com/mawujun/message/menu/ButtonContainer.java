@@ -12,8 +12,9 @@ import javax.persistence.Transient;
  * @author mawujun 16064988@qq.com  
  *
  */
-@Entity  
-@DiscriminatorValue("button_container") 
+//@Entity  
+//@DiscriminatorValue("button_container") 
+@Deprecated
 public class ButtonContainer extends AbstractButton {
 
 	/**

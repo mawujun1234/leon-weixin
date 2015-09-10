@@ -16,7 +16,8 @@ import com.mawujun.message.response.News;
 import com.mawujun.messge.context.WeiXinApplicationContext;
 
 /**
- * 获取微信公众平台自动回复的内容
+ * 获取微信公众平台自动回复的内容,就是自动回复接口的内容，通过微信后台设置的自动回复
+ * 如果使用了“开发者中心”的内容，自动回复就无效了，素以自动回复也是要自己开发的
  * @author mawujun email:16064988@qq.com qq:16064988
  *
  */
@@ -74,10 +75,11 @@ public class AutoReplyService {
 		return baseMessage!=null?baseMessage: WeiXinApplicationContext.getEmptyStringResponse(event.getToUserName(),event.getFromUserName());
 	}
 	/**
-	 * 获取自动回复的消息内容，首先按关键字进行判断，然后获取自动消息回复
+	 * 获取自动回复的消息内容，首先按关键字进行判断，然后获取自动消息回复。
+	 * 如果关键字匹配返回多条信息的时候，需要通过客服接口把多条信息发送到客户上
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @param message
-	 * @return
+	 * @return 如果没有匹配规则的自动回复就返回null
 	 */
 	public BaseMessage[] getMessageAutoreply(com.mawujun.message.request.BaseMessage message) {
 		BaseMessage[] baseMessages=null;
@@ -95,15 +97,17 @@ public class AutoReplyService {
 					JSONObject message_default_autoreply_info=jsonObject.getJSONObject("message_default_autoreply_info");
 					//当删除回复消息后，但存在关键字回复的时候is_autoreply_open=1，但是message_default_autoreply_info==null
 					if(message_default_autoreply_info==null){
-						baseMessages=new BaseMessage[1];
-						baseMessages[0]=WeiXinApplicationContext.getEmptyStringResponse(message.getToUserName(),message.getFromUserName());
+						//baseMessages=new BaseMessage[1];
+						//baseMessages[0]=WeiXinApplicationContext.getEmptyStringResponse(message.getToUserName(),message.getFromUserName());
+						return null;
 					} else {
 						BaseMessage baseMessage=processAutoReplyMsg(message_default_autoreply_info,message.getToUserName(),message.getFromUserName());	
 						baseMessages=new BaseMessage[1];
 						if(baseMessage!=null){	
 							baseMessages[0]=baseMessage;
 						} else {
-							baseMessages[0]=WeiXinApplicationContext.getEmptyStringResponse(message.getToUserName(),message.getFromUserName());
+							//baseMessages[0]=WeiXinApplicationContext.getEmptyStringResponse(message.getToUserName(),message.getFromUserName());
+							return null;
 						}
 					}
 					

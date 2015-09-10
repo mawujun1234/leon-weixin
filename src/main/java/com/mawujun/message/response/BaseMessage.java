@@ -7,15 +7,13 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
 
-import com.mawujun.repository.idEntity.UUIDEntity;
-
 /**
  * 基础的请求消息  客户--》公众号
  * @author mawujun email:16064988@qq.com qq:16064988
  *
  */
 @MappedSuperclass
-public class BaseMessage  extends UUIDEntity{
+public class BaseMessage {
 	// 接收方帐号（收到的OpenID）
 	@Column(length=30)
 	private String ToUserName;

@@ -1,14 +1,12 @@
 package com.mawujun.message.request;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_imagemessage")
+//@Entity
+//@Table(name="wx_imagemessage")
 public class ImageMessage extends BaseMessage {
 	@Column(length=100)
 	private String PicUrl;//图片链接

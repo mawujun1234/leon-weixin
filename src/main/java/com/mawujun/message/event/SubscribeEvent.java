@@ -12,8 +12,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_subscribeevent")
+//@Entity
+//@Table(name="wx_subscribeevent")
 public class SubscribeEvent extends BaseEvent {
 
 }

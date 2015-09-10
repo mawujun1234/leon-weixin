@@ -1,14 +1,12 @@
 package com.mawujun.message.response;
 
 import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_musicmessage")
+//@Entity
+//@Table(name="wx_musicmessage")
 public class MusicMessage extends BaseMessage {
 	/**
 	 * 

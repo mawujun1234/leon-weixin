@@ -1,14 +1,12 @@
 package com.mawujun.message.request;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_linkmessage")
+//@Entity
+//@Table(name="wx_linkmessage")
 public class LinkMessage extends BaseMessage {
 	@Column(length=50)
 	private String Title;//消息标题

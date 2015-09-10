@@ -1,13 +1,10 @@
 package com.mawujun.message.response;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_voicemessage")
+//@Entity
+//@Table(name="wx_voicemessage")
 public class VoiceMessage extends BaseMessage {
 	/**
 	 * 

@@ -14,8 +14,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_menuevent")
+//@Entity
+//@Table(name="wx_menuevent")
 public class MenuEvent extends BaseEvent {
 	//点击菜单拉取消息时的事件推送:Event=CLICK
 	//点击菜单跳转链接时的事件推送:Event=VIEW

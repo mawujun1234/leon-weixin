@@ -5,15 +5,13 @@ import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.Table;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_newsmessage")
+//@Entity
+//@Table(name="wx_newsmessage")
 public class NewsMessage extends BaseMessage {
 	/**
 	 * 
@@ -25,6 +23,7 @@ public class NewsMessage extends BaseMessage {
 	@ElementCollection 
     @CollectionTable(name="wx_news", joinColumns=@JoinColumn(name="newsmessage_id"))  
     //@OrderBy("serviceDate")  
+	@XStreamAlias("Articles") 
 	private List<News> Articles;
 	public NewsMessage(){
 		super();

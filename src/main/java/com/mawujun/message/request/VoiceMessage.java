@@ -1,14 +1,12 @@
 package com.mawujun.message.request;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_voicemessage")
+//@Entity
+//@Table(name="wx_voicemessage")
 public class VoiceMessage extends BaseMessage {
 	@Column(length=20)
 	private String Format;//语音格式，如amr，speex等

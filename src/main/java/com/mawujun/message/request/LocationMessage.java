@@ -1,14 +1,12 @@
 package com.mawujun.message.request;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
-@Entity
-@Table(name="wx_locationmessage")
+//@Entity
+//@Table(name="wx_locationmessage")
 public class LocationMessage extends BaseMessage {
 	@Column(length=30)
 	private String Location_X;//地理位置维度
