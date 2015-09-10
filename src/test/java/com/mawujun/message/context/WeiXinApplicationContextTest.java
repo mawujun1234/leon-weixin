@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import com.mawujun.message.menu.Button;
+
 import com.mawujun.message.menu.ButtonType;
 import com.mawujun.message.menu.Menu;
 import com.mawujun.messge.context.WeiXinApplicationContext;
@@ -21,36 +21,14 @@ public class WeiXinApplicationContextTest {
 	}
 	@Test
 	public void createMenu() {
-		http://mp.weixin.qq.com/wiki/13/43de8269be54a0a6f64413e4dfa94f39.html
-		将菜单的按钮封装成各自的类，然后提供快捷的创建类的方法，并且自动判断，并且在获取类的地方也要进行转换，手工的转换为具体的类，不用统一的一个Button了，这样抬模糊了
-		增加BUttonUtils的类，在里面可以创建相应类型的Button，也可以把json转换成对应类型的Button
-		WeiXinApplicationContext.loadProperties("weixin.properties");
-		Button button=new Button();
-		button.setKey("test");
-		button.setName("测试");
-		button.setType(ButtonType.view);
-		button.setUrl("http://www.baidu.com");
-		Menu menu=new Menu();
-		menu.addButton(button);
-		
-		
-		
-		Button button1=new Button();
-		button1.setKey("test");
-		button1.setName("测试");
-		button1.setType(ButtonType.view);
-		button1.setUrl("http://www.baidu.com");
-		
-		Button button2=new Button();
-		button2.setKey("test");
-		button2.setName("网易");
-		button2.setType(ButtonType.view);
-		button2.setUrl("http://www.163.com");
-		button1.addSub_button(button2);
-		menu.addButton(button1);
-		
-		
-		WeiXinApplicationContext.createMenu(menu);
+//		WeiXinApplicationContext.loadProperties("weixin.properties");
+//
+//		Menu menu=new Menu();
+//		menu.addButton(ButtonType.view,"view","http://www.baidu.com");
+//		
+//		menu.addButton_container("一级菜单").addButton(ButtonType.view, "网易", "http://www.163.com");
+//		
+//		WeiXinApplicationContext.createMenu(menu);
 	}
 	@Test
 	public void getMenu() {

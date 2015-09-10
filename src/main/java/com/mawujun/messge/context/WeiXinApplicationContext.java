@@ -1,6 +1,7 @@
 package com.mawujun.messge.context;
 
 
+import java.awt.Button;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,7 +36,18 @@ import com.mawujun.material.MaterialPage;
 import com.mawujun.material.MaterialType;
 import com.mawujun.material.NewsMaterial;
 import com.mawujun.material.VideoMaterial;
-import com.mawujun.message.menu.Button;
+import com.mawujun.message.menu.ButtonType;
+import com.mawujun.message.menu.Button_click;
+import com.mawujun.message.menu.Button_container;
+import com.mawujun.message.menu.Button_location_select;
+import com.mawujun.message.menu.Button_media_id;
+import com.mawujun.message.menu.Button_pic_photo_or_album;
+import com.mawujun.message.menu.Button_pic_sysphoto;
+import com.mawujun.message.menu.Button_pic_weixin;
+import com.mawujun.message.menu.Button_scancode_push;
+import com.mawujun.message.menu.Button_scancode_waitmsg;
+import com.mawujun.message.menu.Button_view;
+import com.mawujun.message.menu.Button_view_limited;
 import com.mawujun.message.menu.Menu;
 import com.mawujun.message.response.BaseMessage;
 import com.mawujun.messge.service.MessageService;
@@ -177,25 +189,54 @@ public class WeiXinApplicationContext {
 		String jsonStr=httpsRequest(url, "POST",null);
 		
 		JSONObject jSONObject=JSON.parseObject(jsonStr);
-		Menu menu=jSONObject.getObject("menu",  Menu.class);
+		//Menu menu=jSONObject.getObject("menu",  Menu.class);
 		//Menu menu=JSON.parseObject(jSONObject.getJSONObject("menu").toJSONString(), Menu.class);
 		
-//		JSONObject menu_jsonobject=jSONObject.getJSONObject("menu");
-//		JSONArray button_jsonarray=menu_jsonobject.getJSONArray("button");
-//		Menu menu=new Menu();
-//		for(int i=0;i<button_jsonarray.size();i++){
-//			Button button=button_jsonarray.getObject(i, Button.class);
-//			menu.addButton(button);
-//		}
+		JSONObject menu_jsonobject=jSONObject.getJSONObject("menu");
+		JSONArray button_jsonarray=menu_jsonobject.getJSONArray("button");
 		
-		//Menu menu=JSON.parseObject(jsonStr,Menu.class);
+		Menu menu=new Menu();
+		for(int i=0;i<button_jsonarray.size();i++){
+			JSONObject button_jsonobject=button_jsonarray.getJSONObject(i);
+			//=null表示Button_container
+			ButtonType type=button_jsonobject.getObject("type",ButtonType.class);
+			if(type==null){
+				//button_jsonarray.getObject(i, Button_container.class);
+				Button_container btn=new Button_container();
+				btn.setName(button_jsonobject.getString("name"));
+				addSub_button(button_jsonobject.getJSONArray("sub_button"), btn);
+				menu.addButton(btn);
+			} else if(type==ButtonType.view){
+				menu.addButton(type, button_jsonobject.getString("name"), button_jsonobject.getString("url"));
+			} else if(type==ButtonType.media_id || type==ButtonType.view_limited){
+				menu.addButton(type, button_jsonobject.getString("name"), button_jsonobject.getString("media_id"));
+			} else {
+				menu.addButton(type, button_jsonobject.getString("name"), button_jsonobject.getString("key"));
+			}
+			
+		}
+		
 		return menu;
-		
+	}
+	
+	private static void addSub_button(JSONArray button_jsonarray,Button_container button_container){
+		for(int i=0;i<button_jsonarray.size();i++){
+			JSONObject button_jsonobject=button_jsonarray.getJSONObject(i);
+				//=null表示Button_container
+			ButtonType type=button_jsonobject.getObject("type",ButtonType.class);
+			if(type==ButtonType.view){
+				button_container.addButton(type, button_jsonobject.getString("name"), button_jsonobject.getString("url"));
+			} else if(type==ButtonType.media_id || type==ButtonType.view_limited){
+				button_container.addButton(type, button_jsonobject.getString("name"), button_jsonobject.getString("media_id"));
+			} else {
+				button_container.addButton(type, button_jsonobject.getString("name"), button_jsonobject.getString("key"));
+			}
+		}
 	}
 	
 	/**
 	 * 创建或更新 自定义菜单,比如新建一个二级菜单，也要构建整个菜单，然后上传，单上传后要24小时候后才能看到，不过在开发的时候可以先取消关注然后再关注
-	 * 就可以看到新上传的菜单了
+	 * 就可以看到新上传的菜单了,这样重复创建的话，会覆盖原先的菜单
 	 * http://mp.weixin.qq.com/wiki/13/43de8269be54a0a6f64413e4dfa94f39.html
 	 * @author mawujun 16064988@qq.com 
 	 * @param menu

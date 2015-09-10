@@ -8,6 +8,7 @@ package com.mawujun.message.menu;
  *
  */
 public enum ButtonType {
+	button_container,//这个不是微信的类型，这个是自己定义的，用来表示是按钮的容器
 	click,
 	view,
 	scancode_push,

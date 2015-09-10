@@ -1,6 +1,8 @@
 package com.mawujun.message.menu;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 //@Entity
 //@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
