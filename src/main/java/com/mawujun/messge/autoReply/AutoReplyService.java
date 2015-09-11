@@ -72,7 +72,7 @@ public class AutoReplyService {
 			e.printStackTrace();
 			logger.error(e);
 		}
-		return baseMessage!=null?baseMessage: WeiXinApplicationContext.getEmptyStringResponse(event.getToUserName(),event.getFromUserName());
+		return baseMessage;
 	}
 	/**
 	 * 获取自动回复的消息内容，首先按关键字进行判断，然后获取自动消息回复。

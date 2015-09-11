@@ -91,20 +91,20 @@ public class WeiXinApplicationContext {
 		return weixin_pps;
 	}
 	
-	/**
-	 * 当有消息过来后，如果发现没有匹配的自动消息回复规则的时候，先回复一个空字符串，否则，微信将会报错
-	 * @author mawujun email:160649888@163.com qq:16064988
-	 * @return
-	 */
-	public static BaseMessage getEmptyStringResponse(String fromUsername,String toUsername) {
-		com.mawujun.message.response.NotResponseMessage result=new com.mawujun.message.response.NotResponseMessage();
-		//result.setContent("");
-		result.setFromUserName(fromUsername);
-		result.setToUserName(toUsername);
-		result.setCreateTime(new Date());
-		
-		return result;
-	}
+//	/**
+//	 * 当有消息过来后，如果发现没有匹配的自动消息回复规则的时候，先回复一个空字符串，否则，微信将会报错
+//	 * @author mawujun email:160649888@163.com qq:16064988
+//	 * @return
+//	 */
+//	public static BaseMessage getEmptyStringResponse(String fromUsername,String toUsername) {
+//		com.mawujun.message.response.NotResponseMessage result=new com.mawujun.message.response.NotResponseMessage();
+//		//result.setContent("");
+//		result.setFromUserName(fromUsername);
+//		result.setToUserName(toUsername);
+//		result.setCreateTime(new Date());
+//		
+//		return result;
+//	}
 	public static void loadProperties(String wexin_properties_path) {
 		if(wexin_properties_path==null){
 			throw new NullPointerException("wexin。properties路径必须先指定!");
