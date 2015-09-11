@@ -127,4 +127,64 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
+	public BaseMessage process_subscribe(QRCodeEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_SCAN(QRCodeEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_subscribe(SubscribeEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_unsubscribe(SubscribeEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_CLICK(MenuEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_VIEW(MenuEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_scancode_push(MenuEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_scancode_waitmsg(MenuEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_pic_sysphoto(MenuEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_pic_photo_or_album(MenuEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_pic_weixin(MenuEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_location_select(MenuEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

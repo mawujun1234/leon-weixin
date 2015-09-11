@@ -1,6 +1,8 @@
-1:实现IResponseProcess，IRequestProcess，MessageService用来接收消息，这些都是被动回复消息，类似于自动回复,在MessageService中返回IResponseProcess和IRequestProcess
-	在实现类里面做真正的业务
+1:实现AbstractResponseProcess，AbstractRequestProcess，MessageService
+	AbstractResponseProcess，AbstractRequestProcess已经对各种事件进行了区分，到时候只要实现相应方法的实现就可以了，在实现类里面做真正的业务
+	DefaultMessageService主要是为了返回AbstractResponseProcess，AbstractRequestProcess的实现类
 	并且在weixin.properties中做好配置
+	
 2:在web.xml中配置好MessageServlet
     <servlet>  
         <servlet-name>messageServlet</servlet-name>  

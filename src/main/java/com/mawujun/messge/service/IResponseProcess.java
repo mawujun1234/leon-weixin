@@ -23,7 +23,23 @@ public interface IResponseProcess {
 	public BaseMessage process(com.mawujun.message.request.LinkMessage message);
 	
 	public BaseMessage process(QRCodeEvent message);
+	public BaseMessage process_subscribe(QRCodeEvent message);
+	public BaseMessage process_SCAN(QRCodeEvent message);
+	
 	public BaseMessage process(SubscribeEvent message);
+	public BaseMessage process_subscribe(SubscribeEvent message);
+	public BaseMessage process_unsubscribe(SubscribeEvent message);
+	
 	public BaseMessage process(MenuEvent message);
+	public BaseMessage process_CLICK(MenuEvent message);
+	public BaseMessage process_VIEW(MenuEvent message);
+	public BaseMessage process_scancode_push(MenuEvent message);
+	public BaseMessage process_scancode_waitmsg(MenuEvent message);
+	public BaseMessage process_pic_sysphoto(MenuEvent message);
+	public BaseMessage process_pic_photo_or_album(MenuEvent message);
+	public BaseMessage process_pic_weixin(MenuEvent message);
+	public BaseMessage process_location_select(MenuEvent message);
+	
+	
 	public BaseMessage process(LocationEvent message);
 }

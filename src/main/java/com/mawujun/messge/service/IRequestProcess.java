@@ -27,8 +27,24 @@ public interface IRequestProcess {
 	public void process(LinkMessage message);
 	
 	public void process(QRCodeEvent message);
+	public void process_subscribe(QRCodeEvent message);
+	public void process_SCAN(QRCodeEvent message);
+	
 	public void process(SubscribeEvent message);
+	public void process_subscribe(SubscribeEvent message);
+	public void process_unsubscribe(SubscribeEvent message);
+	
 	public void process(MenuEvent message);
+	public void process_CLICK(MenuEvent message);
+	public void process_VIEW(MenuEvent message);
+	public void process_scancode_push(MenuEvent message);
+	public void process_scancode_waitmsg(MenuEvent message);
+	public void process_pic_sysphoto(MenuEvent message);
+	public void process_pic_photo_or_album(MenuEvent message);
+	public void process_pic_weixin(MenuEvent message);
+	public void process_location_select(MenuEvent message);
+	
+	
 	public void process(LocationEvent message);
 
 }

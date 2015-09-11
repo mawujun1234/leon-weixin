@@ -1,8 +1,6 @@
 package com.mawujun.message.event;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
+import com.mawujun.exception.BusinessException;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -15,5 +13,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 //@Entity
 //@Table(name="wx_subscribeevent")
 public class SubscribeEvent extends BaseEvent {
-
+	public void setEvent(EventType event) {
+		if(event!=EventType.subscribe || event!=EventType.unsubscribe){
+			throw new BusinessException("事件类型必须是:subscribe或unsubscribe");
+		}
+		super.setEvent(event);
+	}
 }

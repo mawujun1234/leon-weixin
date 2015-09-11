@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.mawujun.exception.BusinessException;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -24,6 +25,15 @@ public class MenuEvent extends BaseEvent {
 	//点击菜单跳转链接时的事件推送:事件KEY值，设置的跳转URL
 	@Column(length=50)
 	private String EventKey;
+	
+	public void setEvent(EventType event) {
+		if(event!=EventType.CLICK || event!=EventType.VIEW || event!=EventType.scancode_push
+				|| event!=EventType.scancode_waitmsg|| event!=EventType.pic_sysphoto|| event!=EventType.pic_photo_or_album
+				|| event!=EventType.pic_weixin|| event!=EventType.location_select){
+			throw new BusinessException("事件类型必须是:CLICK,VIEW,scancode_push,scancode_waitmsg,pic_sysphoto,pic_photo_or_album,pic_weixin,location_select");
+		}
+		super.setEvent(event);
+	}
 
 	public String getEventKey() {
 		return EventKey;

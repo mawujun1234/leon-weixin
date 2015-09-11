@@ -1,9 +1,8 @@
 package com.mawujun.message.event;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
+import com.mawujun.exception.BusinessException;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -28,6 +27,13 @@ public class QRCodeEvent extends BaseEvent {
 	private String EventKey;
 	@Column(length=30)
 	private String Ticket;//二维码的ticket，可用来换取二维码图片
+	
+	public void setEvent(EventType event) {
+		if(event!=EventType.subscribe || event!=EventType.SCAN){
+			throw new BusinessException("事件类型必须是:subscribe或SCAN");
+		}
+		super.setEvent(event);
+	}
 	public String getEventKey() {
 		return EventKey;
 	}

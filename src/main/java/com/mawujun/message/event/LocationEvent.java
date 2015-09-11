@@ -1,9 +1,8 @@
 package com.mawujun.message.event;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
+import com.mawujun.exception.BusinessException;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -21,6 +20,13 @@ public class LocationEvent extends BaseEvent {
 	private String Longitude;
 	@Column(length=30)
 	private String Precision;
+	
+	public void setEvent(EventType event) {
+		if(event!=EventType.LOCATION){
+			throw new BusinessException("事件类型必须是:LOCATION");
+		}
+		super.setEvent(event);
+	}
 	
 	public LocationEvent(){
 		super();

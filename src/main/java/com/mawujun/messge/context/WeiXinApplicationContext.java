@@ -97,8 +97,8 @@ public class WeiXinApplicationContext {
 	 * @return
 	 */
 	public static BaseMessage getEmptyStringResponse(String fromUsername,String toUsername) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
-		result.setContent("");
+		com.mawujun.message.response.NotResponseMessage result=new com.mawujun.message.response.NotResponseMessage();
+		//result.setContent("");
 		result.setFromUserName(fromUsername);
 		result.setToUserName(toUsername);
 		result.setCreateTime(new Date());

@@ -12,54 +12,99 @@ import com.mawujun.message.request.TextMessage;
 import com.mawujun.message.request.VideoMessage;
 import com.mawujun.message.request.VoiceMessage;
 
-public class DefaultRequestProcess implements IRequestProcess {
+public class DefaultRequestProcess extends AbstractRequestProcess {
 
 	public void process(TextMessage message) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	public void process(ImageMessage message) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	public void process(VoiceMessage message) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	public void process(VideoMessage message) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	public void process(ShortvideoMessage message) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	public void process(LocationMessage message) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	public void process(LinkMessage message) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
-	public void process(QRCodeEvent message) {
+	public void process_subscribe(QRCodeEvent message) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void process(SubscribeEvent message) {
+	public void process_SCAN(QRCodeEvent message) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void process(MenuEvent message) {
+	public void process_subscribe(SubscribeEvent message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void process_unsubscribe(SubscribeEvent message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void process_CLICK(MenuEvent message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void process_VIEW(MenuEvent message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void process_scancode_push(MenuEvent message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void process_scancode_waitmsg(MenuEvent message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void process_pic_sysphoto(MenuEvent message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void process_pic_photo_or_album(MenuEvent message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void process_pic_weixin(MenuEvent message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void process_location_select(MenuEvent message) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -69,4 +114,5 @@ public class DefaultRequestProcess implements IRequestProcess {
 		
 	}
 
+	
 }
