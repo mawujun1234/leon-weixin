@@ -1,7 +1,6 @@
 package com.mawujun.messge.context;
 
 
-import java.awt.Button;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -37,20 +37,11 @@ import com.mawujun.material.MaterialType;
 import com.mawujun.material.NewsMaterial;
 import com.mawujun.material.VideoMaterial;
 import com.mawujun.message.menu.ButtonType;
-import com.mawujun.message.menu.Button_click;
 import com.mawujun.message.menu.Button_container;
-import com.mawujun.message.menu.Button_location_select;
-import com.mawujun.message.menu.Button_media_id;
-import com.mawujun.message.menu.Button_pic_photo_or_album;
-import com.mawujun.message.menu.Button_pic_sysphoto;
-import com.mawujun.message.menu.Button_pic_weixin;
-import com.mawujun.message.menu.Button_scancode_push;
-import com.mawujun.message.menu.Button_scancode_waitmsg;
-import com.mawujun.message.menu.Button_view;
-import com.mawujun.message.menu.Button_view_limited;
 import com.mawujun.message.menu.Menu;
-import com.mawujun.message.response.BaseMessage;
 import com.mawujun.messge.service.MessageService;
+import com.mawujun.qrcode.QRcodeType;
+import com.mawujun.qrcode.Ticket;
 
 /**
  * 应用程序上下文，主要用来根据weixin.properties来初始化上下文类
@@ -83,6 +74,9 @@ public class WeiXinApplicationContext {
 	private static final String get_material_list_url="https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=ACCESS_TOKEN";
 	//获取素材的url
 	private static final String get_material_url="https://api.weixin.qq.com/cgi-bin/material/get_material?access_token=ACCESS_TOKEN";
+	
+	private static final String get_qrcode_ticket_url="https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=ACCESS_TOKEN";
+	private static final String get_qrcode_url="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET";
 	
 	public static MessageService getMessageService() {
 		return messageService;
@@ -446,6 +440,109 @@ public class WeiXinApplicationContext {
 	    }
 	    return filePath;
 		
+	}
+	/**
+	 * 获取临时二维码的ticket
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @param expire_seconds 该二维码有效时间，以秒为单位。 最大不超过604800（即7天）。
+	 * @param scene_id 场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）
+	 * @return
+	 */
+	public static Ticket getTemporaryQRcodeTicket(int expire_seconds,int scene_id){
+		if(expire_seconds>604800){
+			throw new BusinessException("expire_seconds不能超过604800秒!");
+		}
+
+		String requestUrl=get_qrcode_ticket_url.replace("ACCESS_TOKEN", WeiXinApplicationContext.getAccessToken().getAccess_token());
+		String jsonStr=httpsRequest(requestUrl, "POST","{\"expire_seconds\": "+expire_seconds+", \"action_name\": \""+QRcodeType.QR_SCENE+"\", "
+				+ "\"action_info\": {\"scene\": {\"scene_id\": "+scene_id+"}}}");
+		
+		Ticket ticket=JSON.parseObject(jsonStr, Ticket.class);
+		return ticket;
+	} 
+	/**
+	 * 获取永久的二维码，整形的场景id
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @param scene_id
+	 * @return
+	 */
+	public static Ticket getPermanentQRcodeTicket(int scene_id){
+		if(scene_id<1|| scene_id>100000){
+			throw new BusinessException("scene_id数据类型不对,目前参数只支持1--100000;");
+		}
+		String requestUrl=get_qrcode_ticket_url.replace("ACCESS_TOKEN", WeiXinApplicationContext.getAccessToken().getAccess_token());
+		String jsonStr=httpsRequest(requestUrl,"POST" ,"{\"action_name\": \""+QRcodeType.QR_LIMIT_SCENE+"\", \"action_info\": {\"scene\": {\"scene_id\": "+scene_id+"}}}");
+		
+		Ticket ticket=JSON.parseObject(jsonStr, Ticket.class);
+		return ticket;
+	}
+	/**
+	 * 获取永久的二维码，字符串形式的场景id
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @param scene_id
+	 * @return
+	 */
+	public static Ticket getPermanentQRcodeTicket(String scene_id){
+		if(scene_id==null || "".equals(scene_id.trim()) ||scene_id.length()>64){
+			throw new BusinessException("scene_id数据类型不对,长度限制为1到64;");
+		}
+		String requestUrl=get_qrcode_ticket_url.replace("ACCESS_TOKEN", WeiXinApplicationContext.getAccessToken().getAccess_token());
+		String jsonStr=httpsRequest(requestUrl,"POST" ,"{\"action_name\": \""+QRcodeType.QR_LIMIT_STR_SCENE+"\", \"action_info\": {\"scene\": {\"scene_str\": \""+scene_id+"\"}}}");
+		
+		Ticket ticket=JSON.parseObject(jsonStr, Ticket.class);
+		return ticket;
+	}
+	/**
+	 * 获取二维码的图片，并且保存起来
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @param ticket
+	 * @param savePath
+	 * @return 返回的字符串数组，第一个是保存的文件名称，第二个元素是文件保存的绝对路径
+	 */
+	public static String[] getQRcodeImage(String ticket,String savePath){
+		String[] result=new String[2];
+	    //System.out.println(requestUrl);
+	    try {
+	    	String requestUrl=get_qrcode_url.replace("TICKET", URLEncoder.encode(ticket, "UTF-8"));
+			
+
+	      URL url = new URL(requestUrl);
+	      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	      conn.setDoInput(true);
+	      conn.setRequestMethod("GET");
+
+	      if (!savePath.endsWith(File.separator)) {
+	        savePath += File.separator;
+	      }
+	     
+	     
+	      String filePath = null;
+	      result[0]= ticket+".jpg";
+	      filePath = savePath + result[0];
+	      result[1]=filePath;
+	      
+
+	      BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+	      FileOutputStream fos = new FileOutputStream(new File(filePath));
+	      byte[] buf = new byte[8096];
+	      int size = 0;
+	      while ((size = bis.read(buf)) != -1)
+	        fos.write(buf, 0, size);
+	      fos.close();
+	      bis.close();
+
+	      conn.disconnect();
+	      //String info = String.format("下载媒体文件成功，filePath=" + filePath);
+	      //System.out.println(info);
+	      logger.info("下载二維碼圖片成功，filePath={}"+filePath);
+	      
+	    } catch (Exception e) {
+	      //filePath = null;
+	     // String error = String.format("下载媒体文件失败：%s", e);
+	     //System.out.println(error);
+	      logger.error("下载媒体文件失败:",e);
+	    }
+	    return result;
 	}
 	
 	

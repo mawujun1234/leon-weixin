@@ -1,16 +1,11 @@
 package com.mawujun.message.context;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.io.IOException;
 
 import org.junit.Test;
-
-
-import com.mawujun.message.menu.ButtonType;
-import com.mawujun.message.menu.Menu;
+import static org.junit.Assert.*;
 import com.mawujun.messge.context.WeiXinApplicationContext;
+import com.mawujun.qrcode.Ticket;
 
 public class WeiXinApplicationContextTest {
 	@Test
@@ -85,7 +80,7 @@ public class WeiXinApplicationContextTest {
 	}
 	@Test
 	public void get_material() {
-		WeiXinApplicationContext.loadProperties("com/mawujun/message/context/weixin_hujibang.properties");
+//		WeiXinApplicationContext.loadProperties("com/mawujun/message/context/weixin_hujibang.properties");
 		
 //		String media_id="oP9UwQxGsELxtcw6xWXDbxG3JqHehoSOWO8pEiiq6lI";		
 //		//获取图文素材
@@ -102,14 +97,35 @@ public class WeiXinApplicationContextTest {
 		
 	}
 	
-//	@Test
-//	public void getAccessToken() {
+	@Test
+	public void getTemporaryQRcodeTicket() {
+//		WeiXinApplicationContext.loadProperties("weixin.properties");
+//		Ticket ticket=WeiXinApplicationContext.getTemporaryQRcodeTicket(10000, 123);
+//		assertEquals(10000,ticket.getExpire_seconds());
+//		assertNotNull(ticket.getTicket());
+	}
+	
+	@Test
+	public void getPermanentQRcodeTicket() {
+//		WeiXinApplicationContext.loadProperties("weixin.properties");
+//		Ticket ticket=WeiXinApplicationContext.getPermanentQRcodeTicket(1);
+//		assertEquals(0,ticket.getExpire_seconds());
+//		assertNotNull(ticket.getTicket());
 //		
-//	}
-//	@Test
-//	public void createMenu(){
-//		WeiXinApplicationContext.createMenu();
-//	}
+//		ticket=WeiXinApplicationContext.getPermanentQRcodeTicket("str");
+//		assertEquals(0,ticket.getExpire_seconds());
+//		assertNotNull(ticket.getTicket());
+	}
+	@Test
+	public void getQRcode(){
+		WeiXinApplicationContext.loadProperties("weixin.properties");
+		Ticket ticket=WeiXinApplicationContext.getPermanentQRcodeTicket(1);
+		assertEquals(0,ticket.getExpire_seconds());
+		assertNotNull(ticket.getTicket());
+		
+		String[] filePath=WeiXinApplicationContext.getQRcodeImage(ticket.getTicket(), "D:");
+		System.out.println(filePath[0]);
+	}
 //	@Test
 //	public void getMenu(){
 //		Menu menu=WeiXinApplicationContext.getMenu();

@@ -43,6 +43,7 @@
 	#AccessTokenCache接口的实现类
 	#AccessTokenCache接口是用来缓存AccessToken的，可以实现这个接口，来吧AccessToken放到数据库中.默认实现DefaultAccessCache是放在缓存中的
 	accessTokenCache=com.mawujun.messge.context.DefaultAccessTokenCache
-4：AutoReplyService是对微信后台的自动回复的封装，只要new，然后再调用就可以了，这个基本是没有用的，因为使用了"开发者中心"后，这里就不能进行设置了
-	AutoReplyService autoReplyService=new AutoReplyService();
-	BaseMessage[] responseMessage= autoReplyService.getMessageAutoreply(message);
+4：响应信息
+	如果不响应的话，就返回null，
+ 	如果要转发到多客服系统中就调用transfer_customer()方法
+ 	否则就自己写响应信息

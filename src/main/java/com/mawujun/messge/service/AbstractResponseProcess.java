@@ -1,13 +1,55 @@
 package com.mawujun.messge.service;
 
+import java.util.Date;
+
 import com.mawujun.exception.BusinessException;
 import com.mawujun.message.event.EventType;
 import com.mawujun.message.event.MenuEvent;
 import com.mawujun.message.event.QRCodeEvent;
 import com.mawujun.message.event.SubscribeEvent;
 import com.mawujun.message.response.BaseMessage;
+import com.mawujun.messge.customer.TransferCustomer;
+import com.mawujun.messge.customer.TransferCustomer1;
 
+/**
+ * 如果不响应的话，就返回null，
+ * 如果要转发到多客服系统中就调用transfer_customer()方法
+ * 否则就自己写响应信息
+ * @author mawujun email:16064988@qq.com qq:16064988
+ *
+ */
 public abstract class AbstractResponseProcess implements IResponseProcess {
+	/**
+	 * 转发到多客服系统中去
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @param reqeustMessage
+	 * @return
+	 */
+	public TransferCustomer transfer_customer(com.mawujun.message.request.BaseMessage reqeustMessage){
+		TransferCustomer message=new TransferCustomer();
+		message.setCreateTime(new Date());
+		message.setFromUserName(reqeustMessage.getToUserName());
+		message.setToUserName(reqeustMessage.getFromUserName());
+		return message;
+		
+	}
+	
+	/**
+	 * 转发到制定的客服账号上
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @param reqeustMessage
+	 * @param KfAccount 客户账号
+	 * @return
+	 */
+	public TransferCustomer1 transfer_customer(com.mawujun.message.request.BaseMessage reqeustMessage,String kfAccount){
+		TransferCustomer1 message=new TransferCustomer1();
+		message.setCreateTime(new Date());
+		message.setFromUserName(reqeustMessage.getToUserName());
+		message.setToUserName(reqeustMessage.getFromUserName());
+		message.setTransInfo(kfAccount);
+		return message;
+		
+	}
 
 	//@Override
 	public BaseMessage process(SubscribeEvent message) {
