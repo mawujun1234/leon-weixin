@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,14 +37,22 @@ public class MessageDispatch {
 		if(config_file_temp!=null && !"".equals(config_file_temp)){
 			config_file_path=config_file_temp;
 		}
-
+		
 		WeiXinApplicationContext.loadProperties(config_file_path);
 	} 
+	
+	public static void initWebapp_realPath(HttpServletRequest request) {
+		//System.out.println("==============================================="+request.getServletContext().getRealPath("/"));
+		if(WeiXinApplicationContext.getWebapp_realPath()==null || "".equals(WeiXinApplicationContext.getWebapp_realPath())){
+			WeiXinApplicationContext.setWebapp_realPath(request.getServletContext().getRealPath("/"));
+		}	
+	}
 	/*
 	 * 确认请求来自微信服务器
 	 */
 	public static void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		init(null);
+		initWebapp_realPath(request);
 		//request.setCharacterEncoding("UTF-8");
 		//response.setCharacterEncoding("UTF-8");
 		// 微信加密签名
@@ -68,17 +77,21 @@ public class MessageDispatch {
 	 * 处理微信服务器发来的消息
 	 */
 	public static void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		init(null);
 		
+		init(null);
+		initWebapp_realPath(request);
+		
+		request.getCharacterEncoding();
 		//Map<String,String> map=new HashMap<String,String>();
 		InputStream inputStream = request.getInputStream();
 		
-	     BufferedReader in=new BufferedReader(new InputStreamReader(inputStream)); 
+	     BufferedReader in=new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8"))); 
 	     StringBuilder build=new StringBuilder();
 		String s;
 		while ((s = in.readLine()) != null && s.length() != 0) {
 			build.append(s);
 		}
+		
 		// 响应消息
 		PrintWriter out = response.getWriter();
 		
@@ -96,6 +109,7 @@ public class MessageDispatch {
 			// 调用核心业务类接收消息、处理消息
 			String respMessage;
 			try {
+				//String aa=new String(build.toString().getBytes("ISO8859_1"),"UTF-8");
 				respMessage = WeiXinApplicationContext.getMessageService().process(build.toString());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

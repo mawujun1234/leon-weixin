@@ -54,6 +54,11 @@ public class WeiXinApplicationContext {
 	static Properties weixin_pps;
 	static AccessTokenCache accessTokenCache=new DefaultAccessTokenCache();
 	private static MessageService messageService;
+	private static String webapp_realPath="";//项目所在的绝对路径
+	private static String media_image="media/images/";
+	private static String media_voice="media/voice/";
+	private static String media_video="media/video/";
+	private static String media_shortvideo="media/shortvideo/";
 	
 	private static final String access_token_url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 	
@@ -112,16 +117,22 @@ public class WeiXinApplicationContext {
 			weixin_pps.load(in);
 			
 			
+			//System.out.println("=============================="+weixin_pps.getProperty("messageService"));
 			//PropertiesUtils putils=PropertiesUtils.load(wexin_properties_path);
 			Class clazz = Class.forName(weixin_pps.getProperty("messageService"));
 			messageService = (MessageService) clazz.newInstance();
 			
 			Class accessTokenCache_class = Class.forName(weixin_pps.getProperty("accessTokenCache"));
 			accessTokenCache=(AccessTokenCache)accessTokenCache_class.newInstance();
+			
+			
+			//设置media的路径
+			
+			
 		}  catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new RuntimeException("加载微信配置文件出错,该文件不存在或者路径指定错误",e);
+			throw new RuntimeException("加载微信配置文件"+wexin_properties_path+"出错,该文件不存在或者路径指定错误",e);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -392,8 +403,10 @@ public class WeiXinApplicationContext {
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @param media_id
 	 * @param savePath
+	 * @return result[0]:是文件名称，result[1]是保存路径，包括文件名
 	 */
-	public static String get_material_temp_content(String media_id, String savePath)  {
+	public static String[] get_material_temp_content(String media_id, String savePath)  {
+		String[] result=new String[2];
 		String requestUrl=get_material_temp_url.replace("ACCESS_TOKEN", WeiXinApplicationContext.getAccessToken().getAccess_token())
 				.replace("MEDIA_ID", media_id);
 		
@@ -415,8 +428,10 @@ public class WeiXinApplicationContext {
 	      //官方的请求头内容是:Content-disposition: attachment; filename="MEDIA_ID.jpg"
 	      String content_disposition=conn.getHeaderField("Content-disposition");
 	      String filename=content_disposition.split("filename=")[1].replace("\"", "");
+	      result[0]=filename;
 	      // 将mediaId作为文件名
 	      filePath = savePath + filename;
+	      result[1]=filePath;
 
 	      BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
 	      FileOutputStream fos = new FileOutputStream(new File(filePath));
@@ -438,7 +453,7 @@ public class WeiXinApplicationContext {
 	     //System.out.println(error);
 	      logger.error("下载媒体文件失败:",e);
 	    }
-	    return filePath;
+	    return result;
 		
 	}
 	/**
@@ -618,6 +633,38 @@ public class WeiXinApplicationContext {
 			throw new RuntimeException(e);
 		}
 	}
+	public static String getWebapp_realPath() {
+		return webapp_realPath;
+	}
+	public static void setWebapp_realPath(String webapp_realPath) {
+		WeiXinApplicationContext.webapp_realPath = webapp_realPath;
+	}
+	public static String getMedia_image() {
+		return media_image;
+	}
+	public static void setMedia_image(String media_image) {
+		WeiXinApplicationContext.media_image = media_image;
+	}
+	public static String getMedia_voice() {
+		return media_voice;
+	}
+	public static void setMedia_voice(String media_voice) {
+		WeiXinApplicationContext.media_voice = media_voice;
+	}
+	public static String getMedia_video() {
+		return media_video;
+	}
+	public static void setMedia_video(String media_video) {
+		WeiXinApplicationContext.media_video = media_video;
+	}
+	public static String getMedia_shortvideo() {
+		return media_shortvideo;
+	}
+	public static void setMedia_shortvideo(String media_shortvideo) {
+		WeiXinApplicationContext.media_shortvideo = media_shortvideo;
+	}
+
+
 
 
 	
