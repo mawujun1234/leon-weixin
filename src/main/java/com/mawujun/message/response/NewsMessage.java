@@ -3,10 +3,6 @@ package com.mawujun.message.response;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.JoinColumn;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
@@ -20,8 +16,8 @@ public class NewsMessage extends BaseMessage {
 	//图文消息个数，限制为10条以内
 	private int ArticleCount;
 	//多条图文消息信息，默认第一个item为大图,注意，如果图文数超过10，则将会无响应
-	@ElementCollection 
-    @CollectionTable(name="wx_news", joinColumns=@JoinColumn(name="newsmessage_id"))  
+	//@ElementCollection 
+    //@CollectionTable(name="wx_news", joinColumns=@JoinColumn(name="newsmessage_id"))  
     //@OrderBy("serviceDate")  
 	@XStreamAlias("Articles") 
 	private List<News> Articles;

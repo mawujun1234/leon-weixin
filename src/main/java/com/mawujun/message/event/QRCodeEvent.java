@@ -1,7 +1,5 @@
 package com.mawujun.message.event;
 
-import javax.persistence.Column;
-
 import com.mawujun.exception.BusinessException;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -23,9 +21,9 @@ public class QRCodeEvent extends BaseEvent {
 	
 	//用户未关注时，进行关注后的事件推送:事件KEY值，qrscene_为前缀，后面为二维码的参数值
 	//用户已关注时的事件推送:事件KEY值，事件KEY值，是一个32位无符号整数，即创建二维码时的二维码scene_id
-	@Column(length=50)
+	//@Column(length=50)
 	private String EventKey;
-	@Column(length=30)
+	//@Column(length=30)
 	private String Ticket;//二维码的ticket，可用来换取二维码图片
 	
 	public void setEvent(EventType event) {

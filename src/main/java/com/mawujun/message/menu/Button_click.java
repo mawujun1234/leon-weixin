@@ -1,8 +1,5 @@
 package com.mawujun.message.menu;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 /**
  * 菜单
@@ -16,10 +13,10 @@ public class Button_click extends AbstractButton {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Column(length=30)
+	//@Column(length=30)
 	private String key;//click等点击类型必须
-	@Enumerated(EnumType.STRING)
-	@Column(length=30)
+	//@Enumerated(EnumType.STRING)
+	//@Column(length=30)
 	private ButtonType type;
 	
 	public ButtonType getType() {

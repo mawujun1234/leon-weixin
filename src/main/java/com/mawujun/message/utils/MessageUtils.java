@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -252,7 +253,7 @@ public class MessageUtils {
 	 * @throws Exception
 	 */
 	public  static <T> T xml2Message(HttpServletRequest request,Class<T> clazz) throws IOException  {
-		BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream(), Charset.forName("UTF-8")));
 		
 		StringBuilder build=new StringBuilder();
 		String s;

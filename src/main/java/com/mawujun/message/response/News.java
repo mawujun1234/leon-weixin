@@ -1,8 +1,5 @@
 package com.mawujun.message.response;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -11,15 +8,15 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("item")
-@Embeddable
+//@Embeddable
 public class News {
-	@Column(length=36)
+	//@Column(length=36)
 	private String Title;//图文消息标题
-	@Column(length=1500)
+	//@Column(length=1500)
 	private String Description;//图文消息描述
-	@Column(length=150)
+	//@Column(length=150)
 	private String PicUrl;//图片链接，支持JPG、PNG格式，较好的效果为大图360*200，小图200*200
-	@Column(length=150)
+	//@Column(length=150)
 	private String Url;//点击图文消息跳转链接
 
 	

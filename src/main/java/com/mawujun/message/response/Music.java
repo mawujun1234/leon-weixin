@@ -1,8 +1,7 @@
 package com.mawujun.message.response;
 
-import javax.persistence.Embeddable;
 
-@Embeddable
+//@Embeddable
 public class Music {
 	private String MusicURL;//音乐链接
 	private String HQMusicUrl;//高质量音乐链接，WIFI环境优先使用该链接播放音乐

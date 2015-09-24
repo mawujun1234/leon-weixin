@@ -1,8 +1,5 @@
 package com.mawujun.message.menu;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 //@Entity
 //@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -16,7 +13,7 @@ public abstract class AbstractButton {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Column(length=20)
+	//@Column(length=20)
 	private String name;
 //	@Column(length=36)
 //	private String parent_id;

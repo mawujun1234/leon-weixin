@@ -7,7 +7,10 @@ import org.dom4j.DocumentException;
 
 import com.mawujun.message.event.EventType;
 import com.mawujun.message.event.LocationEvent;
-import com.mawujun.message.event.MenuEvent;
+import com.mawujun.message.event.MenuClickViewEvent;
+import com.mawujun.message.event.MenuLocationEvent;
+import com.mawujun.message.event.MenuPicEvent;
+import com.mawujun.message.event.MenuScancodeEvent;
 import com.mawujun.message.event.QRCodeEvent;
 import com.mawujun.message.event.SubscribeEvent;
 import com.mawujun.message.request.ImageMessage;
@@ -136,19 +139,34 @@ public abstract class MessageService {
 				responseMessage = this.getResponseProcess().process(event);
 				//return MessageUtils.message2Xml(responseMessage);
 				
-			}  else if (EventType.CLICK==eventType || EventType.VIEW==eventType
-					|| EventType.scancode_push==eventType
-					|| EventType.scancode_waitmsg==eventType
-					|| EventType.pic_sysphoto==eventType
-					|| EventType.pic_photo_or_album==eventType
-					|| EventType.pic_weixin==eventType
-					|| EventType.location_select==eventType){
-				MenuEvent event = MessageUtils.xml2Message(xmlStr, MenuEvent.class);
+			}  else if (EventType.CLICK==eventType || EventType.VIEW==eventType){
+				MenuClickViewEvent event = MessageUtils.xml2Message(xmlStr, MenuClickViewEvent.class);
 				this.getRequestProcess().process(event);
 				responseMessage = this.getResponseProcess().process(event);
 				//return MessageUtils.message2Xml(responseMessage);
 				
-			}  else {
+			} else if (EventType.scancode_push==eventType
+					|| EventType.scancode_waitmsg==eventType){
+				MenuScancodeEvent event = MessageUtils.xml2Message(xmlStr, MenuScancodeEvent.class);
+				this.getRequestProcess().process(event);
+				responseMessage = this.getResponseProcess().process(event);
+				//return MessageUtils.message2Xml(responseMessage);
+				
+			} else if (EventType.pic_sysphoto==eventType
+					|| EventType.pic_photo_or_album==eventType
+					|| EventType.pic_weixin==eventType){
+				MenuPicEvent event = MessageUtils.xml2Message(xmlStr, MenuPicEvent.class);
+				this.getRequestProcess().process(event);
+				responseMessage = this.getResponseProcess().process(event);
+				//return MessageUtils.message2Xml(responseMessage);
+				
+			} else if (EventType.location_select==eventType){
+				MenuLocationEvent event = MessageUtils.xml2Message(xmlStr, MenuLocationEvent.class);
+				this.getRequestProcess().process(event);
+				responseMessage = this.getResponseProcess().process(event);
+				//return MessageUtils.message2Xml(responseMessage);
+				
+			} else {
 				throw new InvalidMsgTypeException("非法的Event，这个事件类型不存在!");
 			}
 		} else {

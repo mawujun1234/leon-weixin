@@ -42,6 +42,7 @@ import com.mawujun.message.menu.Menu;
 import com.mawujun.messge.service.MessageService;
 import com.mawujun.qrcode.QRcodeType;
 import com.mawujun.qrcode.Ticket;
+import com.mawujun.utils.file.FileUtils;
 
 /**
  * 应用程序上下文，主要用来根据weixin.properties来初始化上下文类
@@ -59,6 +60,7 @@ public class WeiXinApplicationContext {
 	private static String media_voice="media/voice/";
 	private static String media_video="media/video/";
 	private static String media_shortvideo="media/shortvideo/";
+	private static String media_temp_savepath=null;
 	
 	private static final String access_token_url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 	
@@ -127,6 +129,21 @@ public class WeiXinApplicationContext {
 			
 			
 			//设置media的路径
+			if(weixin_pps.getProperty("media_image")!=null && !"".equals(weixin_pps.getProperty("media_image"))){
+				media_image=weixin_pps.getProperty("media_image");
+			}
+			if(weixin_pps.getProperty("media_voice")!=null && !"".equals(weixin_pps.getProperty("media_voice"))){
+				media_voice=weixin_pps.getProperty("media_voice");
+			}
+			if(weixin_pps.getProperty("media_video")!=null && !"".equals(weixin_pps.getProperty("media_video"))){
+				media_video=weixin_pps.getProperty("media_video");
+			}
+			if(weixin_pps.getProperty("media_shortvideo")!=null && !"".equals(weixin_pps.getProperty("media_shortvideo"))){
+				media_shortvideo=weixin_pps.getProperty("media_shortvideo");
+			}
+			if(weixin_pps.getProperty("media_temp_savepath")!=null && !"".equals(weixin_pps.getProperty("media_temp_savepath"))){
+				media_temp_savepath=weixin_pps.getProperty("media_temp_savepath");
+			}
 			
 			
 		}  catch (IOException e) {
@@ -457,6 +474,56 @@ public class WeiXinApplicationContext {
 		
 	}
 	/**
+	 * 把素材保存在临时目录,档重启后，该临时文件就会删除
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @param media_id
+	 * @return
+	 */
+	public static String[] get_material_temp_content(String media_id) {
+		String requestUrl=get_material_temp_url.replace("ACCESS_TOKEN", WeiXinApplicationContext.getAccessToken().getAccess_token())
+				.replace("MEDIA_ID", media_id);
+		String[] result=new String[2];
+		String filePath = null;
+
+	    //System.out.println(requestUrl);
+	    try {
+	      URL url = new URL(requestUrl);
+	      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	      conn.setDoInput(true);
+	      conn.setRequestMethod("GET");     
+	     
+	      //获取文件名称http://mp.weixin.qq.com/wiki/11/07b6b76a6b6e8848e855a435d5e34a5f.html
+	      //官方的请求头内容是:Content-disposition: attachment; filename="MEDIA_ID.jpg"
+	      String content_disposition=conn.getHeaderField("Content-disposition");
+	      String filename=content_disposition.split("filename=")[1].replace("\"", "");
+	      result[0]=filename;
+	      
+	      String[] filenames=filename.split("\\.");
+	      filePath=FileUtils.createTempFile(filenames[0], "."+filenames[1], WeiXinApplicationContext.getMedia_temp_savepath());
+	      result[1]=filePath;
+	      
+	      BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+	      FileOutputStream fos = new FileOutputStream(new File(filePath));
+	      byte[] buf = new byte[8096];
+	      int size = 0;
+	      while ((size = bis.read(buf)) != -1)
+	        fos.write(buf, 0, size);
+	      fos.close();
+	      bis.close();
+
+	      conn.disconnect();
+	      
+	    } catch (Exception e) {
+	      filePath = null;
+	     // String error = String.format("下载媒体文件失败：%s", e);
+	     //System.out.println(error);
+	      logger.error("下载媒体文件失败:",e);
+	    }  
+	    return result;
+	}
+	
+	 
+	/**
 	 * 获取临时二维码的ticket
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @param expire_seconds 该二维码有效时间，以秒为单位。 最大不超过604800（即7天）。
@@ -639,38 +706,41 @@ public class WeiXinApplicationContext {
 	public static void setWebapp_realPath(String webapp_realPath) {
 		WeiXinApplicationContext.webapp_realPath = webapp_realPath;
 	}
+	/**
+	 * 默认是media/images/
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @return
+	 */
 	public static String getMedia_image() {
 		return media_image;
 	}
-	public static void setMedia_image(String media_image) {
-		WeiXinApplicationContext.media_image = media_image;
-	}
+	/**
+	 * 默认是media/voice/
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @return
+	 */
 	public static String getMedia_voice() {
 		return media_voice;
 	}
-	public static void setMedia_voice(String media_voice) {
-		WeiXinApplicationContext.media_voice = media_voice;
-	}
+	/**
+	 * 默认是media/video/
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @return
+	 */
 	public static String getMedia_video() {
 		return media_video;
 	}
-	public static void setMedia_video(String media_video) {
-		WeiXinApplicationContext.media_video = media_video;
-	}
+	/**
+	 * 默认是media/shortvideo/
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @return
+	 */
 	public static String getMedia_shortvideo() {
 		return media_shortvideo;
 	}
-	public static void setMedia_shortvideo(String media_shortvideo) {
-		WeiXinApplicationContext.media_shortvideo = media_shortvideo;
+	public static String getMedia_temp_savepath() {
+		return media_temp_savepath;
 	}
 
-
-
-
-	
-
-
-	
-	
 
 }

@@ -3,8 +3,6 @@ package com.mawujun.message.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Transient;
-
 import com.mawujun.exception.BusinessException;
 /**
  * 二级菜单
@@ -22,7 +20,7 @@ public class Button_container extends AbstractButton {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Transient
+	//@Transient
 	private List<AbstractButton> sub_button=new ArrayList<AbstractButton>();
 	
 	public Button_container(){

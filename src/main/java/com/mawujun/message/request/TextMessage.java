@@ -1,7 +1,5 @@
 package com.mawujun.message.request;
 
-import javax.persistence.Column;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -13,7 +11,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 //@Entity
 //@Table(name="wx_textmessage")
 public class TextMessage extends BaseMessage {
-	@Column(length=200)
+	//@Column(length=200)
 	private String Content;
 	
 	public TextMessage(){

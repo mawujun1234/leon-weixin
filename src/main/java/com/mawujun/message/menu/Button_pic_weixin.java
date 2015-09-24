@@ -1,8 +1,5 @@
 package com.mawujun.message.menu;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 /**
  * 弹出微信相册发图器
@@ -17,10 +14,10 @@ public class Button_pic_weixin extends AbstractButton {
 	private static final long serialVersionUID = 1L;
 
 	
-	@Column(length=150)
+	//@Column(length=150)
 	private String key;
-	@Enumerated(EnumType.STRING)
-	@Column(length=30)
+	//@Enumerated(EnumType.STRING)
+	//@Column(length=30)
 	private ButtonType type;
 	
 	public ButtonType getType() {

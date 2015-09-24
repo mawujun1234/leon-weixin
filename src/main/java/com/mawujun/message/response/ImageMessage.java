@@ -1,7 +1,5 @@
 package com.mawujun.message.response;
 
-import javax.persistence.Embedded;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
@@ -12,7 +10,7 @@ public class ImageMessage extends BaseMessage {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Embedded
+	//@Embedded
 	private Image Image;
 	public ImageMessage(){
 		super();

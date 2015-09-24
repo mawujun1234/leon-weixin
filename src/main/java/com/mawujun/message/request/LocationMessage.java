@@ -1,20 +1,18 @@
 package com.mawujun.message.request;
 
-import javax.persistence.Column;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("xml")
 //@Entity
 //@Table(name="wx_locationmessage")
 public class LocationMessage extends BaseMessage {
-	@Column(length=30)
+	//@Column(length=30)
 	private String Location_X;//地理位置维度
-	@Column(length=30)
+	//@Column(length=30)
 	private String Location_Y;//地理位置经度
-	@Column(length=30)
+	//@Column(length=30)
 	private String Scale;//地图缩放大小
-	@Column(length=60)
+	//@Column(length=60)
 	private String Label;//地理位置信息
 	public LocationMessage(){
 		super();

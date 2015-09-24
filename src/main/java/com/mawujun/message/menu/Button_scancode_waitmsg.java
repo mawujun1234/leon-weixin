@@ -1,8 +1,5 @@
 package com.mawujun.message.menu;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 /**
  * 扫码推事件且弹出“消息接收中”提示框
@@ -17,10 +14,10 @@ public class Button_scancode_waitmsg extends AbstractButton {
 	private static final long serialVersionUID = 1L;
 
 	
-	@Column(length=150)
+	//@Column(length=150)
 	private String key;
-	@Enumerated(EnumType.STRING)
-	@Column(length=30)
+	//@Enumerated(EnumType.STRING)
+	//@Column(length=30)
 	private ButtonType type;
 	
 	public ButtonType getType() {

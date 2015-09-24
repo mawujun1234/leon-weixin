@@ -4,7 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mawujun.message.event.LocationEvent;
-import com.mawujun.message.event.MenuEvent;
+import com.mawujun.message.event.MenuClickViewEvent;
+import com.mawujun.message.event.MenuLocationEvent;
+import com.mawujun.message.event.MenuPicEvent;
+import com.mawujun.message.event.MenuScancodeEvent;
 import com.mawujun.message.event.QRCodeEvent;
 import com.mawujun.message.event.SubscribeEvent;
 import com.mawujun.message.request.ImageMessage;
@@ -75,47 +78,77 @@ public class DefaultResponseProcess extends AbstractResponseProcess {
 		return null;
 	}
 
-	public BaseMessage process_CLICK(MenuEvent message) {
+	public BaseMessage process_CLICK(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_VIEW(MenuEvent message) {
+	public BaseMessage process_VIEW(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_scancode_push(MenuEvent message) {
+	public BaseMessage process_scancode_push(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_scancode_waitmsg(MenuEvent message) {
+	public BaseMessage process_scancode_waitmsg(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_sysphoto(MenuEvent message) {
+	public BaseMessage process_pic_sysphoto(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_photo_or_album(MenuEvent message) {
+	public BaseMessage process_pic_photo_or_album(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_weixin(MenuEvent message) {
+	public BaseMessage process_pic_weixin(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_location_select(MenuEvent message) {
+	public BaseMessage process_location_select(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public BaseMessage process(LocationEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_scancode_push(MenuScancodeEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_scancode_waitmsg(MenuScancodeEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_pic_sysphoto(MenuPicEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_pic_photo_or_album(MenuPicEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_pic_weixin(MenuPicEvent message) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public BaseMessage process_location_select(MenuLocationEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
