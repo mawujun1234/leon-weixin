@@ -14,7 +14,6 @@ import com.mawujun.message.request.ShortvideoMessage;
 import com.mawujun.message.request.TextMessage;
 import com.mawujun.message.request.VideoMessage;
 import com.mawujun.message.request.VoiceMessage;
-import com.mawujun.message.response.BaseMessage;
 
 /**
  * 请求消息的处理接口，包括普通消息和事件消息
@@ -38,18 +37,18 @@ public interface IRequestProcess {
 	public void process_subscribe(SubscribeEvent message);
 	public void process_unsubscribe(SubscribeEvent message);
 	
-	public BaseMessage process(MenuClickViewEvent message);
-	public BaseMessage process_CLICK(MenuClickViewEvent message);
-	public BaseMessage process_VIEW(MenuClickViewEvent message);
-	public BaseMessage process(MenuScancodeEvent message);
-	public BaseMessage process_scancode_push(MenuScancodeEvent message);
-	public BaseMessage process_scancode_waitmsg(MenuScancodeEvent message);
-	public BaseMessage process(MenuPicEvent message);
-	public BaseMessage process_pic_sysphoto(MenuPicEvent message);
-	public BaseMessage process_pic_photo_or_album(MenuPicEvent message);
-	public BaseMessage process_pic_weixin(MenuPicEvent message);
-	public BaseMessage process(MenuLocationEvent message);
-	public BaseMessage process_location_select(MenuLocationEvent message);
+	public void process(MenuClickViewEvent message);
+	public void process_CLICK(MenuClickViewEvent message);
+	public void process_VIEW(MenuClickViewEvent message);
+	public void process(MenuScancodeEvent message);
+	public void process_scancode_push(MenuScancodeEvent message);
+	public void process_scancode_waitmsg(MenuScancodeEvent message);
+	public void process(MenuPicEvent message);
+	public void process_pic_sysphoto(MenuPicEvent message);
+	public void process_pic_photo_or_album(MenuPicEvent message);
+	public void process_pic_weixin(MenuPicEvent message);
+	public void process(MenuLocationEvent message);
+	public void process_location_select(MenuLocationEvent message);
 	
 	
 	public void process(LocationEvent message);

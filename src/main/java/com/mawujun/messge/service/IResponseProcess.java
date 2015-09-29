@@ -7,7 +7,7 @@ import com.mawujun.message.event.MenuPicEvent;
 import com.mawujun.message.event.MenuScancodeEvent;
 import com.mawujun.message.event.QRCodeEvent;
 import com.mawujun.message.event.SubscribeEvent;
-import com.mawujun.message.response.BaseMessage;
+import com.mawujun.message.response.BaseMessageOut;
 
 
 
@@ -17,35 +17,35 @@ import com.mawujun.message.response.BaseMessage;
  *
  */
 public interface IResponseProcess {
-	public BaseMessage process(com.mawujun.message.request.TextMessage message);
-	public BaseMessage process(com.mawujun.message.request.ImageMessage message);
-	public BaseMessage process(com.mawujun.message.request.VoiceMessage message);
-	public BaseMessage process(com.mawujun.message.request.VideoMessage message);
-	public BaseMessage process(com.mawujun.message.request.ShortvideoMessage message);
-	public BaseMessage process(com.mawujun.message.request.LocationMessage message);
-	public BaseMessage process(com.mawujun.message.request.LinkMessage message);
+	public BaseMessageOut process(com.mawujun.message.request.TextMessage message);
+	public BaseMessageOut process(com.mawujun.message.request.ImageMessage message);
+	public BaseMessageOut process(com.mawujun.message.request.VoiceMessage message);
+	public BaseMessageOut process(com.mawujun.message.request.VideoMessage message);
+	public BaseMessageOut process(com.mawujun.message.request.ShortvideoMessage message);
+	public BaseMessageOut process(com.mawujun.message.request.LocationMessage message);
+	public BaseMessageOut process(com.mawujun.message.request.LinkMessage message);
 	
-	public BaseMessage process(QRCodeEvent message);
-	public BaseMessage process_subscribe(QRCodeEvent message);
-	public BaseMessage process_SCAN(QRCodeEvent message);
+	public BaseMessageOut process(QRCodeEvent message);
+	public BaseMessageOut process_subscribe(QRCodeEvent message);
+	public BaseMessageOut process_SCAN(QRCodeEvent message);
 	
-	public BaseMessage process(SubscribeEvent message);
-	public BaseMessage process_subscribe(SubscribeEvent message);
-	public BaseMessage process_unsubscribe(SubscribeEvent message);
+	public BaseMessageOut process(SubscribeEvent message);
+	public BaseMessageOut process_subscribe(SubscribeEvent message);
+	public BaseMessageOut process_unsubscribe(SubscribeEvent message);
 	
-	public BaseMessage process(MenuClickViewEvent message);
-	public BaseMessage process_CLICK(MenuClickViewEvent message);
-	public BaseMessage process_VIEW(MenuClickViewEvent message);
-	public BaseMessage process(MenuScancodeEvent message);
-	public BaseMessage process_scancode_push(MenuScancodeEvent message);
-	public BaseMessage process_scancode_waitmsg(MenuScancodeEvent message);
-	public BaseMessage process(MenuPicEvent message);
-	public BaseMessage process_pic_sysphoto(MenuPicEvent message);
-	public BaseMessage process_pic_photo_or_album(MenuPicEvent message);
-	public BaseMessage process_pic_weixin(MenuPicEvent message);
-	public BaseMessage process(MenuLocationEvent message);
-	public BaseMessage process_location_select(MenuLocationEvent message);
+	public BaseMessageOut process(MenuClickViewEvent message);
+	public BaseMessageOut process_CLICK(MenuClickViewEvent message);
+	public BaseMessageOut process_VIEW(MenuClickViewEvent message);
+	public BaseMessageOut process(MenuScancodeEvent message);
+	public BaseMessageOut process_scancode_push(MenuScancodeEvent message);
+	public BaseMessageOut process_scancode_waitmsg(MenuScancodeEvent message);
+	public BaseMessageOut process(MenuPicEvent message);
+	public BaseMessageOut process_pic_sysphoto(MenuPicEvent message);
+	public BaseMessageOut process_pic_photo_or_album(MenuPicEvent message);
+	public BaseMessageOut process_pic_weixin(MenuPicEvent message);
+	public BaseMessageOut process(MenuLocationEvent message);
+	public BaseMessageOut process_location_select(MenuLocationEvent message);
 	
 	
-	public BaseMessage process(LocationEvent message);
+	public BaseMessageOut process(LocationEvent message);
 }

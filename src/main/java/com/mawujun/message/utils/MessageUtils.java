@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Writer;
 import java.nio.charset.Charset;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,8 @@ import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
-import com.mawujun.message.response.BaseMessage;
-import com.mawujun.messge.service.TextMessage;
+import com.mawujun.message.request.IMessage;
+import com.mawujun.message.response.BaseMessageOut;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
@@ -30,15 +31,19 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
 public class MessageUtils {
 
 	/**
-	 * 构建文本响应消息，减少设置返回的代码量
+	 * 转换toUser和fromUser的位置，同时设置createTime
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @param reqeustMessage
 	 * @return
 	 */
-	public static TextMessage text(com.mawujun.message.request.BaseMessage reqeustMessage){
-		
+	public static void copyFromToUserName(IMessage message,BaseMessageOut messageOut){
+		messageOut.setCreateTime(new Date());
+		messageOut.setFromUserName(message.getToUserName());
+		messageOut.setToUserName(message.getFromUserName());
+		//return messageOut;
 	}
 	
+
 	public static XStream getXStream(){
 		/**
 		 * 扩展xstream，使其支持CDATA块
@@ -184,7 +189,7 @@ public class MessageUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public  static String message2Xml(BaseMessage message) throws Exception {
+	public  static String message2Xml(BaseMessageOut message) throws Exception {
 		XStream xstream=getXStream();
 		xstream.processAnnotations(message.getClass());  
         String xml = xstream.toXML(message);  

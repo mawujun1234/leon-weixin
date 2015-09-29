@@ -2,8 +2,8 @@ package com.mawujun.message.autoReply;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import com.mawujun.message.response.BaseMessage;
-import com.mawujun.message.response.TextMessage;
+import com.mawujun.message.response.BaseMessageOut;
+import com.mawujun.message.response.TextMessageOut;
 import com.mawujun.messge.autoReply.AutoReplyService;
 import com.mawujun.messge.context.WeiXinApplicationContext;
 
@@ -50,15 +50,15 @@ public class AutoReplyServiceTest {
 		message.setFromUserName("aaa");
 		message.setToUserName("bbb");
 		message.setContent("任何文本");
-		BaseMessage[] baseMessages=null;
+		BaseMessageOut[] baseMessages=null;
 		
 		//测试任务文本内容，自动回复为文本
 		baseMessages=autoReplyService.getMessageAutoreply(message);
-		BaseMessage responseMessage=baseMessages[0];
-		assertEquals(true, responseMessage instanceof TextMessage);
+		BaseMessageOut responseMessage=baseMessages[0];
+		assertEquals(true, responseMessage instanceof TextMessageOut);
 		assertEquals("aaa",responseMessage.getToUserName());
 		assertEquals("bbb",responseMessage.getFromUserName());
-		assertEquals("亲，您好！感谢您来到护脊邦在线咨询平台，我们能帮您就近找到最适合您的治疗方案，也可以让医生或理疗机构更好的为您服务！/微笑",((TextMessage)responseMessage).getContent());
+		assertEquals("亲，您好！感谢您来到护脊邦在线咨询平台，我们能帮您就近找到最适合您的治疗方案，也可以让医生或理疗机构更好的为您服务！/微笑",((TextMessageOut)responseMessage).getContent());
 		
 		//测试随机回复
 		message.setContent("test");

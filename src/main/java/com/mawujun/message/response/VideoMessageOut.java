@@ -5,10 +5,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("xml")
 //@Entity
 //@Table(name="wx_videomessage")
-public class VideoMessage extends BaseMessage {
+public class VideoMessageOut extends BaseMessageOut {
 
 	private Video Video;
-	public VideoMessage(){
+	public VideoMessageOut(){
 		super();
 		super.setMsgType(ResponseMsgType.video);
 	}

@@ -10,7 +10,7 @@ import com.mawujun.message.event.MenuPicEvent;
 import com.mawujun.message.event.MenuScancodeEvent;
 import com.mawujun.message.event.QRCodeEvent;
 import com.mawujun.message.event.SubscribeEvent;
-import com.mawujun.message.response.BaseMessage;
+import com.mawujun.message.response.BaseMessageOut;
 import com.mawujun.messge.customer.TransferCustomer;
 import com.mawujun.messge.customer.TransferCustomer1;
 
@@ -58,7 +58,7 @@ public abstract class AbstractResponseProcess implements IResponseProcess {
 
 
 	//@Override
-	public BaseMessage process(SubscribeEvent message) {
+	public BaseMessageOut process(SubscribeEvent message) {
 		if(message.getEvent()==EventType.subscribe){
 			return process_subscribe(message);
 		} else if(message.getEvent()==EventType.unsubscribe){
@@ -69,7 +69,7 @@ public abstract class AbstractResponseProcess implements IResponseProcess {
 	}
 
 	
-	public BaseMessage process(QRCodeEvent message) {
+	public BaseMessageOut process(QRCodeEvent message) {
 		if(message.getEvent()==EventType.subscribe){
 			return process_subscribe(message);
 		} else if(message.getEvent()==EventType.unsubscribe){
@@ -80,7 +80,7 @@ public abstract class AbstractResponseProcess implements IResponseProcess {
 	}
 
 	//@Override
-	public BaseMessage process(MenuClickViewEvent message) {
+	public BaseMessageOut process(MenuClickViewEvent message) {
 		if(message.getEvent()==EventType.CLICK){
 			return process_CLICK(message);
 		} else if(message.getEvent()==EventType.VIEW){
@@ -108,7 +108,7 @@ public abstract class AbstractResponseProcess implements IResponseProcess {
 //			throw new BusinessException("事件类型必须是:CLICK,VIEW,scancode_push,scancode_waitmsg,pic_sysphoto,pic_photo_or_album,pic_weixin,location_select");
 //		}
 	}
-	public BaseMessage process(MenuScancodeEvent message) {
+	public BaseMessageOut process(MenuScancodeEvent message) {
 		if(message.getEvent()==EventType.scancode_push){
 			return process_scancode_push(message);
 		} else if(message.getEvent()==EventType.scancode_waitmsg){
@@ -118,7 +118,7 @@ public abstract class AbstractResponseProcess implements IResponseProcess {
 		}
 	}
 	
-	public BaseMessage process(MenuPicEvent message) {
+	public BaseMessageOut process(MenuPicEvent message) {
 		if(message.getEvent()==EventType.pic_sysphoto){
 			return process_pic_sysphoto(message);
 		} else if(message.getEvent()==EventType.pic_photo_or_album){
@@ -130,7 +130,7 @@ public abstract class AbstractResponseProcess implements IResponseProcess {
 		}
 	}
 	
-	public BaseMessage process(MenuLocationEvent message) {
+	public BaseMessageOut process(MenuLocationEvent message) {
 		if(message.getEvent()==EventType.location_select){
 			return process_location_select(message);
 		}  else {

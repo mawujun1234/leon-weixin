@@ -8,7 +8,7 @@ package com.mawujun.message.request;
  *
  */
 //@MappedSuperclass
-public class BaseMessage {
+public class BaseMessage implements IMessage{
 	//消息id，64位整型
 	//@Column(length=70)
 	private String MsgId;
@@ -27,13 +27,14 @@ public class BaseMessage {
 	private RequestMsgType MsgType;
 	
 	
-	
+	//@Override
 	public String getToUserName() {
 		return ToUserName;
 	}
 	public void setToUserName(String toUserName) {
 		ToUserName = toUserName;
 	}
+	//@Override
 	public String getFromUserName() {
 		return FromUserName;
 	}

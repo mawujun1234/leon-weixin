@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.mawujun.message.event.SubscribeEvent;
 import com.mawujun.message.request.RequestMsgType;
-import com.mawujun.message.response.BaseMessage;
+import com.mawujun.message.response.BaseMessageOut;
 import com.mawujun.message.response.News;
 import com.mawujun.messge.context.WeiXinApplicationContext;
 
@@ -56,8 +56,8 @@ public class AutoReplyService {
 	 * 
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 */
-	public BaseMessage getSubscribeReply(SubscribeEvent event){
-		BaseMessage baseMessage=null;
+	public BaseMessageOut getSubscribeReply(SubscribeEvent event){
+		BaseMessageOut baseMessage=null;
 		try {
 			JSONObject jsonObject=get_current_autoreply_info();
 			//关注后自动回复是否开启，0代表未开启，1代表开启
@@ -81,8 +81,8 @@ public class AutoReplyService {
 	 * @param message
 	 * @return 如果没有匹配规则的自动回复就返回null
 	 */
-	public BaseMessage[] getMessageAutoreply(com.mawujun.message.request.BaseMessage message) {
-		BaseMessage[] baseMessages=null;
+	public BaseMessageOut[] getMessageAutoreply(com.mawujun.message.request.BaseMessage message) {
+		BaseMessageOut[] baseMessages=null;
 		try {
 			JSONObject jsonObject=get_current_autoreply_info();
 			//消息自动回复是否开启，0代表未开启，1代表开启
@@ -101,8 +101,8 @@ public class AutoReplyService {
 						//baseMessages[0]=WeiXinApplicationContext.getEmptyStringResponse(message.getToUserName(),message.getFromUserName());
 						return null;
 					} else {
-						BaseMessage baseMessage=processAutoReplyMsg(message_default_autoreply_info,message.getToUserName(),message.getFromUserName());	
-						baseMessages=new BaseMessage[1];
+						BaseMessageOut baseMessage=processAutoReplyMsg(message_default_autoreply_info,message.getToUserName(),message.getFromUserName());	
+						baseMessages=new BaseMessageOut[1];
 						if(baseMessage!=null){	
 							baseMessages[0]=baseMessage;
 						} else {
@@ -130,7 +130,7 @@ public class AutoReplyService {
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @param message
 	 */
-	private BaseMessage[] process_keyword_autoreply_info(JSONObject data,com.mawujun.message.request.TextMessage message) {
+	private BaseMessageOut[] process_keyword_autoreply_info(JSONObject data,com.mawujun.message.request.TextMessage message) {
 		String msg_keyword=message.getContent();
 		//获取关键字回复规则列表
 		JSONArray list=data.getJSONArray("list");
@@ -161,7 +161,7 @@ public class AutoReplyService {
 			}
 			
 		}
-		BaseMessage[] baseMessages=null;
+		BaseMessageOut[] baseMessages=null;
 		//这里表示具有匹配关键词的自动回复消息
 		if(rule_g!=null){
 			JSONArray reply_list_info=rule_g.getJSONArray("reply_list_info");
@@ -169,7 +169,7 @@ public class AutoReplyService {
 			//回复所有具有的回复消息
 			if("reply_all".equals(reply_mode)){
 				//这里的响应消息会有多条
-				baseMessages=new BaseMessage[reply_list_info.size()];
+				baseMessages=new BaseMessageOut[reply_list_info.size()];
 				for(int i=0;i<reply_list_info.size();i++){
 					baseMessages[i]=processAutoReplyMsg(reply_list_info.getJSONObject(i),message.getToUserName(),message.getFromUserName());
 				}
@@ -186,7 +186,7 @@ public class AutoReplyService {
 					reply_info=reply_list_info.getJSONObject(index);
 				}
 				//把reply_info转换成响应消息
-				baseMessages=new BaseMessage[1];
+				baseMessages=new BaseMessageOut[1];
 				baseMessages[0]=processAutoReplyMsg(reply_info,message.getToUserName(),message.getFromUserName());
 			}
 		}
@@ -201,11 +201,11 @@ public class AutoReplyService {
 	 * @param toUsername
 	 * @return
 	 */
-	private BaseMessage processAutoReplyMsg(JSONObject data,String fromusername,String toUsername){
+	private BaseMessageOut processAutoReplyMsg(JSONObject data,String fromusername,String toUsername){
 		//判断各种数据类型
 		if("text".equals(data.getString("type"))){
 			//构建文本消息回复
-			com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+			com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 			result.setContent(data.getString("content"));
 			result.setFromUserName(fromusername);
 			result.setToUserName(toUsername);
@@ -213,7 +213,7 @@ public class AutoReplyService {
 			return result;
 			
 		} else if("img".equals(data.getString("type"))){
-			com.mawujun.message.response.ImageMessage result=new com.mawujun.message.response.ImageMessage();
+			com.mawujun.message.response.ImageMessageOut result=new com.mawujun.message.response.ImageMessageOut();
 			result.setImage(data.getString("content"));
 			result.setFromUserName(fromusername);
 			result.setToUserName(toUsername);
@@ -221,14 +221,14 @@ public class AutoReplyService {
 			return result;
 			
 		} else if("voice".equals(data.getString("type"))){
-			com.mawujun.message.response.VoiceMessage result=new com.mawujun.message.response.VoiceMessage();
+			com.mawujun.message.response.VoiceMessageOut result=new com.mawujun.message.response.VoiceMessageOut();
 			result.setVoice(data.getString("content"));
 			result.setFromUserName(fromusername);
 			result.setToUserName(toUsername);
 			result.setCreateTime(new Date());	
 			return result;
 		} else if("video".equals(data.getString("type"))){
-			com.mawujun.message.response.VideoMessage result=new com.mawujun.message.response.VideoMessage();
+			com.mawujun.message.response.VideoMessageOut result=new com.mawujun.message.response.VideoMessageOut();
 			String media_id=data.getString("content");
 			//获取素材的标题和描述信息,不这么获取了，而且主要是有次数限制，一天的限制只有1000次，要做也要保存下来
 			//VideoMaterial videoMaterial=(VideoMaterial) WeiXinApplicationContext.get_material(MaterialType.video,media_id);
@@ -240,7 +240,7 @@ public class AutoReplyService {
 			return result;
 		} else if("news".equals(data.getString("type"))){
 			//关键词自动回复则还多了图文消息（news）,在关注中是不支持的，所以不需要做
-			com.mawujun.message.response.NewsMessage result=new com.mawujun.message.response.NewsMessage();
+			com.mawujun.message.response.NewsMessageOut result=new com.mawujun.message.response.NewsMessageOut();
 			result.setFromUserName(fromusername);
 			result.setToUserName(toUsername);
 			result.setCreateTime(new Date());	

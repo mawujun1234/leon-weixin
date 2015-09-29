@@ -8,7 +8,7 @@ import java.util.Date;
  *
  */
 //@MappedSuperclass
-public class BaseMessage {
+public class BaseMessageOut {
 	// 接收方帐号（收到的OpenID）
 	//@Column(length=30)
 	private String ToUserName;

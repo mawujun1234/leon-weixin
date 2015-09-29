@@ -5,13 +5,13 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("xml")
 //@Entity
 //@Table(name="wx_voicemessage")
-public class VoiceMessage extends BaseMessage {
+public class VoiceMessageOut extends BaseMessageOut {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Voice Voice;
-	public VoiceMessage(){
+	public VoiceMessageOut(){
 		super();
 		super.setMsgType(ResponseMsgType.voice);
 	}

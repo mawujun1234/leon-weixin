@@ -8,7 +8,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("xml")
 //@Entity
 //@Table(name="wx_newsmessage")
-public class NewsMessage extends BaseMessage {
+public class NewsMessageOut extends BaseMessageOut {
 	/**
 	 * 
 	 */
@@ -21,7 +21,7 @@ public class NewsMessage extends BaseMessage {
     //@OrderBy("serviceDate")  
 	@XStreamAlias("Articles") 
 	private List<News> Articles;
-	public NewsMessage(){
+	public NewsMessageOut(){
 		super();
 		super.setMsgType(ResponseMsgType.news);
 	}

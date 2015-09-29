@@ -14,14 +14,14 @@ import com.mawujun.message.request.ShortvideoMessage;
 import com.mawujun.message.request.TextMessage;
 import com.mawujun.message.request.VideoMessage;
 import com.mawujun.message.request.VoiceMessage;
-import com.mawujun.message.response.BaseMessage;
+import com.mawujun.message.response.BaseMessageOut;
 import com.mawujun.messge.service.IResponseProcess;
 
 public class DefaultResponseProcess implements IResponseProcess {
 
-	public BaseMessage process(TextMessage message) {
+	public BaseMessageOut process(TextMessage message) {
 		// TODO Auto-generated method stub
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("热烈欢迎");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -30,8 +30,8 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process(ImageMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+	public BaseMessageOut process(ImageMessage message) {
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("热烈欢迎");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -40,8 +40,8 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process(VoiceMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+	public BaseMessageOut process(VoiceMessage message) {
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("热烈欢迎");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -50,8 +50,8 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process(VideoMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+	public BaseMessageOut process(VideoMessage message) {
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("热烈欢迎");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -60,8 +60,8 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process(ShortvideoMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+	public BaseMessageOut process(ShortvideoMessage message) {
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("热烈欢迎");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -70,8 +70,8 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process(LocationMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+	public BaseMessageOut process(LocationMessage message) {
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("热烈欢迎");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -80,8 +80,8 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process(LinkMessage message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+	public BaseMessageOut process(LinkMessage message) {
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("热烈欢迎");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -90,8 +90,8 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process(QRCodeEvent message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+	public BaseMessageOut process(QRCodeEvent message) {
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("热烈欢迎");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -100,8 +100,8 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process(SubscribeEvent message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+	public BaseMessageOut process(SubscribeEvent message) {
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("谢谢关注");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -110,8 +110,8 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process(MenuClickViewEvent message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+	public BaseMessageOut process(MenuClickViewEvent message) {
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("热烈欢迎");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -120,8 +120,8 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process(LocationEvent message) {
-		com.mawujun.message.response.TextMessage result=new com.mawujun.message.response.TextMessage();
+	public BaseMessageOut process(LocationEvent message) {
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
 		result.setContent("热烈欢迎");
 		result.setFromUserName(message.getToUserName());
 		result.setToUserName(message.getFromUserName());
@@ -130,107 +130,107 @@ public class DefaultResponseProcess implements IResponseProcess {
 		return result;
 	}
 
-	public BaseMessage process_subscribe(QRCodeEvent message) {
+	public BaseMessageOut process_subscribe(QRCodeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_SCAN(QRCodeEvent message) {
+	public BaseMessageOut process_SCAN(QRCodeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_subscribe(SubscribeEvent message) {
+	public BaseMessageOut process_subscribe(SubscribeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_unsubscribe(SubscribeEvent message) {
+	public BaseMessageOut process_unsubscribe(SubscribeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_CLICK(MenuClickViewEvent message) {
+	public BaseMessageOut process_CLICK(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_VIEW(MenuClickViewEvent message) {
+	public BaseMessageOut process_VIEW(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_scancode_push(MenuClickViewEvent message) {
+	public BaseMessageOut process_scancode_push(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_scancode_waitmsg(MenuClickViewEvent message) {
+	public BaseMessageOut process_scancode_waitmsg(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_sysphoto(MenuClickViewEvent message) {
+	public BaseMessageOut process_pic_sysphoto(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_photo_or_album(MenuClickViewEvent message) {
+	public BaseMessageOut process_pic_photo_or_album(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_weixin(MenuClickViewEvent message) {
+	public BaseMessageOut process_pic_weixin(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_location_select(MenuClickViewEvent message) {
+	public BaseMessageOut process_location_select(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process(MenuScancodeEvent message) {
+	public BaseMessageOut process(MenuScancodeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_scancode_push(MenuScancodeEvent message) {
+	public BaseMessageOut process_scancode_push(MenuScancodeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_scancode_waitmsg(MenuScancodeEvent message) {
+	public BaseMessageOut process_scancode_waitmsg(MenuScancodeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process(MenuPicEvent message) {
+	public BaseMessageOut process(MenuPicEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_sysphoto(MenuPicEvent message) {
+	public BaseMessageOut process_pic_sysphoto(MenuPicEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_photo_or_album(MenuPicEvent message) {
+	public BaseMessageOut process_pic_photo_or_album(MenuPicEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_weixin(MenuPicEvent message) {
+	public BaseMessageOut process_pic_weixin(MenuPicEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process(MenuLocationEvent message) {
+	public BaseMessageOut process(MenuLocationEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_location_select(MenuLocationEvent message) {
+	public BaseMessageOut process_location_select(MenuLocationEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}

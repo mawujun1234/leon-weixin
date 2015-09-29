@@ -1,6 +1,6 @@
 package com.mawujun.messge.customer;
 
-import com.mawujun.message.response.BaseMessage;
+import com.mawujun.message.response.BaseMessageOut;
 import com.mawujun.message.response.ResponseMsgType;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("xml")
-public class TransferCustomer extends BaseMessage{
+public class TransferCustomer extends BaseMessageOut{
 	public TransferCustomer() {
 		super();
 		super.setMsgType(ResponseMsgType.transfer_customer_service);

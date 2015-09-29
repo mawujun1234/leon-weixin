@@ -5,14 +5,14 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 @XStreamAlias("xml")
 //@Entity
 //@Table(name="wx_imagemessage")
-public class ImageMessage extends BaseMessage {
+public class ImageMessageOut extends BaseMessageOut {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	//@Embedded
 	private Image Image;
-	public ImageMessage(){
+	public ImageMessageOut(){
 		super();
 		super.setMsgType(ResponseMsgType.image);
 	}

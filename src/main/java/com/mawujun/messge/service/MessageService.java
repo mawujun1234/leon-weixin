@@ -21,7 +21,7 @@ import com.mawujun.message.request.ShortvideoMessage;
 import com.mawujun.message.request.TextMessage;
 import com.mawujun.message.request.VideoMessage;
 import com.mawujun.message.request.VoiceMessage;
-import com.mawujun.message.response.BaseMessage;
+import com.mawujun.message.response.BaseMessageOut;
 import com.mawujun.message.utils.InvalidMsgTypeException;
 import com.mawujun.message.utils.MessageUtils;
 
@@ -66,7 +66,7 @@ public abstract class MessageService {
 		}
 		
 		//BaseMessage requestMessage=null;
-		BaseMessage responseMessage=null;
+		BaseMessageOut responseMessage=null;
 		//文本消息处理
 		if(RequestMsgType.text==MsgType){
 			TextMessage message=MessageUtils.xml2Message(xmlStr, TextMessage.class);

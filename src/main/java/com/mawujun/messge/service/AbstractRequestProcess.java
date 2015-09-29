@@ -8,7 +8,7 @@ import com.mawujun.message.event.MenuPicEvent;
 import com.mawujun.message.event.MenuScancodeEvent;
 import com.mawujun.message.event.QRCodeEvent;
 import com.mawujun.message.event.SubscribeEvent;
-import com.mawujun.message.response.BaseMessage;
+import com.mawujun.message.response.BaseMessageOut;
 
 public abstract class AbstractRequestProcess implements IRequestProcess {
 	
@@ -54,11 +54,11 @@ public abstract class AbstractRequestProcess implements IRequestProcess {
 //		}
 //	}
 
-	public BaseMessage process(MenuClickViewEvent message) {
+	public void process(MenuClickViewEvent message) {
 		if(message.getEvent()==EventType.CLICK){
-			return process_CLICK(message);
+			 process_CLICK(message);
 		} else if(message.getEvent()==EventType.VIEW){
-			return process_VIEW(message);
+			 process_VIEW(message);
 		}  else {
 			throw new BusinessException("事件类型必须是:CLICK,VIEW");
 		}
@@ -82,31 +82,31 @@ public abstract class AbstractRequestProcess implements IRequestProcess {
 //			throw new BusinessException("事件类型必须是:CLICK,VIEW,scancode_push,scancode_waitmsg,pic_sysphoto,pic_photo_or_album,pic_weixin,location_select");
 //		}
 	}
-	public BaseMessage process(MenuScancodeEvent message) {
+	public void process(MenuScancodeEvent message) {
 		if(message.getEvent()==EventType.scancode_push){
-			return process_scancode_push(message);
+			 process_scancode_push(message);
 		} else if(message.getEvent()==EventType.scancode_waitmsg){
-			return process_scancode_waitmsg(message);
+			 process_scancode_waitmsg(message);
 		} else {
 			throw new BusinessException("事件类型必须是:scancode_push,scancode_waitmsg");
 		}
 	}
 	
-	public BaseMessage process(MenuPicEvent message) {
+	public void process(MenuPicEvent message) {
 		if(message.getEvent()==EventType.pic_sysphoto){
-			return process_pic_sysphoto(message);
+			 process_pic_sysphoto(message);
 		} else if(message.getEvent()==EventType.pic_photo_or_album){
-			return process_pic_photo_or_album(message);
+			 process_pic_photo_or_album(message);
 		} else if(message.getEvent()==EventType.pic_weixin){
-			return process_pic_weixin(message);
+			 process_pic_weixin(message);
 		} else {
 			throw new BusinessException("事件类型必须是:pic_sysphoto,pic_photo_or_album,pic_weixin");
 		}
 	}
 	
-	public BaseMessage process(MenuLocationEvent message) {
+	public void process(MenuLocationEvent message) {
 		if(message.getEvent()==EventType.location_select){
-			return process_location_select(message);
+			process_location_select(message);
 		}  else {
 			throw new BusinessException("事件类型必须是:location_select");
 		}

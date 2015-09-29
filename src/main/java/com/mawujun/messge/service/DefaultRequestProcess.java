@@ -14,7 +14,6 @@ import com.mawujun.message.request.ShortvideoMessage;
 import com.mawujun.message.request.TextMessage;
 import com.mawujun.message.request.VideoMessage;
 import com.mawujun.message.request.VoiceMessage;
-import com.mawujun.message.response.BaseMessage;
 
 public class DefaultRequestProcess extends AbstractRequestProcess {
 
@@ -110,44 +109,44 @@ public class DefaultRequestProcess extends AbstractRequestProcess {
 		
 	}
 
-	public BaseMessage process_scancode_push(MenuScancodeEvent message) {
+	public void process_scancode_push(MenuScancodeEvent message) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
-	public BaseMessage process_scancode_waitmsg(MenuScancodeEvent message) {
+	public void process_scancode_waitmsg(MenuScancodeEvent message) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
-	public BaseMessage process_pic_sysphoto(MenuPicEvent message) {
+	public void process_pic_sysphoto(MenuPicEvent message) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
-	public BaseMessage process_pic_photo_or_album(MenuPicEvent message) {
+	public void process_pic_photo_or_album(MenuPicEvent message) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
-	public BaseMessage process_pic_weixin(MenuPicEvent message) {
+	public void process_pic_weixin(MenuPicEvent message) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
-	public BaseMessage process_location_select(MenuLocationEvent message) {
+	public void process_location_select(MenuLocationEvent message) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
-	public BaseMessage process_CLICK(MenuClickViewEvent message) {
+	public void process_CLICK(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
-	public BaseMessage process_VIEW(MenuClickViewEvent message) {
+	public void process_VIEW(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	

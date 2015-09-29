@@ -17,138 +17,138 @@ import com.mawujun.message.request.ShortvideoMessage;
 import com.mawujun.message.request.TextMessage;
 import com.mawujun.message.request.VideoMessage;
 import com.mawujun.message.request.VoiceMessage;
-import com.mawujun.message.response.BaseMessage;
+import com.mawujun.message.response.BaseMessageOut;
 import com.mawujun.messge.context.WeiXinApplicationContext;
 
 public class DefaultResponseProcess extends AbstractResponseProcess {
 	static Logger logger=LogManager.getLogger(DefaultResponseProcess.class);
 
-	public BaseMessage process(TextMessage message) {
+	public BaseMessageOut process(TextMessage message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process(ImageMessage message) {
+	public BaseMessageOut process(ImageMessage message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process(VoiceMessage message) {
+	public BaseMessageOut process(VoiceMessage message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process(VideoMessage message) {
+	public BaseMessageOut process(VideoMessage message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process(ShortvideoMessage message) {
+	public BaseMessageOut process(ShortvideoMessage message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process(LocationMessage message) {
+	public BaseMessageOut process(LocationMessage message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process(LinkMessage message) {
+	public BaseMessageOut process(LinkMessage message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_subscribe(QRCodeEvent message) {
+	public BaseMessageOut process_subscribe(QRCodeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_SCAN(QRCodeEvent message) {
+	public BaseMessageOut process_SCAN(QRCodeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_subscribe(SubscribeEvent message) {
+	public BaseMessageOut process_subscribe(SubscribeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_unsubscribe(SubscribeEvent message) {
+	public BaseMessageOut process_unsubscribe(SubscribeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_CLICK(MenuClickViewEvent message) {
+	public BaseMessageOut process_CLICK(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_VIEW(MenuClickViewEvent message) {
+	public BaseMessageOut process_VIEW(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_scancode_push(MenuClickViewEvent message) {
+	public BaseMessageOut process_scancode_push(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_scancode_waitmsg(MenuClickViewEvent message) {
+	public BaseMessageOut process_scancode_waitmsg(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_sysphoto(MenuClickViewEvent message) {
+	public BaseMessageOut process_pic_sysphoto(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_photo_or_album(MenuClickViewEvent message) {
+	public BaseMessageOut process_pic_photo_or_album(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_weixin(MenuClickViewEvent message) {
+	public BaseMessageOut process_pic_weixin(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_location_select(MenuClickViewEvent message) {
+	public BaseMessageOut process_location_select(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process(LocationEvent message) {
+	public BaseMessageOut process(LocationEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_scancode_push(MenuScancodeEvent message) {
+	public BaseMessageOut process_scancode_push(MenuScancodeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_scancode_waitmsg(MenuScancodeEvent message) {
+	public BaseMessageOut process_scancode_waitmsg(MenuScancodeEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_sysphoto(MenuPicEvent message) {
+	public BaseMessageOut process_pic_sysphoto(MenuPicEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_photo_or_album(MenuPicEvent message) {
+	public BaseMessageOut process_pic_photo_or_album(MenuPicEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_pic_weixin(MenuPicEvent message) {
+	public BaseMessageOut process_pic_weixin(MenuPicEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public BaseMessage process_location_select(MenuLocationEvent message) {
+	public BaseMessageOut process_location_select(MenuLocationEvent message) {
 		// TODO Auto-generated method stub
 		return null;
 	}

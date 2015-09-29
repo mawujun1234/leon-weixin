@@ -1,9 +1,10 @@
 package com.mawujun.message.event;
 
+import com.mawujun.message.request.IMessage;
 import com.mawujun.message.request.RequestMsgType;
 
 //@MappedSuperclass
-public class BaseEvent {
+public class BaseEvent implements IMessage{
 	// 开发者微信号，公众号的微信号
 	//@Column(length=30)
 	private String ToUserName;

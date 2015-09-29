@@ -108,7 +108,7 @@ public class MessageUtilsTest {
 	
 	@Test
 	public void message2Xml_text() throws Exception{
-		com.mawujun.message.response.TextMessage message=new com.mawujun.message.response.TextMessage();
+		com.mawujun.message.response.TextMessageOut message=new com.mawujun.message.response.TextMessageOut();
 		message.setToUserName("toUser");
 		message.setFromUserName("fromUser");
 		message.setCreateTime(12345678);
@@ -130,7 +130,7 @@ public class MessageUtilsTest {
 	
 	@Test
 	public void message2Xml_image() throws Exception{
-		com.mawujun.message.response.ImageMessage message=new com.mawujun.message.response.ImageMessage();
+		com.mawujun.message.response.ImageMessageOut message=new com.mawujun.message.response.ImageMessageOut();
 		message.setToUserName("toUser");
 		message.setFromUserName("fromUser");
 		message.setCreateTime(12345678);
@@ -157,7 +157,7 @@ public class MessageUtilsTest {
 	
 	@Test
 	public void message2Xml_news() throws Exception{
-		com.mawujun.message.response.NewsMessage message=new com.mawujun.message.response.NewsMessage();
+		com.mawujun.message.response.NewsMessageOut message=new com.mawujun.message.response.NewsMessageOut();
 		message.setToUserName("toUser");
 		message.setFromUserName("fromUser");
 		message.setCreateTime(12345678);

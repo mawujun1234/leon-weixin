@@ -1,6 +1,6 @@
 package com.mawujun.messge.customer;
 
-import com.mawujun.message.response.BaseMessage;
+import com.mawujun.message.response.BaseMessageOut;
 import com.mawujun.message.response.ResponseMsgType;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
