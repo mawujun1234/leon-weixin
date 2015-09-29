@@ -179,23 +179,32 @@ public class WeiXinApplicationContext {
 	 * @throws IOException 
 	 */
 	public static AccessToken getAccessToken() {
-		AccessToken accessToken=accessTokenCache.getAccessToken();
+		AccessToken accessToken= accessTokenCache.getAccessToken();
 		if(accessToken!=null && !accessToken.isExpires()){
 			return accessToken;
 		}
 		
+		refreshtAccessToken();
 		
-		String access_token_url1=access_token_url.replace("APPID", weixin_pps.getProperty("appid")).replace("APPSECRET", weixin_pps.getProperty("appsecret"));
-		String jsonstr=httpsRequest(access_token_url1,"GET",null);
-
-		accessToken=JSON.parseObject(jsonstr, AccessToken.class);
-		accessToken.setCreateDate(new Date());
-		accessTokenCache.setAccessToken(accessToken);
 		return accessToken;
 		
 		//String accessToken=json.getString("access_token");
 		//return accessToken;
 		
+	}
+	/**
+	 * 强制刷新AccessToken，并返回这个值
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @return
+	 */
+	public static AccessToken refreshtAccessToken() {
+		String access_token_url1=access_token_url.replace("APPID", weixin_pps.getProperty("appid")).replace("APPSECRET", weixin_pps.getProperty("appsecret"));
+		String jsonstr=httpsRequest(access_token_url1,"GET",null);
+
+		AccessToken accessToken=JSON.parseObject(jsonstr, AccessToken.class);
+		accessToken.setCreateDate(new Date());
+		accessTokenCache.setAccessToken(accessToken);
+		return accessToken;
 	}
 	/**
 	 * 获取菜单

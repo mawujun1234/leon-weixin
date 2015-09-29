@@ -53,6 +53,9 @@ public abstract class AbstractResponseProcess implements IResponseProcess {
 		return message;
 		
 	}
+	
+	
+
 
 	//@Override
 	public BaseMessage process(SubscribeEvent message) {
@@ -64,14 +67,7 @@ public abstract class AbstractResponseProcess implements IResponseProcess {
 			throw new BusinessException("事件类型必须是:subscribe或unsubscribe");
 		}
 	}
-//	public BaseMessage process_subscribe(QRCodeEvent message) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//	public BaseMessage process_unsubscribe(QRCodeEvent message) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
 	
 	public BaseMessage process(QRCodeEvent message) {
 		if(message.getEvent()==EventType.subscribe){
