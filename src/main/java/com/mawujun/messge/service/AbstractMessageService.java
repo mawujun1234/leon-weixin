@@ -30,7 +30,7 @@ import com.mawujun.message.utils.MessageUtils;
  * @author mawujun email:16064988@qq.com qq:16064988
  *
  */
-public abstract class MessageService {
+public abstract class AbstractMessageService {
 	/**
 	 * 获取请求消息处理器
 	 * @author mawujun email:160649888@163.com qq:16064988
@@ -144,6 +144,7 @@ public abstract class MessageService {
 				this.getRequestProcess().process(event);
 				responseMessage = this.getResponseProcess().process(event);
 				//return MessageUtils.message2Xml(responseMessage);
+				ll
 				
 			} else if (EventType.scancode_push==eventType
 					|| EventType.scancode_waitmsg==eventType){

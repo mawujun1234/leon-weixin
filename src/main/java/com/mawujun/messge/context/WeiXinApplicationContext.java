@@ -39,7 +39,7 @@ import com.mawujun.material.VideoMaterial;
 import com.mawujun.message.menu.ButtonType;
 import com.mawujun.message.menu.Button_container;
 import com.mawujun.message.menu.Menu;
-import com.mawujun.messge.service.MessageService;
+import com.mawujun.messge.service.AbstractMessageService;
 import com.mawujun.qrcode.QRcodeType;
 import com.mawujun.qrcode.Ticket;
 import com.mawujun.utils.file.FileUtils;
@@ -54,7 +54,7 @@ public class WeiXinApplicationContext {
 	
 	static Properties weixin_pps;
 	static AccessTokenCache accessTokenCache=new DefaultAccessTokenCache();
-	private static MessageService messageService;
+	private static AbstractMessageService messageService;
 	private static String webapp_realPath="";//项目所在的绝对路径
 	private static String media_image="media/images/";
 	private static String media_voice="media/voice/";
@@ -85,7 +85,7 @@ public class WeiXinApplicationContext {
 	private static final String get_qrcode_ticket_url="https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=ACCESS_TOKEN";
 	private static final String get_qrcode_url="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET";
 	
-	public static MessageService getMessageService() {
+	public static AbstractMessageService getMessageService() {
 		return messageService;
 	}
 	public static Properties getWeixin_pps() {
@@ -122,7 +122,7 @@ public class WeiXinApplicationContext {
 			//System.out.println("=============================="+weixin_pps.getProperty("messageService"));
 			//PropertiesUtils putils=PropertiesUtils.load(wexin_properties_path);
 			Class clazz = Class.forName(weixin_pps.getProperty("messageService"));
-			messageService = (MessageService) clazz.newInstance();
+			messageService = (AbstractMessageService) clazz.newInstance();
 			
 			Class accessTokenCache_class = Class.forName(weixin_pps.getProperty("accessTokenCache"));
 			accessTokenCache=(AccessTokenCache)accessTokenCache_class.newInstance();

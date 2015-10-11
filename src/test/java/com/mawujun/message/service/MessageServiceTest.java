@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.springframework.util.StringUtils;
 
-import com.mawujun.messge.service.MessageService;
+import com.mawujun.messge.service.AbstractMessageService;
 
 public class MessageServiceTest {
 	
@@ -13,7 +13,7 @@ public class MessageServiceTest {
 //	public void setBeforeClass(){
 //		
 //	}
-	MessageService messageService=new DefaultMessageService();
+	AbstractMessageService messageService=new DefaultMessageService();
 	
 	@Test
 	public void process() throws Exception {
