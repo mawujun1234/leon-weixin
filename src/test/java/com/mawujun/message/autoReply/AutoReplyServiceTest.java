@@ -10,7 +10,7 @@ import com.mawujun.messge.context.WeiXinApplicationContext;
 public class AutoReplyServiceTest {
 	AutoReplyService autoReplyService=new AutoReplyService();
 	
-	@Test
+	//@Test
 	public void getSubscribeReply() throws Exception{
 //		WeiXinApplicationContext.loadProperties("com/mawujun/message/context/weixin_hujibang.properties");
 //		SubscribeEvent subscribeEvent=new SubscribeEvent();
@@ -43,7 +43,7 @@ public class AutoReplyServiceTest {
 
 	}
 	
-	@Test
+	//@Test
 	public void getMessageAutoreply() throws Exception{
 		WeiXinApplicationContext.loadProperties("com/mawujun/message/context/weixin_hujibang.properties");
 		com.mawujun.message.request.TextMessage message=new com.mawujun.message.request.TextMessage();

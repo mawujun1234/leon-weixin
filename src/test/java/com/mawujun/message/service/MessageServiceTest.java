@@ -62,7 +62,7 @@ public class MessageServiceTest {
 				+ "<FromUserName><![CDATA[toUser]]></FromUserName>"
 				+ "<CreateTime><![CDATA[12345678]]></CreateTime>"
 				+ "<MsgType><![CDATA[text]]></MsgType>"
-				+ "<Content><![CDATA[谢谢关注]]></Content>"
+				+ "<Content><![CDATA[热烈欢迎]]></Content>"
 				+ "</xml>";
 		
 		assertEquals(orginxml,StringUtils.trimAllWhitespace(xml));

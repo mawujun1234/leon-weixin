@@ -185,7 +185,7 @@ public class WeiXinApplicationContext {
 		}
 		
 		refreshtAccessToken();
-		
+		accessToken= accessTokenCache.getAccessToken();
 		return accessToken;
 		
 		//String accessToken=json.getString("access_token");

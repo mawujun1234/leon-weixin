@@ -131,108 +131,203 @@ public class DefaultResponseProcess implements IResponseProcess {
 	}
 
 	public BaseMessageOut process_subscribe(QRCodeEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_SCAN(QRCodeEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_subscribe(SubscribeEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_unsubscribe(SubscribeEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_CLICK(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_VIEW(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_scancode_push(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_scancode_waitmsg(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_pic_sysphoto(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_pic_photo_or_album(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_pic_weixin(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_location_select(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process(MenuScancodeEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_scancode_push(MenuScancodeEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_scancode_waitmsg(MenuScancodeEvent message) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public BaseMessageOut process(MenuPicEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_pic_sysphoto(MenuPicEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_pic_photo_or_album(MenuPicEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_pic_weixin(MenuPicEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process(MenuLocationEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 	public BaseMessageOut process_location_select(MenuLocationEvent message) {
-		// TODO Auto-generated method stub
-		return null;
+		com.mawujun.message.response.TextMessageOut result=new com.mawujun.message.response.TextMessageOut();
+		result.setContent("热烈欢迎");
+		result.setFromUserName(message.getToUserName());
+		result.setToUserName(message.getFromUserName());
+		result.setCreateTime(12345678);
+		
+		return result;
 	}
 
 }
