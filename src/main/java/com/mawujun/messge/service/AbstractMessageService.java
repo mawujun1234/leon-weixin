@@ -116,21 +116,32 @@ public abstract class AbstractMessageService {
 				//扫描带二维码参数时候的关注
 				if(requestMap.get("EventKey")!=null){
 					QRCodeEvent event = MessageUtils.xml2Message(xmlStr, QRCodeEvent.class);
-					this.getRequestProcess().process(event);
-					responseMessage = this.getResponseProcess().process(event);
+					
+					if(event.getEvent()==EventType.subscribe){
+						this.getRequestProcess().process_subscribe(event);
+						responseMessage = this.getResponseProcess().process_subscribe(event);
+					} 
+//					else if(event.getEvent()==EventType.unsubscribe){
+//						this.getRequestProcess().process_SCAN(event);
+//						responseMessage = this.getResponseProcess().process_SCAN(event);
+//					} 
 					//return MessageUtils.message2Xml(responseMessage);
 				} else {
 					//普通关注或取消关注
 					SubscribeEvent event = MessageUtils.xml2Message(xmlStr, SubscribeEvent.class);
-					this.getRequestProcess().process(event);
-					responseMessage = this.getResponseProcess().process(event);
-					//return MessageUtils.message2Xml(responseMessage);
+					if(event.getEvent()==EventType.subscribe){
+						this.getRequestProcess().process_subscribe(event);
+						responseMessage = this.getResponseProcess().process_subscribe(event);
+					} else if(event.getEvent()==EventType.unsubscribe){
+						this.getRequestProcess().process_unsubscribe(event);
+						responseMessage = this.getResponseProcess().process_subscribe(event);
+					}
 				}
 				
 			}  else if (EventType.SCAN==eventType){
 				QRCodeEvent event = MessageUtils.xml2Message(xmlStr, QRCodeEvent.class);
-				this.getRequestProcess().process(event);
-				responseMessage = this.getResponseProcess().process(event);
+				this.getRequestProcess().process_SCAN(event);
+				responseMessage = this.getResponseProcess().process_SCAN(event);
 				//return MessageUtils.message2Xml(responseMessage);
 				
 			}  else if (EventType.LOCATION==eventType){
@@ -139,32 +150,49 @@ public abstract class AbstractMessageService {
 				responseMessage = this.getResponseProcess().process(event);
 				//return MessageUtils.message2Xml(responseMessage);
 				
-			}  else if (EventType.CLICK==eventType || EventType.VIEW==eventType){
+			}  else if (EventType.CLICK==eventType){
 				MenuClickViewEvent event = MessageUtils.xml2Message(xmlStr, MenuClickViewEvent.class);
-				this.getRequestProcess().process(event);
-				responseMessage = this.getResponseProcess().process(event);
-				//return MessageUtils.message2Xml(responseMessage);
-				ll
+				this.getRequestProcess().process_CLICK(event);
+				responseMessage = this.getResponseProcess().process_CLICK(event);
 				
-			} else if (EventType.scancode_push==eventType
-					|| EventType.scancode_waitmsg==eventType){
+			}else if (EventType.VIEW==eventType){
+				MenuClickViewEvent event = MessageUtils.xml2Message(xmlStr, MenuClickViewEvent.class);	
+				this.getRequestProcess().process_VIEW(event);
+				responseMessage = this.getResponseProcess().process_VIEW(event);
+				
+			} else if (EventType.scancode_push==eventType){
 				MenuScancodeEvent event = MessageUtils.xml2Message(xmlStr, MenuScancodeEvent.class);
-				this.getRequestProcess().process(event);
-				responseMessage = this.getResponseProcess().process(event);
+				this.getRequestProcess().process_scancode_push(event);
+				responseMessage = this.getResponseProcess().process_scancode_push(event);
 				//return MessageUtils.message2Xml(responseMessage);
 				
-			} else if (EventType.pic_sysphoto==eventType
-					|| EventType.pic_photo_or_album==eventType
-					|| EventType.pic_weixin==eventType){
+			} else if (EventType.scancode_waitmsg==eventType){
+				MenuScancodeEvent event = MessageUtils.xml2Message(xmlStr, MenuScancodeEvent.class);
+				this.getRequestProcess().process_scancode_waitmsg(event);
+				responseMessage = this.getResponseProcess().process_scancode_waitmsg(event);
+				//return MessageUtils.message2Xml(responseMessage);
+			} else if (EventType.pic_sysphoto==eventType){
 				MenuPicEvent event = MessageUtils.xml2Message(xmlStr, MenuPicEvent.class);
-				this.getRequestProcess().process(event);
-				responseMessage = this.getResponseProcess().process(event);
+				this.getRequestProcess().process_pic_sysphoto(event);
+				responseMessage = this.getResponseProcess().process_pic_sysphoto(event);
+				//return MessageUtils.message2Xml(responseMessage);
+				
+			}else if ( EventType.pic_photo_or_album==eventType){
+				MenuPicEvent event = MessageUtils.xml2Message(xmlStr, MenuPicEvent.class);
+				this.getRequestProcess().process_pic_photo_or_album(event);
+				responseMessage = this.getResponseProcess().process_pic_photo_or_album(event);
+				//return MessageUtils.message2Xml(responseMessage);
+				
+			}else if (EventType.pic_weixin==eventType){
+				MenuPicEvent event = MessageUtils.xml2Message(xmlStr, MenuPicEvent.class);
+				this.getRequestProcess().process_pic_weixin(event);
+				responseMessage = this.getResponseProcess().process_pic_weixin(event);
 				//return MessageUtils.message2Xml(responseMessage);
 				
 			} else if (EventType.location_select==eventType){
 				MenuLocationEvent event = MessageUtils.xml2Message(xmlStr, MenuLocationEvent.class);
-				this.getRequestProcess().process(event);
-				responseMessage = this.getResponseProcess().process(event);
+				this.getRequestProcess().process_location_select(event);
+				responseMessage = this.getResponseProcess().process_location_select(event);
 				//return MessageUtils.message2Xml(responseMessage);
 				
 			} else {

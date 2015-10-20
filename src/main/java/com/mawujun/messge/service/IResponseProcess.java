@@ -25,25 +25,25 @@ public interface IResponseProcess {
 	public BaseMessageOut process(com.mawujun.message.request.LocationMessage message);
 	public BaseMessageOut process(com.mawujun.message.request.LinkMessage message);
 	
-	public BaseMessageOut process(QRCodeEvent message);
+	//public BaseMessageOut process(QRCodeEvent message);
 	public BaseMessageOut process_subscribe(QRCodeEvent message);
 	public BaseMessageOut process_SCAN(QRCodeEvent message);
 	
-	public BaseMessageOut process(SubscribeEvent message);
+	//public BaseMessageOut process(SubscribeEvent message);
 	public BaseMessageOut process_subscribe(SubscribeEvent message);
 	public BaseMessageOut process_unsubscribe(SubscribeEvent message);
 	
-	public BaseMessageOut process(MenuClickViewEvent message);
+	//public BaseMessageOut process(MenuClickViewEvent message);
 	public BaseMessageOut process_CLICK(MenuClickViewEvent message);
 	public BaseMessageOut process_VIEW(MenuClickViewEvent message);
-	public BaseMessageOut process(MenuScancodeEvent message);
+	//public BaseMessageOut process(MenuScancodeEvent message);
 	public BaseMessageOut process_scancode_push(MenuScancodeEvent message);
 	public BaseMessageOut process_scancode_waitmsg(MenuScancodeEvent message);
-	public BaseMessageOut process(MenuPicEvent message);
+	//public BaseMessageOut process(MenuPicEvent message);
 	public BaseMessageOut process_pic_sysphoto(MenuPicEvent message);
 	public BaseMessageOut process_pic_photo_or_album(MenuPicEvent message);
 	public BaseMessageOut process_pic_weixin(MenuPicEvent message);
-	public BaseMessageOut process(MenuLocationEvent message);
+	//public BaseMessageOut process(MenuLocationEvent message);
 	public BaseMessageOut process_location_select(MenuLocationEvent message);
 	
 	

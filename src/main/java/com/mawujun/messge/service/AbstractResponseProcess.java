@@ -2,15 +2,6 @@ package com.mawujun.messge.service;
 
 import java.util.Date;
 
-import com.mawujun.exception.BusinessException;
-import com.mawujun.message.event.EventType;
-import com.mawujun.message.event.MenuClickViewEvent;
-import com.mawujun.message.event.MenuLocationEvent;
-import com.mawujun.message.event.MenuPicEvent;
-import com.mawujun.message.event.MenuScancodeEvent;
-import com.mawujun.message.event.QRCodeEvent;
-import com.mawujun.message.event.SubscribeEvent;
-import com.mawujun.message.response.BaseMessageOut;
 import com.mawujun.messge.customer.TransferCustomer;
 import com.mawujun.messge.customer.TransferCustomer1;
 
@@ -57,85 +48,85 @@ public abstract class AbstractResponseProcess implements IResponseProcess {
 	
 
 
-	//@Override
-	public BaseMessageOut process(SubscribeEvent message) {
-		if(message.getEvent()==EventType.subscribe){
-			return process_subscribe(message);
-		} else if(message.getEvent()==EventType.unsubscribe){
-			return process_unsubscribe(message);
-		} else {
-			throw new BusinessException("事件类型必须是:subscribe或unsubscribe");
-		}
-	}
-
-	
-	public BaseMessageOut process(QRCodeEvent message) {
-		if(message.getEvent()==EventType.subscribe){
-			return process_subscribe(message);
-		} else if(message.getEvent()==EventType.unsubscribe){
-			return process_SCAN(message);
-		} else {
-			throw new BusinessException("事件类型必须是:subscribe或SCAN");
-		}
-	}
-
-	//@Override
-	public BaseMessageOut process(MenuClickViewEvent message) {
-		if(message.getEvent()==EventType.CLICK){
-			return process_CLICK(message);
-		} else if(message.getEvent()==EventType.VIEW){
-			return process_VIEW(message);
-		}  else {
-			throw new BusinessException("事件类型必须是:CLICK,VIEW");
-		}
+//	//@Override
+//	public BaseMessageOut process(SubscribeEvent message) {
+//		if(message.getEvent()==EventType.subscribe){
+//			return process_subscribe(message);
+//		} else if(message.getEvent()==EventType.unsubscribe){
+//			return process_unsubscribe(message);
+//		} else {
+//			throw new BusinessException("事件类型必须是:subscribe或unsubscribe");
+//		}
+//	}
+//
+//	
+//	public BaseMessageOut process(QRCodeEvent message) {
+//		if(message.getEvent()==EventType.subscribe){
+//			return process_subscribe(message);
+//		} else if(message.getEvent()==EventType.unsubscribe){
+//			return process_SCAN(message);
+//		} else {
+//			throw new BusinessException("事件类型必须是:subscribe或SCAN");
+//		}
+//	}
+//
+//	//@Override
+//	public BaseMessageOut process(MenuClickViewEvent message) {
 //		if(message.getEvent()==EventType.CLICK){
 //			return process_CLICK(message);
 //		} else if(message.getEvent()==EventType.VIEW){
 //			return process_VIEW(message);
-//		} else if(message.getEvent()==EventType.scancode_push){
+//		}  else {
+//			throw new BusinessException("事件类型必须是:CLICK,VIEW");
+//		}
+////		if(message.getEvent()==EventType.CLICK){
+////			return process_CLICK(message);
+////		} else if(message.getEvent()==EventType.VIEW){
+////			return process_VIEW(message);
+////		} else if(message.getEvent()==EventType.scancode_push){
+////			return process_scancode_push(message);
+////		} else if(message.getEvent()==EventType.scancode_waitmsg){
+////			return process_scancode_waitmsg(message);
+////		} else if(message.getEvent()==EventType.pic_sysphoto){
+////			return process_pic_sysphoto(message);
+////		} else if(message.getEvent()==EventType.pic_photo_or_album){
+////			return process_pic_photo_or_album(message);
+////		} else if(message.getEvent()==EventType.pic_weixin){
+////			return process_pic_weixin(message);
+////		} else if(message.getEvent()==EventType.location_select){
+////			return process_location_select(message);
+////		}  else {
+////			throw new BusinessException("事件类型必须是:CLICK,VIEW,scancode_push,scancode_waitmsg,pic_sysphoto,pic_photo_or_album,pic_weixin,location_select");
+////		}
+//	}
+//	public BaseMessageOut process(MenuScancodeEvent message) {
+//		if(message.getEvent()==EventType.scancode_push){
 //			return process_scancode_push(message);
 //		} else if(message.getEvent()==EventType.scancode_waitmsg){
 //			return process_scancode_waitmsg(message);
-//		} else if(message.getEvent()==EventType.pic_sysphoto){
+//		} else {
+//			throw new BusinessException("事件类型必须是:scancode_push,scancode_waitmsg");
+//		}
+//	}
+//	
+//	public BaseMessageOut process(MenuPicEvent message) {
+//		if(message.getEvent()==EventType.pic_sysphoto){
 //			return process_pic_sysphoto(message);
 //		} else if(message.getEvent()==EventType.pic_photo_or_album){
 //			return process_pic_photo_or_album(message);
 //		} else if(message.getEvent()==EventType.pic_weixin){
 //			return process_pic_weixin(message);
-//		} else if(message.getEvent()==EventType.location_select){
+//		} else {
+//			throw new BusinessException("事件类型必须是:pic_sysphoto,pic_photo_or_album,pic_weixin");
+//		}
+//	}
+//	
+//	public BaseMessageOut process(MenuLocationEvent message) {
+//		if(message.getEvent()==EventType.location_select){
 //			return process_location_select(message);
 //		}  else {
-//			throw new BusinessException("事件类型必须是:CLICK,VIEW,scancode_push,scancode_waitmsg,pic_sysphoto,pic_photo_or_album,pic_weixin,location_select");
+//			throw new BusinessException("事件类型必须是:location_select");
 //		}
-	}
-	public BaseMessageOut process(MenuScancodeEvent message) {
-		if(message.getEvent()==EventType.scancode_push){
-			return process_scancode_push(message);
-		} else if(message.getEvent()==EventType.scancode_waitmsg){
-			return process_scancode_waitmsg(message);
-		} else {
-			throw new BusinessException("事件类型必须是:scancode_push,scancode_waitmsg");
-		}
-	}
-	
-	public BaseMessageOut process(MenuPicEvent message) {
-		if(message.getEvent()==EventType.pic_sysphoto){
-			return process_pic_sysphoto(message);
-		} else if(message.getEvent()==EventType.pic_photo_or_album){
-			return process_pic_photo_or_album(message);
-		} else if(message.getEvent()==EventType.pic_weixin){
-			return process_pic_weixin(message);
-		} else {
-			throw new BusinessException("事件类型必须是:pic_sysphoto,pic_photo_or_album,pic_weixin");
-		}
-	}
-	
-	public BaseMessageOut process(MenuLocationEvent message) {
-		if(message.getEvent()==EventType.location_select){
-			return process_location_select(message);
-		}  else {
-			throw new BusinessException("事件类型必须是:location_select");
-		}
-	}
+//	}
 
 }

@@ -72,39 +72,12 @@ public class DefaultRequestProcess extends AbstractRequestProcess {
 		
 	}
 
-
-
-	public void process_scancode_push(MenuClickViewEvent message) {
+	public void process_CLICK(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void process_scancode_waitmsg(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void process_pic_sysphoto(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void process_pic_photo_or_album(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void process_pic_weixin(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void process_location_select(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void process(LocationEvent message) {
+	public void process_VIEW(MenuClickViewEvent message) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -139,15 +112,11 @@ public class DefaultRequestProcess extends AbstractRequestProcess {
 		
 	}
 
-	public void process_CLICK(MenuClickViewEvent message) {
+	public void process(LocationEvent message) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void process_VIEW(MenuClickViewEvent message) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	
 }
