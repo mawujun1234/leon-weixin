@@ -1,5 +1,9 @@
 package com.mawujun.messge.service;
 
+import java.io.IOException;
+
+import org.dom4j.DocumentException;
+
 import com.mawujun.message.event.LocationEvent;
 import com.mawujun.message.event.MenuClickViewEvent;
 import com.mawujun.message.event.MenuLocationEvent;
@@ -8,6 +12,7 @@ import com.mawujun.message.event.MenuScancodeEvent;
 import com.mawujun.message.event.QRCodeEvent;
 import com.mawujun.message.event.SubscribeEvent;
 import com.mawujun.message.response.BaseMessageOut;
+import com.mawujun.message.utils.InvalidMsgTypeException;
 
 
 
@@ -17,6 +22,14 @@ import com.mawujun.message.response.BaseMessageOut;
  *
  */
 public interface IResponseProcess {
+	/**
+	 * 对客微信传递过来的xml字符串进行处理
+	 * @author mawujun email:160649888@163.com qq:16064988
+	 * @param xmlStr
+	 * @return
+	 */
+	public String process(String xmlStr);
+	
 	public BaseMessageOut process(com.mawujun.message.request.TextMessage message);
 	public BaseMessageOut process(com.mawujun.message.request.ImageMessage message);
 	public BaseMessageOut process(com.mawujun.message.request.VoiceMessage message);

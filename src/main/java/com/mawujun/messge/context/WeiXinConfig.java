@@ -5,7 +5,7 @@ package com.mawujun.messge.context;
  * @author mawujun 16064988@qq.com  
  *
  */
-public interface AccessTokenCache {
+public interface WeiXinConfig {
 	/**
 	 * 设置新的AccessToken
 	 * @author mawujun 16064988@qq.com 
@@ -17,4 +17,12 @@ public interface AccessTokenCache {
 	 * @author mawujun 16064988@qq.com
 	 */
 	public AccessToken getAccessToken();
+	
+	public String getToken();
+
+	public String getGrant_type();
+
+	public String getAppid();
+
+	public String getAppsecret();
 }

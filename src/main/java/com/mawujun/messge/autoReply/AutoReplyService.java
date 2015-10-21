@@ -38,11 +38,12 @@ public class AutoReplyService {
 				return autoreply_info_JSONObject;
 			}
 		} else {
-			//初始化时间间隔
-			String auto_reply_sync_timeMillis_p=WeiXinApplicationContext.getWeixin_pps().getProperty(auto_reply_sync_timeMillis_name);
-			if(auto_reply_sync_timeMillis_p != null) {
-				auto_reply_sync_interval=Long.parseLong(auto_reply_sync_timeMillis_p);
-			}
+//			//初始化时间间隔
+//			String auto_reply_sync_timeMillis_p=WeiXinApplicationContext.getWeixin_pps().getProperty(auto_reply_sync_timeMillis_name);
+//			if(auto_reply_sync_timeMillis_p != null) {
+//				auto_reply_sync_interval=Long.parseLong(auto_reply_sync_timeMillis_p);
+//			}
+			auto_reply_sync_interval=1800000;
 			
 		}
 		String jsonStr=WeiXinApplicationContext.get_current_autoreply_info();

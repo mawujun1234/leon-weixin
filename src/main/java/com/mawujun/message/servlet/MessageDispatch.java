@@ -13,7 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.dom4j.DocumentException;
 
+import com.mawujun.exception.WeiXinException;
+import com.mawujun.message.response.TextMessageOut;
+import com.mawujun.message.utils.InvalidMsgTypeException;
+import com.mawujun.message.utils.MessageUtils;
 import com.mawujun.message.utils.SignUtil;
 import com.mawujun.messge.context.WeiXinApplicationContext;
 
@@ -25,22 +30,22 @@ import com.mawujun.messge.context.WeiXinApplicationContext;
 public class MessageDispatch {
 	static Logger logger=LogManager.getLogger(MessageDispatch.class);
 	
-	protected static String config_file_path="weixin.properties";
-	
-	private static boolean isInit=false;
-	public static void init(String config_file_temp) { 
-		if(isInit){
-			return;
-		}
-//		ServletConfig config = getServletConfig(); 
-//		String config_file_temp = config.getInitParameter("config_file_path"); 
-		if(config_file_temp!=null && !"".equals(config_file_temp)){
-			config_file_path=config_file_temp;
-		}
-		
-		WeiXinApplicationContext.loadProperties(config_file_path);
-	} 
-	
+	//protected static String config_file_path="weixin.properties";
+//	
+//	private static boolean isInit=false;
+//	public static void init(String config_file_temp) { 
+//		if(isInit){
+//			return;
+//		}
+////		ServletConfig config = getServletConfig(); 
+////		String config_file_temp = config.getInitParameter("config_file_path"); 
+//		if(config_file_temp!=null && !"".equals(config_file_temp)){
+//			config_file_path=config_file_temp;
+//		}
+//		
+//		WeiXinApplicationContext.loadProperties(config_file_path);
+//	} 
+//	
 	public static void initWebapp_realPath(HttpServletRequest request) {
 		//System.out.println("==============================================="+request.getServletContext().getRealPath("/"));
 		if(WeiXinApplicationContext.getWebapp_realPath()==null || "".equals(WeiXinApplicationContext.getWebapp_realPath())){
@@ -51,7 +56,7 @@ public class MessageDispatch {
 	 * 确认请求来自微信服务器
 	 */
 	public static void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		init(null);
+		//init(null);
 		initWebapp_realPath(request);
 		//request.setCharacterEncoding("UTF-8");
 		//response.setCharacterEncoding("UTF-8");
@@ -78,7 +83,7 @@ public class MessageDispatch {
 	 */
 	public static void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		init(null);
+		//init(null);
 		initWebapp_realPath(request);
 		
 		request.getCharacterEncoding();
@@ -108,18 +113,21 @@ public class MessageDispatch {
 		if (SignUtil.checkSignature(signature, timestamp, nonce)) {
 			// 调用核心业务类接收消息、处理消息
 			String respMessage;
-			try {
+			//try {
 				//String aa=new String(build.toString().getBytes("ISO8859_1"),"UTF-8");
-				respMessage = WeiXinApplicationContext.getMessageService().process(build.toString());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-				logger.info(e);
-				throw new RuntimeException("在处理过程中发生异常",e);
-			}
+				respMessage = WeiXinApplicationContext.getResponseProcess().process(build.toString());
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				//e.printStackTrace();
+//				logger.error(e);
+//				throw new RuntimeException("在处理过程中发生异常",e);
+//				
+//			}
 			
 			
 			out.print(respMessage);
+		} else {
+			throw new WeiXinException("签名没有通过!");
 		}
 
 		

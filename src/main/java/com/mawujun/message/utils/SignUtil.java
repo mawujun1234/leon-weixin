@@ -24,7 +24,7 @@ public class SignUtil {
 		 * @return
 		 */
 		public static boolean checkSignature(String signature, String timestamp, String nonce) {
-			String token=WeiXinApplicationContext.getToken();
+			String token=WeiXinApplicationContext.getWeiXinConfig().getToken();
 			String[] arr = new String[] { token, timestamp, nonce };
 			// 将token、timestamp、nonce三个参数进行字典序排序
 			Arrays.sort(arr);

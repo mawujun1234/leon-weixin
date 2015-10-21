@@ -5,15 +5,13 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.springframework.util.StringUtils;
 
-import com.mawujun.messge.service.AbstractMessageService;
-
 public class MessageServiceTest {
 	
 //	@BeforeClass
 //	public void setBeforeClass(){
 //		
 //	}
-	AbstractMessageService messageService=new DefaultMessageService();
+	DefaultResponseProcess messageService=new DefaultResponseProcess();
 	
 	@Test
 	public void process() throws Exception {

@@ -1,14 +1,27 @@
 package com.mawujun.message.autoReply;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
+
 import com.mawujun.message.response.BaseMessageOut;
 import com.mawujun.message.response.TextMessageOut;
 import com.mawujun.messge.autoReply.AutoReplyService;
 import com.mawujun.messge.context.WeiXinApplicationContext;
+import com.mawujun.messge.context.WeiXinConfigInCache;
 
 public class AutoReplyServiceTest {
 	AutoReplyService autoReplyService=new AutoReplyService();
+	
+	@BeforeClass
+	public static void init(){
+		WeiXinConfigInCache weiXinConfig=new WeiXinConfigInCache();
+		weiXinConfig.setToken("mawujun1234");
+		weiXinConfig.setAppid("wxb9301e6c9b317d22");
+		weiXinConfig.setAppsecret("981123813c9e5426fbed093e8291e1ed");
+		WeiXinApplicationContext.setWeiXinConfig(weiXinConfig);
+	}
 	
 	//@Test
 	public void getSubscribeReply() throws Exception{
@@ -45,7 +58,7 @@ public class AutoReplyServiceTest {
 	
 	//@Test
 	public void getMessageAutoreply() throws Exception{
-		WeiXinApplicationContext.loadProperties("com/mawujun/message/context/weixin_hujibang.properties");
+		//WeiXinApplicationContext.loadProperties("com/mawujun/message/context/weixin_hujibang.properties");
 		com.mawujun.message.request.TextMessage message=new com.mawujun.message.request.TextMessage();
 		message.setFromUserName("aaa");
 		message.setToUserName("bbb");

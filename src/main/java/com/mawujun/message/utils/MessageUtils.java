@@ -189,7 +189,7 @@ public class MessageUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public  static String message2Xml(BaseMessageOut message) throws Exception {
+	public  static String message2Xml(BaseMessageOut message)  {
 		XStream xstream=getXStream();
 		xstream.processAnnotations(message.getClass());  
         String xml = xstream.toXML(message);  

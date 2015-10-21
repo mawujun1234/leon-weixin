@@ -20,6 +20,7 @@ import com.mawujun.message.request.VoiceMessage;
  * @author mawujun email:16064988@qq.com qq:16064988
  *
  */
+@Deprecated
 public interface IRequestProcess {
 	public void process(TextMessage message);
 	public void process(ImageMessage message);

@@ -16,7 +16,6 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.Date;
-import java.util.Properties;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -39,7 +38,7 @@ import com.mawujun.material.VideoMaterial;
 import com.mawujun.message.menu.ButtonType;
 import com.mawujun.message.menu.Button_container;
 import com.mawujun.message.menu.Menu;
-import com.mawujun.messge.service.AbstractMessageService;
+import com.mawujun.messge.service.IResponseProcess;
 import com.mawujun.qrcode.QRcodeType;
 import com.mawujun.qrcode.Ticket;
 import com.mawujun.utils.file.FileUtils;
@@ -52,9 +51,10 @@ import com.mawujun.utils.file.FileUtils;
 public class WeiXinApplicationContext {
 	static Logger logger=LogManager.getLogger(WeiXinApplicationContext.class);
 	
-	static Properties weixin_pps;
-	static AccessTokenCache accessTokenCache=new DefaultAccessTokenCache();
-	private static AbstractMessageService messageService;
+	//static Properties weixin_pps;
+	static WeiXinConfig weiXinConfig;
+	private static IResponseProcess responseProcess;//响应消息处理器
+	
 	private static String webapp_realPath="";//项目所在的绝对路径
 	private static String media_image="media/images/";
 	private static String media_voice="media/voice/";
@@ -85,93 +85,78 @@ public class WeiXinApplicationContext {
 	private static final String get_qrcode_ticket_url="https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=ACCESS_TOKEN";
 	private static final String get_qrcode_url="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET";
 	
-	public static AbstractMessageService getMessageService() {
-		return messageService;
-	}
-	public static Properties getWeixin_pps() {
-		return weixin_pps;
-	}
+
+//	public static Properties getWeixin_pps() {
+//		return weixin_pps;
+//	}
 	
+
+//	public static void loadProperties(String wexin_properties_path) {
+//		if(wexin_properties_path==null){
+//			throw new NullPointerException("wexin。properties路径必须先指定!");
+//		}
+//		try {
+//			InputStream in = WeiXinApplicationContext.class.getClassLoader().getResourceAsStream(wexin_properties_path);
+//			if(in==null){
+//				throw new NullPointerException("不能读取到微信框架的配置文件,请检查路径!");
+//			}
+//			weixin_pps = new Properties();
+//			weixin_pps.load(in);
+//			
+//			
+//			//System.out.println("=============================="+weixin_pps.getProperty("messageService"));
+//			//PropertiesUtils putils=PropertiesUtils.load(wexin_properties_path);
+//			Class clazz = Class.forName(weixin_pps.getProperty("messageService"));
+//			messageService = (AbstractMessageService) clazz.newInstance();
+//			
+//			Class accessTokenCache_class = Class.forName(weixin_pps.getProperty("weiXinConfig"));
+//			weiXinConfig=(WeiXinConfig)accessTokenCache_class.newInstance();
+//			
+//			
+//			//设置media的路径
+//			if(weixin_pps.getProperty("media_image")!=null && !"".equals(weixin_pps.getProperty("media_image"))){
+//				media_image=weixin_pps.getProperty("media_image");
+//			}
+//			if(weixin_pps.getProperty("media_voice")!=null && !"".equals(weixin_pps.getProperty("media_voice"))){
+//				media_voice=weixin_pps.getProperty("media_voice");
+//			}
+//			if(weixin_pps.getProperty("media_video")!=null && !"".equals(weixin_pps.getProperty("media_video"))){
+//				media_video=weixin_pps.getProperty("media_video");
+//			}
+//			if(weixin_pps.getProperty("media_shortvideo")!=null && !"".equals(weixin_pps.getProperty("media_shortvideo"))){
+//				media_shortvideo=weixin_pps.getProperty("media_shortvideo");
+//			}
+//			if(weixin_pps.getProperty("media_temp_savepath")!=null && !"".equals(weixin_pps.getProperty("media_temp_savepath"))){
+//				media_temp_savepath=weixin_pps.getProperty("media_temp_savepath");
+//			}
+//			
+//			
+//		}  catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			throw new RuntimeException("加载微信配置文件"+wexin_properties_path+"出错,该文件不存在或者路径指定错误",e);
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			throw new RuntimeException("找不到指定的类",e);
+//		} catch (InstantiationException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			throw new RuntimeException("指定的类，请提供默认的构造函数",e);
+//		} catch (IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			throw new RuntimeException("指定的类，请提供默认的构造函数",e);
+//		}
+//	}
 //	/**
-//	 * 当有消息过来后，如果发现没有匹配的自动消息回复规则的时候，先回复一个空字符串，否则，微信将会报错
-//	 * @author mawujun email:160649888@163.com qq:16064988
+//	 * 在微信上配置服务器地址的时候填写的token
+//	 * @author mawujun 16064988@qq.com 
 //	 * @return
 //	 */
-//	public static BaseMessage getEmptyStringResponse(String fromUsername,String toUsername) {
-//		com.mawujun.message.response.NotResponseMessage result=new com.mawujun.message.response.NotResponseMessage();
-//		//result.setContent("");
-//		result.setFromUserName(fromUsername);
-//		result.setToUserName(toUsername);
-//		result.setCreateTime(new Date());
-//		
-//		return result;
+//	public static String getToken() {
+//		return weixin_pps.getProperty("Token");
 //	}
-	public static void loadProperties(String wexin_properties_path) {
-		if(wexin_properties_path==null){
-			throw new NullPointerException("wexin。properties路径必须先指定!");
-		}
-		try {
-			InputStream in = WeiXinApplicationContext.class.getClassLoader().getResourceAsStream(wexin_properties_path);
-			if(in==null){
-				throw new NullPointerException("不能读取到微信框架的配置文件,请检查路径!");
-			}
-			weixin_pps = new Properties();
-			weixin_pps.load(in);
-			
-			
-			//System.out.println("=============================="+weixin_pps.getProperty("messageService"));
-			//PropertiesUtils putils=PropertiesUtils.load(wexin_properties_path);
-			Class clazz = Class.forName(weixin_pps.getProperty("messageService"));
-			messageService = (AbstractMessageService) clazz.newInstance();
-			
-			Class accessTokenCache_class = Class.forName(weixin_pps.getProperty("accessTokenCache"));
-			accessTokenCache=(AccessTokenCache)accessTokenCache_class.newInstance();
-			
-			
-			//设置media的路径
-			if(weixin_pps.getProperty("media_image")!=null && !"".equals(weixin_pps.getProperty("media_image"))){
-				media_image=weixin_pps.getProperty("media_image");
-			}
-			if(weixin_pps.getProperty("media_voice")!=null && !"".equals(weixin_pps.getProperty("media_voice"))){
-				media_voice=weixin_pps.getProperty("media_voice");
-			}
-			if(weixin_pps.getProperty("media_video")!=null && !"".equals(weixin_pps.getProperty("media_video"))){
-				media_video=weixin_pps.getProperty("media_video");
-			}
-			if(weixin_pps.getProperty("media_shortvideo")!=null && !"".equals(weixin_pps.getProperty("media_shortvideo"))){
-				media_shortvideo=weixin_pps.getProperty("media_shortvideo");
-			}
-			if(weixin_pps.getProperty("media_temp_savepath")!=null && !"".equals(weixin_pps.getProperty("media_temp_savepath"))){
-				media_temp_savepath=weixin_pps.getProperty("media_temp_savepath");
-			}
-			
-			
-		}  catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("加载微信配置文件"+wexin_properties_path+"出错,该文件不存在或者路径指定错误",e);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("找不到指定的类",e);
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("指定的类，请提供默认的构造函数",e);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("指定的类，请提供默认的构造函数",e);
-		}
-	}
-	/**
-	 * 在微信上配置服务器地址的时候填写的token
-	 * @author mawujun 16064988@qq.com 
-	 * @return
-	 */
-	public static String getToken() {
-		return weixin_pps.getProperty("Token");
-	}
 	/**
 	 * access_token是公众号的全局唯一票据，公众号调用各接口时都需使用access_token。正常情况下access_token有效期为7200秒，重复获取将导致上次获取的access_token失效。由于获取access_token的api调用次数非常有限，建议开发者全局存储与更新access_token，频繁刷新access_token会导致api调用受限，影响自身业务。
 请开发者注意，
@@ -179,13 +164,13 @@ public class WeiXinApplicationContext {
 	 * @throws IOException 
 	 */
 	public static AccessToken getAccessToken() {
-		AccessToken accessToken= accessTokenCache.getAccessToken();
+		AccessToken accessToken= weiXinConfig.getAccessToken();
 		if(accessToken!=null && !accessToken.isExpires()){
 			return accessToken;
 		}
 		
 		refreshtAccessToken();
-		accessToken= accessTokenCache.getAccessToken();
+		accessToken= weiXinConfig.getAccessToken();
 		return accessToken;
 		
 		//String accessToken=json.getString("access_token");
@@ -198,12 +183,12 @@ public class WeiXinApplicationContext {
 	 * @return
 	 */
 	public static AccessToken refreshtAccessToken() {
-		String access_token_url1=access_token_url.replace("APPID", weixin_pps.getProperty("appid")).replace("APPSECRET", weixin_pps.getProperty("appsecret"));
+		String access_token_url1=access_token_url.replace("APPID", weiXinConfig.getAppid()).replace("APPSECRET", weiXinConfig.getAppsecret());
 		String jsonstr=httpsRequest(access_token_url1,"GET",null);
 
 		AccessToken accessToken=JSON.parseObject(jsonstr, AccessToken.class);
 		accessToken.setCreateDate(new Date());
-		accessTokenCache.setAccessToken(accessToken);
+		weiXinConfig.setAccessToken(accessToken);
 		return accessToken;
 	}
 	/**
@@ -749,6 +734,28 @@ public class WeiXinApplicationContext {
 	}
 	public static String getMedia_temp_savepath() {
 		return media_temp_savepath;
+	}
+	public static WeiXinConfig getAccessTokenCache() {
+		return weiXinConfig;
+	}
+	public static void setAccessTokenCache(WeiXinConfig accessTokenCache) {
+		WeiXinApplicationContext.weiXinConfig = accessTokenCache;
+	}
+
+
+	public static WeiXinConfig getWeiXinConfig() {
+		return weiXinConfig;
+	}
+
+
+	public static void setWeiXinConfig(WeiXinConfig weiXinConfig) {
+		WeiXinApplicationContext.weiXinConfig = weiXinConfig;
+	}
+	public static IResponseProcess getResponseProcess() {
+		return responseProcess;
+	}
+	public static void setResponseProcess(IResponseProcess responseProcess) {
+		WeiXinApplicationContext.responseProcess = responseProcess;
 	}
 
 

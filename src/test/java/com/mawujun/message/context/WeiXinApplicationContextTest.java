@@ -2,18 +2,31 @@ package com.mawujun.message.context;
 
 import java.io.IOException;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
+
 import com.mawujun.messge.context.WeiXinApplicationContext;
+import com.mawujun.messge.context.WeiXinConfigInCache;
 import com.mawujun.qrcode.Ticket;
 
 public class WeiXinApplicationContextTest {
-	@Test
-	public void loadProperties() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException{
-//		WeiXinApplicationContext.loadProperties("weixin.properties");
-//		assertNotNull(WeiXinApplicationContext.getMessageService());
-//		assertEquals("com.mawujun.message.service.DefaultMessageService", WeiXinApplicationContext.getMessageService().getClass().getName());
+	
+	@BeforeClass
+	public static void init(){
+		WeiXinConfigInCache weiXinConfig=new WeiXinConfigInCache();
+		weiXinConfig.setToken("mawujun1234");
+		weiXinConfig.setAppid("wxb9301e6c9b317d22");
+		weiXinConfig.setAppsecret("981123813c9e5426fbed093e8291e1ed");
+		WeiXinApplicationContext.setWeiXinConfig(weiXinConfig);
 	}
+//	@Test
+//	public void loadProperties() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException{
+////		WeiXinApplicationContext.loadProperties("weixin.properties");
+////		assertNotNull(WeiXinApplicationContext.getMessageService());
+////		assertEquals("com.mawujun.message.service.DefaultMessageService", WeiXinApplicationContext.getMessageService().getClass().getName());
+//	}
 	@Test
 	public void createMenu() {
 //		WeiXinApplicationContext.loadProperties("weixin.properties");
@@ -118,7 +131,7 @@ public class WeiXinApplicationContextTest {
 	}
 	@Test
 	public void getQRcode(){
-		WeiXinApplicationContext.loadProperties("weixin.properties");
+		//WeiXinApplicationContext.loadProperties("weixin.properties");
 		Ticket ticket=WeiXinApplicationContext.getPermanentQRcodeTicket(1);
 		assertEquals(0,ticket.getExpire_seconds());
 		assertNotNull(ticket.getTicket());

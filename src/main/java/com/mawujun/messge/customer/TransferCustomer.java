@@ -11,7 +11,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  *
  */
 @XStreamAlias("xml")
-public class TransferCustomer extends BaseMessageOut{
+public class TransferCustomer extends BaseMessageOut {
 	public TransferCustomer() {
 		super();
 		super.setMsgType(ResponseMsgType.transfer_customer_service);
