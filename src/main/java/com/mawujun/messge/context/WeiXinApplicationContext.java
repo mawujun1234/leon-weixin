@@ -56,11 +56,11 @@ public class WeiXinApplicationContext {
 	private static IResponseProcess responseProcess;//响应消息处理器
 	
 	private static String webapp_realPath="";//项目所在的绝对路径
-	private static String media_image="media/images/";
-	private static String media_voice="media/voice/";
-	private static String media_video="media/video/";
-	private static String media_shortvideo="media/shortvideo/";
-	private static String media_temp_savepath=null;
+	private static String media_image_path=File.separator+"media"+File.separator+"images";
+	private static String media_voice_path=File.separator+"media"+File.separator+"voice";
+	private static String media_video_path=File.separator+"media"+File.separator+"video";
+	private static String media_shortvideo_path="/media/shortvideo";
+	//private static String media_temp_savepath=System.getProperty("java.io.tmpdir");
 	
 	private static final String access_token_url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 	
@@ -114,17 +114,17 @@ public class WeiXinApplicationContext {
 //			
 //			
 //			//设置media的路径
-//			if(weixin_pps.getProperty("media_image")!=null && !"".equals(weixin_pps.getProperty("media_image"))){
-//				media_image=weixin_pps.getProperty("media_image");
+//			if(weixin_pps.getProperty("media_image_path")!=null && !"".equals(weixin_pps.getProperty("media_image_path"))){
+//				media_image_path=weixin_pps.getProperty("media_image_path");
 //			}
-//			if(weixin_pps.getProperty("media_voice")!=null && !"".equals(weixin_pps.getProperty("media_voice"))){
-//				media_voice=weixin_pps.getProperty("media_voice");
+//			if(weixin_pps.getProperty("media_voice_path")!=null && !"".equals(weixin_pps.getProperty("media_voice_path"))){
+//				media_voice_path=weixin_pps.getProperty("media_voice_path");
 //			}
-//			if(weixin_pps.getProperty("media_video")!=null && !"".equals(weixin_pps.getProperty("media_video"))){
-//				media_video=weixin_pps.getProperty("media_video");
+//			if(weixin_pps.getProperty("media_video_path")!=null && !"".equals(weixin_pps.getProperty("media_video_path"))){
+//				media_video_path=weixin_pps.getProperty("media_video_path");
 //			}
-//			if(weixin_pps.getProperty("media_shortvideo")!=null && !"".equals(weixin_pps.getProperty("media_shortvideo"))){
-//				media_shortvideo=weixin_pps.getProperty("media_shortvideo");
+//			if(weixin_pps.getProperty("media_shortvideo_path")!=null && !"".equals(weixin_pps.getProperty("media_shortvideo_path"))){
+//				media_shortvideo_path=weixin_pps.getProperty("media_shortvideo_path");
 //			}
 //			if(weixin_pps.getProperty("media_temp_savepath")!=null && !"".equals(weixin_pps.getProperty("media_temp_savepath"))){
 //				media_temp_savepath=weixin_pps.getProperty("media_temp_savepath");
@@ -413,10 +413,10 @@ public class WeiXinApplicationContext {
 	 * http://mp.weixin.qq.com/wiki/10/78b15308b053286e2a66b33f0f0f5fb6.html
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @param media_id
-	 * @param savePath
+	 * @param dirPath
 	 * @return result[0]:是文件名称，result[1]是保存路径，包括文件名
 	 */
-	public static String[] get_material_temp_content(String media_id, String savePath)  {
+	public static String[] get_material_temp_content(String media_id, String dirPath)  {
 		String[] result=new String[2];
 		String requestUrl=get_material_temp_url.replace("ACCESS_TOKEN", WeiXinApplicationContext.getAccessToken().getAccess_token())
 				.replace("MEDIA_ID", media_id);
@@ -430,8 +430,8 @@ public class WeiXinApplicationContext {
 	      conn.setDoInput(true);
 	      conn.setRequestMethod("GET");
 
-	      if (!savePath.endsWith(File.separator)) {
-	        savePath += File.separator;
+	      if (!dirPath.endsWith(File.separator)) {
+	        dirPath += File.separator;
 	      }
 	     
 	     
@@ -441,7 +441,7 @@ public class WeiXinApplicationContext {
 	      String filename=content_disposition.split("filename=")[1].replace("\"", "");
 	      result[0]=filename;
 	      // 将mediaId作为文件名
-	      filePath = savePath + filename;
+	      filePath = dirPath + filename;
 	      result[1]=filePath;
 
 	      BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
@@ -490,11 +490,11 @@ public class WeiXinApplicationContext {
 	      //官方的请求头内容是:Content-disposition: attachment; filename="MEDIA_ID.jpg"
 	      String content_disposition=conn.getHeaderField("Content-disposition");
 	      String filename=content_disposition.split("filename=")[1].replace("\"", "");
-	      result[0]=filename;
+	      result[0]=filename;//存储文件名
 	      
 	      String[] filenames=filename.split("\\.");
-	      filePath=FileUtils.createTempFile(filenames[0], "."+filenames[1], WeiXinApplicationContext.getMedia_temp_savepath());
-	      result[1]=filePath;
+	      filePath=FileUtils.createTempFile(filenames[0], "."+filenames[1], null);
+	      result[1]=filePath;//存储文件路径
 	      
 	      BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
 	      FileOutputStream fos = new FileOutputStream(new File(filePath));
@@ -701,40 +701,45 @@ public class WeiXinApplicationContext {
 		WeiXinApplicationContext.webapp_realPath = webapp_realPath;
 	}
 	/**
-	 * 默认是media/images/
+	 * 默认是/media/images
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @return
 	 */
-	public static String getMedia_image() {
-		return media_image;
+	public static String getMedia_image_path() {
+		return media_image_path;
 	}
 	/**
-	 * 默认是media/voice/
+	 * 默认是/media/voice
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @return
 	 */
-	public static String getMedia_voice() {
-		return media_voice;
+	public static String getMedia_voice_path() {
+		return media_voice_path;
 	}
 	/**
-	 * 默认是media/video/
+	 * 默认是/media/video
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @return
 	 */
-	public static String getMedia_video() {
-		return media_video;
+	public static String getMedia_video_path() {
+		return media_video_path;
 	}
 	/**
-	 * 默认是media/shortvideo/
+	 * 默认是/media/shortvideo
 	 * @author mawujun email:160649888@163.com qq:16064988
 	 * @return
 	 */
-	public static String getMedia_shortvideo() {
-		return media_shortvideo;
+	public static String getMedia_shortvideo_path() {
+		return media_shortvideo_path;
 	}
-	public static String getMedia_temp_savepath() {
-		return media_temp_savepath;
-	}
+//	/**
+//	 * 获取临时文件存放目录
+//	 * @author mawujun email:160649888@163.com qq:16064988
+//	 * @return
+//	 */
+//	public static String getMedia_temp_savepath() {
+//		return media_temp_savepath;
+//	}
 	public static WeiXinConfig getAccessTokenCache() {
 		return weiXinConfig;
 	}
@@ -757,6 +762,7 @@ public class WeiXinApplicationContext {
 	public static void setResponseProcess(IResponseProcess responseProcess) {
 		WeiXinApplicationContext.responseProcess = responseProcess;
 	}
+
 
 
 }

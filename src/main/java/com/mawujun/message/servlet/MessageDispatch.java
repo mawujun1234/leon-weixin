@@ -13,12 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.dom4j.DocumentException;
 
 import com.mawujun.exception.WeiXinException;
-import com.mawujun.message.response.TextMessageOut;
-import com.mawujun.message.utils.InvalidMsgTypeException;
-import com.mawujun.message.utils.MessageUtils;
 import com.mawujun.message.utils.SignUtil;
 import com.mawujun.messge.context.WeiXinApplicationContext;
 
